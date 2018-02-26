@@ -1,0 +1,24 @@
+PODS:
+  - paper-onboarding (4.0.1)
+  - SnapKit (4.0.0)
+
+DEPENDENCIES:
+  - paper-onboarding (from `https://github.com/Ramotion/paper-onboarding.git`)
+  - SnapKit (~> 4.0.0)
+
+EXTERNAL SOURCES:
+  paper-onboarding:
+    :git: https://github.com/Ramotion/paper-onboarding.git
+
+CHECKOUT OPTIONS:
+  paper-onboarding:
+    :commit: f35e0a88532f0100e453837bc39cdd93f449517b
+    :git: https://github.com/Ramotion/paper-onboarding.git
+
+SPEC CHECKSUMS:
+  paper-onboarding: ecb43c83e4e4f90137f228b8e9d87ca5aee591ee
+  SnapKit: a42d492c16e80209130a3379f73596c3454b7694
+
+PODFILE CHECKSUM: 033711e24109533ee7d38874ab2ba4551c2713e0
+
+COCOAPODS: 1.4.0

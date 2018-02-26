@@ -1,0 +1,6 @@
+framework module Pods_xdag_iosTests {
+  umbrella header "Pods-xdag-iosTests-umbrella.h"
+
+  export *
+  module * { export * }
+}
