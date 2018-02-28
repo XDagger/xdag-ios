@@ -10,6 +10,11 @@
 		2610121345B6067DADE417BE /* Pods_xdag_iosTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F575BF24B3A94D152579D826 /* Pods_xdag_iosTests.framework */; };
 		6BB6FF58956E36C24BC09567 /* Pods_xdag_iosUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B16B9CA38ADF1393659ED547 /* Pods_xdag_iosUITests.framework */; };
 		AED687D18D3BA32ECAA614DF /* Pods_xdag_ios.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 25C83CF0A0B916236770A5D6 /* Pods_xdag_ios.framework */; };
+		FDD5AA272045B7B800C84CC1 /* TransactionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDD5AA262045B7B800C84CC1 /* TransactionViewController.swift */; };
+		FDD5AA2A20464C5500C84CC1 /* Util.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDD5AA2920464C5500C84CC1 /* Util.swift */; };
+		FDD5AA2C2046882100C84CC1 /* UIColorExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDD5AA2B2046882100C84CC1 /* UIColorExtension.swift */; };
+		FDD5AA30204689D000C84CC1 /* TransactionTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDD5AA2F204689D000C84CC1 /* TransactionTableViewCell.swift */; };
+		FDD5AA3320468A8700C84CC1 /* XDAGTransaction.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDD5AA3220468A8700C84CC1 /* XDAGTransaction.swift */; };
 		FDDFDDA42042805200B3D0DE /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDDFDDA32042805200B3D0DE /* AppDelegate.swift */; };
 		FDDFDDA62042805200B3D0DE /* FirstViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDDFDDA52042805200B3D0DE /* FirstViewController.swift */; };
 		FDDFDDA82042805200B3D0DE /* SecondViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDDFDDA72042805200B3D0DE /* SecondViewController.swift */; };
@@ -48,6 +53,11 @@
 		B16B9CA38ADF1393659ED547 /* Pods_xdag_iosUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_xdag_iosUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		B2B0194D1EE6B527C4E28409 /* Pods-xdag-iosUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-xdag-iosUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-xdag-iosUITests/Pods-xdag-iosUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		F575BF24B3A94D152579D826 /* Pods_xdag_iosTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_xdag_iosTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		FDD5AA262045B7B800C84CC1 /* TransactionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionViewController.swift; sourceTree = "<group>"; };
+		FDD5AA2920464C5500C84CC1 /* Util.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Util.swift; sourceTree = "<group>"; };
+		FDD5AA2B2046882100C84CC1 /* UIColorExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIColorExtension.swift; sourceTree = "<group>"; };
+		FDD5AA2F204689D000C84CC1 /* TransactionTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionTableViewCell.swift; sourceTree = "<group>"; };
+		FDD5AA3220468A8700C84CC1 /* XDAGTransaction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XDAGTransaction.swift; sourceTree = "<group>"; };
 		FDDFDDA02042805200B3D0DE /* xdag-ios.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "xdag-ios.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		FDDFDDA32042805200B3D0DE /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		FDDFDDA52042805200B3D0DE /* FirstViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstViewController.swift; sourceTree = "<group>"; };
@@ -116,6 +126,31 @@
 			name = Pods;
 			sourceTree = "<group>";
 		};
+		FDD5AA2820464BF000C84CC1 /* Common */ = {
+			isa = PBXGroup;
+			children = (
+				FDD5AA2920464C5500C84CC1 /* Util.swift */,
+				FDD5AA2B2046882100C84CC1 /* UIColorExtension.swift */,
+			);
+			path = Common;
+			sourceTree = "<group>";
+		};
+		FDD5AA2D2046899D00C84CC1 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				FDD5AA2F204689D000C84CC1 /* TransactionTableViewCell.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		FDD5AA3120468A7C00C84CC1 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				FDD5AA3220468A8700C84CC1 /* XDAGTransaction.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
 		FDDFDD972042805200B3D0DE = {
 			isa = PBXGroup;
 			children = (
@@ -141,6 +176,8 @@
 		FDDFDDA22042805200B3D0DE /* xdag-ios */ = {
 			isa = PBXGroup;
 			children = (
+				FDD5AA3120468A7C00C84CC1 /* Models */,
+				FDD5AA2D2046899D00C84CC1 /* Views */,
 				FDDFDDD32042B24A00B3D0DE /* Controllers */,
 				FDDFDDA32042805200B3D0DE /* AppDelegate.swift */,
 				FDDFDDA52042805200B3D0DE /* FirstViewController.swift */,
@@ -174,7 +211,9 @@
 		FDDFDDD32042B24A00B3D0DE /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				FDD5AA2820464BF000C84CC1 /* Common */,
 				FDDFDDD42042B26000B3D0DE /* Guide */,
+				FDD5AA262045B7B800C84CC1 /* TransactionViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -482,9 +521,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FDD5AA272045B7B800C84CC1 /* TransactionViewController.swift in Sources */,
+				FDD5AA2C2046882100C84CC1 /* UIColorExtension.swift in Sources */,
+				FDD5AA30204689D000C84CC1 /* TransactionTableViewCell.swift in Sources */,
+				FDD5AA2A20464C5500C84CC1 /* Util.swift in Sources */,
 				FDDFDDA82042805200B3D0DE /* SecondViewController.swift in Sources */,
 				FDDFDDD62042B28900B3D0DE /* GuideViewController.swift in Sources */,
 				FDDFDDA42042805200B3D0DE /* AppDelegate.swift in Sources */,
+				FDD5AA3320468A8700C84CC1 /* XDAGTransaction.swift in Sources */,
 				FDDFDDA62042805200B3D0DE /* FirstViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

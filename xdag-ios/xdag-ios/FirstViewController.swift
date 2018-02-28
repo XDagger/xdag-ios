@@ -7,12 +7,28 @@
 //
 
 import UIKit
+import SnapKit
 
 class FirstViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        var hv:TransactionViewController = Util.GetViewController(controllerName: "transactionView")
+        self.addChildViewController(hv)
+        self.view.addSubview(hv.view)
+        hv.view.snp.makeConstraints { (maker) in
+            maker.top.equalTo(self.view).offset(200)
+            maker.leading.equalTo(self.view).offset(0)
+            maker.trailing.equalTo(self.view).offset(0)
+            maker.bottom.equalTo(self.view).offset(-49)
+
+        }
         // Do any additional setup after loading the view, typically from a nib.
+    }
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        return .lightContent
+        
     }
 
     override func didReceiveMemoryWarning() {
