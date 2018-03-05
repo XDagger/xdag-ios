@@ -17,7 +17,7 @@
 		FDD5AA30204689D000C84CC1 /* TransactionTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDD5AA2F204689D000C84CC1 /* TransactionTableViewCell.swift */; };
 		FDD5AA3320468A8700C84CC1 /* XDAGTransaction.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDD5AA3220468A8700C84CC1 /* XDAGTransaction.swift */; };
 		FDDFDDA42042805200B3D0DE /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDDFDDA32042805200B3D0DE /* AppDelegate.swift */; };
-		FDDFDDA62042805200B3D0DE /* FirstViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDDFDDA52042805200B3D0DE /* FirstViewController.swift */; };
+		FDDFDDA62042805200B3D0DE /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDDFDDA52042805200B3D0DE /* HomeViewController.swift */; };
 		FDDFDDA82042805200B3D0DE /* ReceiveViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDDFDDA72042805200B3D0DE /* ReceiveViewController.swift */; };
 		FDDFDDAB2042805200B3D0DE /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FDDFDDA92042805200B3D0DE /* Main.storyboard */; };
 		FDDFDDAD2042805200B3D0DE /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FDDFDDAC2042805200B3D0DE /* Assets.xcassets */; };
@@ -62,7 +62,7 @@
 		FDD5AA3220468A8700C84CC1 /* XDAGTransaction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XDAGTransaction.swift; sourceTree = "<group>"; };
 		FDDFDDA02042805200B3D0DE /* xdag-ios.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "xdag-ios.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		FDDFDDA32042805200B3D0DE /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		FDDFDDA52042805200B3D0DE /* FirstViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstViewController.swift; sourceTree = "<group>"; };
+		FDDFDDA52042805200B3D0DE /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		FDDFDDA72042805200B3D0DE /* ReceiveViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReceiveViewController.swift; sourceTree = "<group>"; };
 		FDDFDDAA2042805200B3D0DE /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		FDDFDDAC2042805200B3D0DE /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -184,8 +184,6 @@
 				FDD5AA2820464BF000C84CC1 /* Common */,
 				FDDFDDD32042B24A00B3D0DE /* Controllers */,
 				FDDFDDA32042805200B3D0DE /* AppDelegate.swift */,
-				FDDFDDA52042805200B3D0DE /* FirstViewController.swift */,
-				FDDFDDA72042805200B3D0DE /* ReceiveViewController.swift */,
 				FDDFDDA92042805200B3D0DE /* Main.storyboard */,
 				FDDFDDAC2042805200B3D0DE /* Assets.xcassets */,
 				FDDFDDAE2042805200B3D0DE /* LaunchScreen.storyboard */,
@@ -215,6 +213,8 @@
 		FDDFDDD32042B24A00B3D0DE /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				FDDFDDA52042805200B3D0DE /* HomeViewController.swift */,
+				FDDFDDA72042805200B3D0DE /* ReceiveViewController.swift */,
 				FDDFDDD42042B26000B3D0DE /* Guide */,
 				FDD5AA262045B7B800C84CC1 /* TransactionViewController.swift */,
 			);
@@ -533,7 +533,7 @@
 				FDDFDDD62042B28900B3D0DE /* GuideViewController.swift in Sources */,
 				FDDFDDA42042805200B3D0DE /* AppDelegate.swift in Sources */,
 				FDD5AA3320468A8700C84CC1 /* XDAGTransaction.swift in Sources */,
-				FDDFDDA62042805200B3D0DE /* FirstViewController.swift in Sources */,
+				FDDFDDA62042805200B3D0DE /* HomeViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
