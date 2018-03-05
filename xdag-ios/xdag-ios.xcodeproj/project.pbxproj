@@ -10,6 +10,7 @@
 		2610121345B6067DADE417BE /* Pods_xdag_iosTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F575BF24B3A94D152579D826 /* Pods_xdag_iosTests.framework */; };
 		6BB6FF58956E36C24BC09567 /* Pods_xdag_iosUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B16B9CA38ADF1393659ED547 /* Pods_xdag_iosUITests.framework */; };
 		AED687D18D3BA32ECAA614DF /* Pods_xdag_ios.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 25C83CF0A0B916236770A5D6 /* Pods_xdag_ios.framework */; };
+		FD07F7CC204D081800BE86B9 /* SwiftNotice.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD07F7CB204D081700BE86B9 /* SwiftNotice.swift */; };
 		FDD5AA272045B7B800C84CC1 /* TransactionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDD5AA262045B7B800C84CC1 /* TransactionViewController.swift */; };
 		FDD5AA2A20464C5500C84CC1 /* Util.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDD5AA2920464C5500C84CC1 /* Util.swift */; };
 		FDD5AA2C2046882100C84CC1 /* UIColorExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDD5AA2B2046882100C84CC1 /* UIColorExtension.swift */; };
@@ -17,7 +18,7 @@
 		FDD5AA3320468A8700C84CC1 /* XDAGTransaction.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDD5AA3220468A8700C84CC1 /* XDAGTransaction.swift */; };
 		FDDFDDA42042805200B3D0DE /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDDFDDA32042805200B3D0DE /* AppDelegate.swift */; };
 		FDDFDDA62042805200B3D0DE /* FirstViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDDFDDA52042805200B3D0DE /* FirstViewController.swift */; };
-		FDDFDDA82042805200B3D0DE /* SecondViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDDFDDA72042805200B3D0DE /* SecondViewController.swift */; };
+		FDDFDDA82042805200B3D0DE /* ReceiveViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDDFDDA72042805200B3D0DE /* ReceiveViewController.swift */; };
 		FDDFDDAB2042805200B3D0DE /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FDDFDDA92042805200B3D0DE /* Main.storyboard */; };
 		FDDFDDAD2042805200B3D0DE /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FDDFDDAC2042805200B3D0DE /* Assets.xcassets */; };
 		FDDFDDB02042805200B3D0DE /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FDDFDDAE2042805200B3D0DE /* LaunchScreen.storyboard */; };
@@ -53,6 +54,7 @@
 		B16B9CA38ADF1393659ED547 /* Pods_xdag_iosUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_xdag_iosUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		B2B0194D1EE6B527C4E28409 /* Pods-xdag-iosUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-xdag-iosUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-xdag-iosUITests/Pods-xdag-iosUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		F575BF24B3A94D152579D826 /* Pods_xdag_iosTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_xdag_iosTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		FD07F7CB204D081700BE86B9 /* SwiftNotice.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwiftNotice.swift; sourceTree = "<group>"; };
 		FDD5AA262045B7B800C84CC1 /* TransactionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionViewController.swift; sourceTree = "<group>"; };
 		FDD5AA2920464C5500C84CC1 /* Util.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Util.swift; sourceTree = "<group>"; };
 		FDD5AA2B2046882100C84CC1 /* UIColorExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIColorExtension.swift; sourceTree = "<group>"; };
@@ -61,7 +63,7 @@
 		FDDFDDA02042805200B3D0DE /* xdag-ios.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "xdag-ios.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		FDDFDDA32042805200B3D0DE /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		FDDFDDA52042805200B3D0DE /* FirstViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstViewController.swift; sourceTree = "<group>"; };
-		FDDFDDA72042805200B3D0DE /* SecondViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecondViewController.swift; sourceTree = "<group>"; };
+		FDDFDDA72042805200B3D0DE /* ReceiveViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReceiveViewController.swift; sourceTree = "<group>"; };
 		FDDFDDAA2042805200B3D0DE /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		FDDFDDAC2042805200B3D0DE /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		FDDFDDAF2042805200B3D0DE /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -129,6 +131,7 @@
 		FDD5AA2820464BF000C84CC1 /* Common */ = {
 			isa = PBXGroup;
 			children = (
+				FD07F7CB204D081700BE86B9 /* SwiftNotice.swift */,
 				FDD5AA2920464C5500C84CC1 /* Util.swift */,
 				FDD5AA2B2046882100C84CC1 /* UIColorExtension.swift */,
 			);
@@ -178,10 +181,11 @@
 			children = (
 				FDD5AA3120468A7C00C84CC1 /* Models */,
 				FDD5AA2D2046899D00C84CC1 /* Views */,
+				FDD5AA2820464BF000C84CC1 /* Common */,
 				FDDFDDD32042B24A00B3D0DE /* Controllers */,
 				FDDFDDA32042805200B3D0DE /* AppDelegate.swift */,
 				FDDFDDA52042805200B3D0DE /* FirstViewController.swift */,
-				FDDFDDA72042805200B3D0DE /* SecondViewController.swift */,
+				FDDFDDA72042805200B3D0DE /* ReceiveViewController.swift */,
 				FDDFDDA92042805200B3D0DE /* Main.storyboard */,
 				FDDFDDAC2042805200B3D0DE /* Assets.xcassets */,
 				FDDFDDAE2042805200B3D0DE /* LaunchScreen.storyboard */,
@@ -211,7 +215,6 @@
 		FDDFDDD32042B24A00B3D0DE /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				FDD5AA2820464BF000C84CC1 /* Common */,
 				FDDFDDD42042B26000B3D0DE /* Guide */,
 				FDD5AA262045B7B800C84CC1 /* TransactionViewController.swift */,
 			);
@@ -524,8 +527,9 @@
 				FDD5AA272045B7B800C84CC1 /* TransactionViewController.swift in Sources */,
 				FDD5AA2C2046882100C84CC1 /* UIColorExtension.swift in Sources */,
 				FDD5AA30204689D000C84CC1 /* TransactionTableViewCell.swift in Sources */,
+				FD07F7CC204D081800BE86B9 /* SwiftNotice.swift in Sources */,
 				FDD5AA2A20464C5500C84CC1 /* Util.swift in Sources */,
-				FDDFDDA82042805200B3D0DE /* SecondViewController.swift in Sources */,
+				FDDFDDA82042805200B3D0DE /* ReceiveViewController.swift in Sources */,
 				FDDFDDD62042B28900B3D0DE /* GuideViewController.swift in Sources */,
 				FDDFDDA42042805200B3D0DE /* AppDelegate.swift in Sources */,
 				FDD5AA3320468A8700C84CC1 /* XDAGTransaction.swift in Sources */,

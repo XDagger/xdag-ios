@@ -76,35 +76,57 @@
             </objects>
             <point key="canvasLocation" x="749.60000000000002" y="-320.68965517241384"/>
         </scene>
-        <!--XDag-->
+        <!--Receive XDag-->
         <scene sceneID="wg7-f3-ORb">
             <objects>
-                <viewController id="8rJ-Kc-sve" customClass="SecondViewController" customModule="xdag_ios" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="8rJ-Kc-sve" customClass="ReceiveViewController" customModule="xdag_ios" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="QS5-Rx-YEW">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Ux8-7C-zRK">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Ux8-7C-zRK">
                                 <rect key="frame" x="77" y="166" width="220" height="220"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="220" id="O0Q-5a-6tS"/>
+                                    <constraint firstAttribute="width" constant="220" id="aSp-DJ-IG5"/>
+                                </constraints>
                             </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="4f1Sp/UD5533ddxxevUCpyenaPwqmpC" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="W6A-ex-jeQ">
-                                <rect key="frame" x="25" y="132" width="334" height="21"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="4f1Sp/UD5533ddxxevUCpyenaPwqmpC" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="W6A-ex-jeQ">
+                                <rect key="frame" x="25" y="132" width="325" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <nil key="textColor"/>
+                                <color key="textColor" red="0.1215686275" green="0.23921568630000001" blue="0.33725490200000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CTi-3M-AkQ">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CTi-3M-AkQ">
                                 <rect key="frame" x="77" y="402" width="220" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Button"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="220" id="NXS-es-M3b"/>
+                                </constraints>
+                                <state key="normal" title="copy address">
+                                    <color key="titleColor" red="0.12156862745098039" green="0.23921568627450979" blue="0.33725490196078434" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                </state>
+                                <connections>
+                                    <action selector="copyAddress:" destination="8rJ-Kc-sve" eventType="touchUpInside" id="nUr-lY-kQA"/>
+                                </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="Ux8-7C-zRK" firstAttribute="top" secondItem="W6A-ex-jeQ" secondAttribute="bottom" constant="13" id="2yR-Cu-kiz"/>
+                            <constraint firstItem="W6A-ex-jeQ" firstAttribute="leading" secondItem="O1u-W8-tvY" secondAttribute="leading" constant="25" id="65Z-RJ-2u8"/>
+                            <constraint firstItem="CTi-3M-AkQ" firstAttribute="centerX" secondItem="O1u-W8-tvY" secondAttribute="centerX" id="Bjs-tF-j0f"/>
+                            <constraint firstItem="CTi-3M-AkQ" firstAttribute="top" secondItem="Ux8-7C-zRK" secondAttribute="bottom" constant="16" id="M8i-qS-K1K"/>
+                            <constraint firstItem="W6A-ex-jeQ" firstAttribute="top" secondItem="O1u-W8-tvY" secondAttribute="top" constant="68" id="Ndf-h9-KZe"/>
+                            <constraint firstItem="Ux8-7C-zRK" firstAttribute="centerX" secondItem="O1u-W8-tvY" secondAttribute="centerX" id="hUj-Fi-WI4"/>
+                            <constraint firstItem="O1u-W8-tvY" firstAttribute="trailing" secondItem="W6A-ex-jeQ" secondAttribute="trailing" constant="25" id="zGl-0j-Xhq"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="O1u-W8-tvY"/>
                     </view>
-                    <navigationItem key="navigationItem" title="XDag" id="IvX-Oc-rnD"/>
+                    <navigationItem key="navigationItem" title="Receive XDag" id="IvX-Oc-rnD"/>
+                    <connections>
+                        <outlet property="addressLabel" destination="W6A-ex-jeQ" id="L01-89-r1i"/>
+                        <outlet property="addressQRCode" destination="Ux8-7C-zRK" id="qt8-FS-ed4"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4Nw-L8-lE0" sceneMemberID="firstResponder"/>
             </objects>
@@ -191,7 +213,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="vBU-mQ-e6H" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="88.799999999999997" y="716.49175412293857"/>
+            <point key="canvasLocation" x="295" y="759"/>
         </scene>
         <!--Send-->
         <scene sceneID="ewY-wZ-xXE">
@@ -207,7 +229,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="tIT-O9-fcY" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-786" y="704"/>
+            <point key="canvasLocation" x="-1058" y="786"/>
         </scene>
         <!--Setting-->
         <scene sceneID="iul-zD-oBD">
