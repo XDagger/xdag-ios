@@ -20,14 +20,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         originViewController = self.window?.rootViewController
 
-       // if UserDefaults.standard.bool(forKey: "firstLogin") == false {
+        if UserDefaults.standard.bool(forKey: "firstLogin") == false {
             UserDefaults.standard.set(true, forKey: "firstLogin")
             UserDefaults.standard.synchronize()
             
             let guideViewController = GuideViewController()
             self.window?.rootViewController = guideViewController
             
-       // }
+        }
         
         return true
     }

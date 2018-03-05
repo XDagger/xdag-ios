@@ -1,7 +1,11 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13122.16" systemVersion="17A277" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" launchScreen="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="01J-lp-oVM">
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" launchScreen="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="01J-lp-oVM">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13104.12"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -13,13 +17,70 @@
                     <view key="view" contentMode="scaleToFill" id="Ze5-6b-2t3">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="map-bg" translatesAutoresizingMaskIntoConstraints="NO" id="Ef1-tT-fid">
+                                <rect key="frame" x="0.0" y="20" width="375" height="647"/>
+                            </imageView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="xdag-2" translatesAutoresizingMaskIntoConstraints="NO" id="U4V-he-iGf">
+                                <rect key="frame" x="165" y="140" width="45" height="45"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="45" id="Oan-4D-tep"/>
+                                    <constraint firstAttribute="height" constant="45" id="QN1-E6-CYa"/>
+                                </constraints>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Dagger [XDAG]" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8lY-7U-5l7">
+                                <rect key="frame" x="117" y="200" width="142.5" height="27"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="27" id="ecQ-QV-wah"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="21"/>
+                                <color key="textColor" red="0.98753036189999999" green="0.98753036189999999" blue="0.98753036189999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="A new DAG-based cryptocurrency." textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cYL-V2-qKc">
+                                <rect key="frame" x="57" y="297" width="302" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                <color key="textColor" red="0.98753036189999999" green="0.98753036189999999" blue="0.98753036189999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FPz-xy-akC">
+                                <rect key="frame" x="46.5" y="644.5" width="282" height="14.5"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="282" id="oOq-lg-Dvh"/>
+                                </constraints>
+                                <string key="text">© 2018 Dagger (XDAG). All rights reserved.
+
+</string>
+                                <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                <color key="textColor" red="0.98753036189999999" green="0.98753036189999999" blue="0.98753036189999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="top" secondItem="Ef1-tT-fid" secondAttribute="top" id="CKP-IA-zwM"/>
+                            <constraint firstItem="FPz-xy-akC" firstAttribute="centerX" secondItem="6Tk-OE-BBY" secondAttribute="centerX" id="Jzw-Pz-ikB"/>
+                            <constraint firstItem="U4V-he-iGf" firstAttribute="top" secondItem="Ef1-tT-fid" secondAttribute="top" constant="120" id="K5K-UK-2P7"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="FPz-xy-akC" secondAttribute="bottom" constant="8" id="KfA-nl-3FR"/>
+                            <constraint firstItem="cYL-V2-qKc" firstAttribute="centerX" secondItem="6Tk-OE-BBY" secondAttribute="centerX" id="Lpg-Yz-loB"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="Ef1-tT-fid" secondAttribute="bottom" id="Ng8-qT-WTy"/>
+                            <constraint firstItem="cYL-V2-qKc" firstAttribute="centerY" secondItem="6Tk-OE-BBY" secondAttribute="centerY" id="Sm2-8B-UZQ"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="Ef1-tT-fid" secondAttribute="trailing" id="UqK-2d-zFe"/>
+                            <constraint firstItem="Ef1-tT-fid" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="bK6-oc-oTe"/>
+                            <constraint firstItem="U4V-he-iGf" firstAttribute="centerX" secondItem="6Tk-OE-BBY" secondAttribute="centerX" id="hPG-1v-e6E"/>
+                            <constraint firstItem="8lY-7U-5l7" firstAttribute="top" secondItem="U4V-he-iGf" secondAttribute="top" constant="60" id="mSH-n7-dbW"/>
+                            <constraint firstItem="8lY-7U-5l7" firstAttribute="centerX" secondItem="6Tk-OE-BBY" secondAttribute="centerX" id="v1o-6I-vMf"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="iYj-Kq-Ea1" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="53" y="375"/>
+            <point key="canvasLocation" x="52" y="374.66266866566718"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="map-bg" width="960" height="505"/>
+        <image name="xdag-2" width="27" height="26"/>
+    </resources>
 </document>

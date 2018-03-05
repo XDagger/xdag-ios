@@ -18,4 +18,8 @@ extension UIColor {
         return UIColor(red: 252 / 255.0, green: 86 / 255.0, blue: 86 / 255.0, alpha: 1.0);
     }
     
+    class func navigationBarColor() -> UIColor{
+        return UIColor(red: 58 / 255.0, green: 70 / 255.0, blue: 101 / 255.0, alpha: 1.0);
+    }
+    
 }
