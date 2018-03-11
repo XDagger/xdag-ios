@@ -12,6 +12,8 @@
 		AED687D18D3BA32ECAA614DF /* Pods_xdag_ios.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 25C83CF0A0B916236770A5D6 /* Pods_xdag_ios.framework */; };
 		FD07F7CC204D081800BE86B9 /* SwiftNotice.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD07F7CB204D081700BE86B9 /* SwiftNotice.swift */; };
 		FD07F7CE204E6D1700BE86B9 /* SettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD07F7CD204E6D1700BE86B9 /* SettingViewController.swift */; };
+		FDA7E43320556A0400A914B1 /* AVCaptureSessionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDA7E43220556A0400A914B1 /* AVCaptureSessionManager.swift */; };
+		FDA7E4352055713000A914B1 /* AppPermissions.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDA7E4342055713000A914B1 /* AppPermissions.swift */; };
 		FDD5AA272045B7B800C84CC1 /* TransactionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDD5AA262045B7B800C84CC1 /* TransactionViewController.swift */; };
 		FDD5AA2A20464C5500C84CC1 /* Util.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDD5AA2920464C5500C84CC1 /* Util.swift */; };
 		FDD5AA2C2046882100C84CC1 /* UIColorExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDD5AA2B2046882100C84CC1 /* UIColorExtension.swift */; };
@@ -57,6 +59,8 @@
 		F575BF24B3A94D152579D826 /* Pods_xdag_iosTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_xdag_iosTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		FD07F7CB204D081700BE86B9 /* SwiftNotice.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwiftNotice.swift; sourceTree = "<group>"; };
 		FD07F7CD204E6D1700BE86B9 /* SettingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingViewController.swift; sourceTree = "<group>"; };
+		FDA7E43220556A0400A914B1 /* AVCaptureSessionManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AVCaptureSessionManager.swift; sourceTree = "<group>"; };
+		FDA7E4342055713000A914B1 /* AppPermissions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppPermissions.swift; sourceTree = "<group>"; };
 		FDD5AA262045B7B800C84CC1 /* TransactionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionViewController.swift; sourceTree = "<group>"; };
 		FDD5AA2920464C5500C84CC1 /* Util.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Util.swift; sourceTree = "<group>"; };
 		FDD5AA2B2046882100C84CC1 /* UIColorExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIColorExtension.swift; sourceTree = "<group>"; };
@@ -136,6 +140,8 @@
 				FD07F7CB204D081700BE86B9 /* SwiftNotice.swift */,
 				FDD5AA2920464C5500C84CC1 /* Util.swift */,
 				FDD5AA2B2046882100C84CC1 /* UIColorExtension.swift */,
+				FDA7E43220556A0400A914B1 /* AVCaptureSessionManager.swift */,
+				FDA7E4342055713000A914B1 /* AppPermissions.swift */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -528,7 +534,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				FDD5AA272045B7B800C84CC1 /* TransactionViewController.swift in Sources */,
+				FDA7E4352055713000A914B1 /* AppPermissions.swift in Sources */,
 				FD07F7CE204E6D1700BE86B9 /* SettingViewController.swift in Sources */,
+				FDA7E43320556A0400A914B1 /* AVCaptureSessionManager.swift in Sources */,
 				FDD5AA2C2046882100C84CC1 /* UIColorExtension.swift in Sources */,
 				FDD5AA30204689D000C84CC1 /* TransactionTableViewCell.swift in Sources */,
 				FD07F7CC204D081800BE86B9 /* SwiftNotice.swift in Sources */,
