@@ -325,7 +325,7 @@
         <!--Send XDag-->
         <scene sceneID="ewY-wZ-xXE">
             <objects>
-                <viewController id="PuT-ff-0lH" sceneMemberID="viewController">
+                <viewController id="PuT-ff-0lH" customClass="SendTransactionController" customModule="xdag_ios" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="aCH-gc-NkE">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -464,6 +464,9 @@
                     <navigationItem key="navigationItem" title="Send XDag" id="6Ui-6e-Ahd" colorLabel="IBBuiltInLabel-Red">
                         <barButtonItem key="rightBarButtonItem" title="Item" image="scancode" id="vQE-lR-U4l">
                             <color key="tintColor" red="0.98753036189999999" green="0.98753036189999999" blue="0.98753036189999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <connections>
+                                <action selector="scanBtnClicked:" destination="PuT-ff-0lH" id="2uK-3U-heH"/>
+                            </connections>
                         </barButtonItem>
                     </navigationItem>
                 </viewController>
@@ -542,20 +545,48 @@
             </objects>
             <point key="canvasLocation" x="-1422" y="786"/>
         </scene>
-        <!--View Controller-->
+        <!--Scan View Controller-->
         <scene sceneID="Eu7-MK-GDW">
             <objects>
-                <viewController id="IPx-nn-sEd" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="scanViewController" id="IPx-nn-sEd" customClass="ScanViewController" customModule="xdag_ios" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Caz-gh-OQk">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jo7-LK-gWC">
+                                <rect key="frame" x="87" y="243.5" width="200" height="200"/>
+                                <subviews>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="0FX-nF-Leh">
+                                        <rect key="frame" x="0.0" y="0.0" width="200" height="200"/>
+                                    </imageView>
+                                </subviews>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstItem="0FX-nF-Leh" firstAttribute="leading" secondItem="jo7-LK-gWC" secondAttribute="leading" id="Iti-Cd-FVK"/>
+                                    <constraint firstItem="0FX-nF-Leh" firstAttribute="top" secondItem="jo7-LK-gWC" secondAttribute="top" id="NH2-Tw-mrW"/>
+                                    <constraint firstAttribute="height" constant="200" id="Qks-WT-zUU"/>
+                                    <constraint firstAttribute="bottom" secondItem="0FX-nF-Leh" secondAttribute="bottom" id="Tly-Nz-hi6"/>
+                                    <constraint firstAttribute="trailing" secondItem="0FX-nF-Leh" secondAttribute="trailing" id="eKh-mp-kK8"/>
+                                    <constraint firstAttribute="width" constant="200" id="ode-Vk-4Wl"/>
+                                </constraints>
+                            </view>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eRR-sA-jwc">
+                                <rect key="frame" x="164" y="463" width="46" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Button"/>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" red="0.94158239389999998" green="0.94158239389999998" blue="0.94158239389999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="jo7-LK-gWC" firstAttribute="centerY" secondItem="goM-S0-hjf" secondAttribute="centerY" id="Ung-Fe-22z"/>
+                            <constraint firstItem="jo7-LK-gWC" firstAttribute="centerX" secondItem="goM-S0-hjf" secondAttribute="centerX" id="svU-MA-Tmf"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="goM-S0-hjf"/>
                     </view>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="bYM-dY-5tc" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-697" y="1454"/>
+            <point key="canvasLocation" x="-719" y="1448"/>
         </scene>
         <!--Setting-->
         <scene sceneID="Nro-NZ-wnw">

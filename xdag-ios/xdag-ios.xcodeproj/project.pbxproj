@@ -14,6 +14,8 @@
 		FD07F7CE204E6D1700BE86B9 /* SettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD07F7CD204E6D1700BE86B9 /* SettingViewController.swift */; };
 		FDA7E43320556A0400A914B1 /* AVCaptureSessionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDA7E43220556A0400A914B1 /* AVCaptureSessionManager.swift */; };
 		FDA7E4352055713000A914B1 /* AppPermissions.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDA7E4342055713000A914B1 /* AppPermissions.swift */; };
+		FDA7E437205D18BC00A914B1 /* ScanViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDA7E436205D18BC00A914B1 /* ScanViewController.swift */; };
+		FDA7E439205D1FA900A914B1 /* SendTransactionController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDA7E438205D1FA900A914B1 /* SendTransactionController.swift */; };
 		FDD5AA272045B7B800C84CC1 /* TransactionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDD5AA262045B7B800C84CC1 /* TransactionViewController.swift */; };
 		FDD5AA2A20464C5500C84CC1 /* Util.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDD5AA2920464C5500C84CC1 /* Util.swift */; };
 		FDD5AA2C2046882100C84CC1 /* UIColorExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDD5AA2B2046882100C84CC1 /* UIColorExtension.swift */; };
@@ -61,6 +63,8 @@
 		FD07F7CD204E6D1700BE86B9 /* SettingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingViewController.swift; sourceTree = "<group>"; };
 		FDA7E43220556A0400A914B1 /* AVCaptureSessionManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AVCaptureSessionManager.swift; sourceTree = "<group>"; };
 		FDA7E4342055713000A914B1 /* AppPermissions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppPermissions.swift; sourceTree = "<group>"; };
+		FDA7E436205D18BC00A914B1 /* ScanViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScanViewController.swift; sourceTree = "<group>"; };
+		FDA7E438205D1FA900A914B1 /* SendTransactionController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SendTransactionController.swift; sourceTree = "<group>"; };
 		FDD5AA262045B7B800C84CC1 /* TransactionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionViewController.swift; sourceTree = "<group>"; };
 		FDD5AA2920464C5500C84CC1 /* Util.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Util.swift; sourceTree = "<group>"; };
 		FDD5AA2B2046882100C84CC1 /* UIColorExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIColorExtension.swift; sourceTree = "<group>"; };
@@ -226,6 +230,8 @@
 				FDDFDDD42042B26000B3D0DE /* Guide */,
 				FDD5AA262045B7B800C84CC1 /* TransactionViewController.swift */,
 				FD07F7CD204E6D1700BE86B9 /* SettingViewController.swift */,
+				FDA7E436205D18BC00A914B1 /* ScanViewController.swift */,
+				FDA7E438205D1FA900A914B1 /* SendTransactionController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -316,6 +322,11 @@
 					FDDFDD9F2042805200B3D0DE = {
 						CreatedOnToolsVersion = 9.2;
 						ProvisioningStyle = Automatic;
+						SystemCapabilities = {
+							com.apple.BackgroundModes = {
+								enabled = 0;
+							};
+						};
 					};
 					FDDFDDB52042805200B3D0DE = {
 						CreatedOnToolsVersion = 9.2;
@@ -534,8 +545,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				FDD5AA272045B7B800C84CC1 /* TransactionViewController.swift in Sources */,
+				FDA7E437205D18BC00A914B1 /* ScanViewController.swift in Sources */,
 				FDA7E4352055713000A914B1 /* AppPermissions.swift in Sources */,
 				FD07F7CE204E6D1700BE86B9 /* SettingViewController.swift in Sources */,
+				FDA7E439205D1FA900A914B1 /* SendTransactionController.swift in Sources */,
 				FDA7E43320556A0400A914B1 /* AVCaptureSessionManager.swift in Sources */,
 				FDD5AA2C2046882100C84CC1 /* UIColorExtension.swift in Sources */,
 				FDD5AA30204689D000C84CC1 /* TransactionTableViewCell.swift in Sources */,

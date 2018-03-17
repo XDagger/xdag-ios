@@ -6,8 +6,6 @@
 //  Copyright © 2018年 xdag.org. All rights reserved.
 //
 
-import Foundation
-
 import UIKit
 import AVFoundation
 import Photos
