@@ -13,10 +13,14 @@ class ScanViewController: UIViewController {
     var sessionManager:AVCaptureSessionManager?
     
     var scanSuccessDelegate: ScanXDagQRCodeResultDelegate?
+    var torchState = false
+
+    @IBOutlet weak var scanInRect: UIView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        self.navigationController?.navigationBar.tintColor = UIColor.white
         sessionManager = AVCaptureSessionManager(captureType: .AVCaptureTypeQRCode, scanRect: CGRect.null, success: { (result) in
             if let qrScheme = result {
                 self.parserQRSchemeResult(qrScheme)
@@ -27,10 +31,18 @@ class ScanViewController: UIViewController {
         
         let item = UIBarButtonItem(title: "Photos", style: .plain, target: self, action: #selector(pickPhoto))
         navigationItem.rightBarButtonItem = item
+        scanInRect.layer.borderWidth = 1
+        scanInRect.layer.borderColor = UIColor.green.cgColor
     }
 
     override func viewWillAppear(_ animated: Bool) {
         sessionManager?.start()
+    }
+    
+    
+    @IBAction func toggleTorch(_ sender: Any) {
+        torchState = !torchState
+        sessionManager?.turnTorch(state: torchState)
     }
     
     func parserQRSchemeResult (_ qrScheme:String) {

@@ -577,16 +577,21 @@
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eRR-sA-jwc">
                                 <rect key="frame" x="164" y="463" width="46" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Button"/>
+                                <state key="normal" title="Torch"/>
+                                <connections>
+                                    <action selector="toggleTorch:" destination="IPx-nn-sEd" eventType="touchUpInside" id="oBk-3Q-tGX"/>
+                                </connections>
                             </button>
                         </subviews>
-                        <color key="backgroundColor" red="0.94158239389999998" green="0.94158239389999998" blue="0.94158239389999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="jo7-LK-gWC" firstAttribute="centerY" secondItem="goM-S0-hjf" secondAttribute="centerY" id="Ung-Fe-22z"/>
                             <constraint firstItem="jo7-LK-gWC" firstAttribute="centerX" secondItem="goM-S0-hjf" secondAttribute="centerX" id="svU-MA-Tmf"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="goM-S0-hjf"/>
                     </view>
+                    <connections>
+                        <outlet property="scanInRect" destination="jo7-LK-gWC" id="msd-MM-xiv"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="bYM-dY-5tc" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

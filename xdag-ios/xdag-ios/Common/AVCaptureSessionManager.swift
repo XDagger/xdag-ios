@@ -101,6 +101,24 @@ class AVCaptureSessionManager: AVCaptureSession {
         view.layer.insertSublayer(previewLayer, at: 0)
         start()
     }
+    
+    func turnTorch(state:Bool) {
+        if let device = device {
+            if (device.hasTorch) {
+                do {
+                    try device.lockForConfiguration()
+                } catch let error as NSError {
+                    print("TorchError  \(error)")
+                }
+                if (state) {
+                    device.torchMode = AVCaptureDevice.TorchMode.on
+                } else {
+                    device.torchMode = AVCaptureDevice.TorchMode.off
+                }
+                device.unlockForConfiguration()
+            }
+        }
+    }
 }
 
 
