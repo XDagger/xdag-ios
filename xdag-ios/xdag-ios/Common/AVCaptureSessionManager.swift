@@ -115,6 +115,11 @@ extension AVCaptureSessionManager: AVCaptureMetadataOutputObjectsDelegate {
     }
 }
 
+public protocol ScanXDagQRCodeResultDelegate : NSObjectProtocol {
+
+    func scanSuccess(_ address:String, withParams params: [String:String]?)
+}
+
 
 enum AVCaptureType {
     case AVCaptureTypeQRCode

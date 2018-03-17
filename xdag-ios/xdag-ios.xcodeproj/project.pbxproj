@@ -16,6 +16,7 @@
 		FDA7E4352055713000A914B1 /* AppPermissions.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDA7E4342055713000A914B1 /* AppPermissions.swift */; };
 		FDA7E437205D18BC00A914B1 /* ScanViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDA7E436205D18BC00A914B1 /* ScanViewController.swift */; };
 		FDA7E439205D1FA900A914B1 /* SendTransactionController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDA7E438205D1FA900A914B1 /* SendTransactionController.swift */; };
+		FDA7E43B205D2BE800A914B1 /* XDagQuerySerialization.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDA7E43A205D2BE800A914B1 /* XDagQuerySerialization.swift */; };
 		FDD5AA272045B7B800C84CC1 /* TransactionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDD5AA262045B7B800C84CC1 /* TransactionViewController.swift */; };
 		FDD5AA2A20464C5500C84CC1 /* Util.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDD5AA2920464C5500C84CC1 /* Util.swift */; };
 		FDD5AA2C2046882100C84CC1 /* UIColorExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDD5AA2B2046882100C84CC1 /* UIColorExtension.swift */; };
@@ -65,6 +66,7 @@
 		FDA7E4342055713000A914B1 /* AppPermissions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppPermissions.swift; sourceTree = "<group>"; };
 		FDA7E436205D18BC00A914B1 /* ScanViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScanViewController.swift; sourceTree = "<group>"; };
 		FDA7E438205D1FA900A914B1 /* SendTransactionController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SendTransactionController.swift; sourceTree = "<group>"; };
+		FDA7E43A205D2BE800A914B1 /* XDagQuerySerialization.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XDagQuerySerialization.swift; sourceTree = "<group>"; };
 		FDD5AA262045B7B800C84CC1 /* TransactionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionViewController.swift; sourceTree = "<group>"; };
 		FDD5AA2920464C5500C84CC1 /* Util.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Util.swift; sourceTree = "<group>"; };
 		FDD5AA2B2046882100C84CC1 /* UIColorExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIColorExtension.swift; sourceTree = "<group>"; };
@@ -146,6 +148,7 @@
 				FDD5AA2B2046882100C84CC1 /* UIColorExtension.swift */,
 				FDA7E43220556A0400A914B1 /* AVCaptureSessionManager.swift */,
 				FDA7E4342055713000A914B1 /* AppPermissions.swift */,
+				FDA7E43A205D2BE800A914B1 /* XDagQuerySerialization.swift */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -559,6 +562,7 @@
 				FDDFDDA42042805200B3D0DE /* AppDelegate.swift in Sources */,
 				FDD5AA3320468A8700C84CC1 /* XDAGTransaction.swift in Sources */,
 				FDDFDDA62042805200B3D0DE /* HomeViewController.swift in Sources */,
+				FDA7E43B205D2BE800A914B1 /* XDagQuerySerialization.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

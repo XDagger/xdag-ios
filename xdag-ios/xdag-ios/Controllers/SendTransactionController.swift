@@ -10,6 +10,10 @@ import UIKit
 
 class SendTransactionController: UIViewController {
 
+    @IBOutlet weak var txtToAddress: UITextField!
+    
+    
+    @IBOutlet weak var txtAmount: UITextField!
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -20,6 +24,7 @@ class SendTransactionController: UIViewController {
         AppPermissions.authorizeCameraWith { (authorized) in
             if authorized {
                 let scanViewController:ScanViewController = Util.GetViewController(controllerName: "scanViewController")
+                scanViewController.scanSuccessDelegate = self
                 self.navigationController?.pushViewController(scanViewController, animated: true)
             } else {
                 let action = UIAlertAction(title: "OK", style: .default, handler: { (action) in
@@ -48,4 +53,15 @@ class SendTransactionController: UIViewController {
     }
     */
 
+}
+
+extension SendTransactionController: ScanXDagQRCodeResultDelegate {
+    func scanSuccess(_ address: String, withParams params: [String : String]?) {
+        txtToAddress.text = address
+        if params != nil  {
+           txtAmount.text = params!["amount"]
+        }
+    }
+    
+    
 }

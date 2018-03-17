@@ -24,7 +24,9 @@ class ReceiveViewController: UIViewController {
     
     func setupViews(address:String) {
         addressLabel.text = address
-        addressQRCode.image = generateQRCodeImage(address: address)
+        
+        var qrScheme = XDagQuerySerialization.encode(address: address, paramsDictionary: [:])
+        addressQRCode.image = generateQRCodeImage(qrString: qrScheme)
     }
 
     override func didReceiveMemoryWarning() {
@@ -39,9 +41,9 @@ class ReceiveViewController: UIViewController {
     }
     
     // generate QRCode
-    private func generateQRCodeImage(address: String) -> UIImage? {
+    private func generateQRCodeImage(qrString: String) -> UIImage? {
         let parameters: [String : Any] = [
-            "inputMessage": address.data(using: .utf8)!,
+            "inputMessage": qrString.data(using: .utf8)!,
             "inputCorrectionLevel": "L"
         ]
         let filter = CIFilter(name: "CIQRCodeGenerator", withInputParameters: parameters)

@@ -21,9 +21,22 @@ class xdag_iosTests: XCTestCase {
         super.tearDown()
     }
     
-    func testExample() {
+    func testXDagQRSchemeTest() {
         // This is an example of a functional test case.
         // Use XCTAssert and related functions to verify your tests produce the correct results.
+        let address = "asdfljas/==342sdfsdf/34234=d90"
+        var params = [String:String]()
+        params["label"] = "fortest"
+        params["amount"] = "3"
+        
+       var qrScheme = XDagQuerySerialization.encode(address: address, paramsDictionary: params)
+        print(qrScheme);
+        XCTAssertTrue(qrScheme=="xdag:asdfljas/==342sdfsdf/34234=d90?label=fortest&amount=3", "encode failed")
+        
+        var (rAddress,rParams) = XDagQuerySerialization.decode(uriScheme: qrScheme)
+        print(rAddress!)
+        XCTAssertTrue(rAddress! == address, "decode address failed")
+        XCTAssertTrue(rParams!["amount"]=="3", "decode params failed")
     }
     
     func testPerformanceExample() {

@@ -24,6 +24,9 @@ class HomeViewController: UIViewController {
             maker.bottom.equalTo(self.view).offset(-49)
 
         }
+        
+        var test = "xdag:sadfasdf/asdfsdf3=dsfasdf?k1=v1&k2=v2"
+        
         // Do any additional setup after loading the view, typically from a nib.
     }
     override var preferredStatusBarStyle: UIStatusBarStyle {

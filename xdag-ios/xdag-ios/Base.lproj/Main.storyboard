@@ -469,6 +469,10 @@
                             </connections>
                         </barButtonItem>
                     </navigationItem>
+                    <connections>
+                        <outlet property="txtAmount" destination="ca0-7U-XtN" id="EgX-Us-VsE"/>
+                        <outlet property="txtToAddress" destination="7PE-6f-YSh" id="tDv-f7-DRY"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="tIT-O9-fcY" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

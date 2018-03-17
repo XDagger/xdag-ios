@@ -12,12 +12,14 @@ class ScanViewController: UIViewController {
 
     var sessionManager:AVCaptureSessionManager?
     
+    var scanSuccessDelegate: ScanXDagQRCodeResultDelegate?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         sessionManager = AVCaptureSessionManager(captureType: .AVCaptureTypeQRCode, scanRect: CGRect.null, success: { (result) in
-            if let strs = result {
-                print(strs)
+            if let qrScheme = result {
+                self.parserQRSchemeResult(qrScheme)
             }
         })
         
@@ -29,6 +31,20 @@ class ScanViewController: UIViewController {
 
     override func viewWillAppear(_ animated: Bool) {
         sessionManager?.start()
+    }
+    
+    func parserQRSchemeResult (_ qrScheme:String) {
+        guard XDagQuerySerialization.validateUrlScheme(uriScheme: qrScheme) == true else {
+            return
+        }
+       
+        let (address, params) = XDagQuerySerialization.decode(uriScheme: qrScheme)
+        if address == nil {
+            return
+        }
+        
+        scanSuccessDelegate?.scanSuccess(address!, withParams: params)
+        self.navigationController?.popViewController(animated: true)
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -81,8 +97,8 @@ extension ScanViewController:UIImagePickerControllerDelegate, UINavigationContro
         dismiss(animated: true) {
             self.sessionManager?.start()
             self.sessionManager?.scanPhoto(image: info["UIImagePickerControllerOriginalImage"] as! UIImage, success: { (result) in
-                if let strs = result {
-                    print("qrcode: \(strs)")
+                if let qrScheme = result {
+                    self.parserQRSchemeResult(qrScheme)
                 }
             })
         }
