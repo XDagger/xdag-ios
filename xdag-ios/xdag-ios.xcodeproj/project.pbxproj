@@ -12,6 +12,47 @@
 		AED687D18D3BA32ECAA614DF /* Pods_xdag_ios.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 25C83CF0A0B916236770A5D6 /* Pods_xdag_ios.framework */; };
 		FD07F7CC204D081800BE86B9 /* SwiftNotice.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD07F7CB204D081700BE86B9 /* SwiftNotice.swift */; };
 		FD07F7CE204E6D1700BE86B9 /* SettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD07F7CD204E6D1700BE86B9 /* SettingViewController.swift */; };
+		FDA555C620A1E4E000173691 /* dnet_threads.c in Sources */ = {isa = PBXBuildFile; fileRef = FDA5550A20A1E4E000173691 /* dnet_threads.c */; };
+		FDA555C720A1E4E000173691 /* dnet_files.c in Sources */ = {isa = PBXBuildFile; fileRef = FDA5550B20A1E4E000173691 /* dnet_files.c */; };
+		FDA555C820A1E4E000173691 /* dnet_stream.c in Sources */ = {isa = PBXBuildFile; fileRef = FDA5550C20A1E4E000173691 /* dnet_stream.c */; };
+		FDA555C920A1E4E000173691 /* dnet_crypt.c in Sources */ = {isa = PBXBuildFile; fileRef = FDA5551220A1E4E000173691 /* dnet_crypt.c */; };
+		FDA555CA20A1E4E000173691 /* dnet_main.c in Sources */ = {isa = PBXBuildFile; fileRef = FDA5551320A1E4E000173691 /* dnet_main.c */; };
+		FDA555CB20A1E4E000173691 /* dnet_log.c in Sources */ = {isa = PBXBuildFile; fileRef = FDA5551620A1E4E000173691 /* dnet_log.c */; };
+		FDA555CC20A1E4E000173691 /* dnet_command.c in Sources */ = {isa = PBXBuildFile; fileRef = FDA5551820A1E4E000173691 /* dnet_command.c */; };
+		FDA555CD20A1E4E000173691 /* dnet_database.c in Sources */ = {isa = PBXBuildFile; fileRef = FDA5551920A1E4E000173691 /* dnet_database.c */; };
+		FDA555CE20A1E4E000173691 /* dnet_connection.c in Sources */ = {isa = PBXBuildFile; fileRef = FDA5551B20A1E4E000173691 /* dnet_connection.c */; };
+		FDA555CF20A1E4E000173691 /* dnet_tap.c in Sources */ = {isa = PBXBuildFile; fileRef = FDA5551E20A1E4E000173691 /* dnet_tap.c */; };
+		FDA555D020A1E4E000173691 /* dnet_packet.c in Sources */ = {isa = PBXBuildFile; fileRef = FDA5551F20A1E4E000173691 /* dnet_packet.c */; };
+		FDA555D120A1E4E000173691 /* utils.c in Sources */ = {isa = PBXBuildFile; fileRef = FDA5552420A1E4E000173691 /* utils.c */; };
+		FDA555D220A1E4E000173691 /* FSOpenSSL.m in Sources */ = {isa = PBXBuildFile; fileRef = FDA5558320A1E4E000173691 /* FSOpenSSL.m */; };
+		FDA555D320A1E4E000173691 /* libcrypto.a in Frameworks */ = {isa = PBXBuildFile; fileRef = FDA5558520A1E4E000173691 /* libcrypto.a */; };
+		FDA555D420A1E4E000173691 /* libssl.a in Frameworks */ = {isa = PBXBuildFile; fileRef = FDA5558620A1E4E000173691 /* libssl.a */; };
+		FDA555D520A1E4E000173691 /* log.c in Sources */ = {isa = PBXBuildFile; fileRef = FDA5558820A1E4E000173691 /* log.c */; };
+		FDA555D620A1E4E000173691 /* crypt.c in Sources */ = {isa = PBXBuildFile; fileRef = FDA5558920A1E4E000173691 /* crypt.c */; };
+		FDA555D720A1E4E000173691 /* transport.c in Sources */ = {isa = PBXBuildFile; fileRef = FDA5558A20A1E4E000173691 /* transport.c */; };
+		FDA555D820A1E4E000173691 /* netdb.c in Sources */ = {isa = PBXBuildFile; fileRef = FDA5558C20A1E4E000173691 /* netdb.c */; };
+		FDA555D920A1E4E000173691 /* block.c in Sources */ = {isa = PBXBuildFile; fileRef = FDA5558E20A1E4E000173691 /* block.c */; };
+		FDA555DA20A1E4E000173691 /* memory.c in Sources */ = {isa = PBXBuildFile; fileRef = FDA5558F20A1E4E000173691 /* memory.c */; };
+		FDA555DB20A1E4E000173691 /* wallet.c in Sources */ = {isa = PBXBuildFile; fileRef = FDA5559020A1E4E000173691 /* wallet.c */; };
+		FDA555DC20A1E4E000173691 /* terminal.c in Sources */ = {isa = PBXBuildFile; fileRef = FDA5559120A1E4E000173691 /* terminal.c */; };
+		FDA555DD20A1E4E000173691 /* storage.c in Sources */ = {isa = PBXBuildFile; fileRef = FDA5559320A1E4E000173691 /* storage.c */; };
+		FDA555DE20A1E4E000173691 /* netdb-white-testnet.txt in Resources */ = {isa = PBXBuildFile; fileRef = FDA5559420A1E4E000173691 /* netdb-white-testnet.txt */; };
+		FDA555DF20A1E4E000173691 /* init.c in Sources */ = {isa = PBXBuildFile; fileRef = FDA5559520A1E4E000173691 /* init.c */; };
+		FDA555E020A1E4E000173691 /* netdb.txt in Resources */ = {isa = PBXBuildFile; fileRef = FDA5559920A1E4E000173691 /* netdb.txt */; };
+		FDA555E120A1E4E000173691 /* hash.c in Sources */ = {isa = PBXBuildFile; fileRef = FDA5559A20A1E4E000173691 /* hash.c */; };
+		FDA555E220A1E4E000173691 /* sync.c in Sources */ = {isa = PBXBuildFile; fileRef = FDA5559E20A1E4E000173691 /* sync.c */; };
+		FDA555E320A1E4E000173691 /* pool.c in Sources */ = {isa = PBXBuildFile; fileRef = FDA555A220A1E4E000173691 /* pool.c */; };
+		FDA555E420A1E4E000173691 /* sha256.c in Sources */ = {isa = PBXBuildFile; fileRef = FDA555A620A1E4E000173691 /* sha256.c */; };
+		FDA555E520A1E4E000173691 /* netdb-testnet.txt in Resources */ = {isa = PBXBuildFile; fileRef = FDA555A820A1E4E000173691 /* netdb-testnet.txt */; };
+		FDA555E620A1E4E000173691 /* address.c in Sources */ = {isa = PBXBuildFile; fileRef = FDA555A920A1E4E000173691 /* address.c */; };
+		FDA555E720A1E4E000173691 /* commands.c in Sources */ = {isa = PBXBuildFile; fileRef = FDA555AD20A1E4E000173691 /* commands.c */; };
+		FDA555E820A1E4E000173691 /* statsdaemon.c in Sources */ = {isa = PBXBuildFile; fileRef = FDA555AE20A1E4E000173691 /* statsdaemon.c */; };
+		FDA555E920A1E4E000173691 /* netdb-white.txt in Resources */ = {isa = PBXBuildFile; fileRef = FDA555AF20A1E4E000173691 /* netdb-white.txt */; };
+		FDA555EA20A1E4E000173691 /* crc_c.c in Sources */ = {isa = PBXBuildFile; fileRef = FDA555B720A1E4E000173691 /* crc_c.c */; };
+		FDA555EB20A1E4E000173691 /* dfslib_crypt.c in Sources */ = {isa = PBXBuildFile; fileRef = FDA555BF20A1E4E000173691 /* dfslib_crypt.c */; };
+		FDA555EC20A1E4E000173691 /* dfslib_random.c in Sources */ = {isa = PBXBuildFile; fileRef = FDA555C020A1E4E000173691 /* dfslib_random.c */; };
+		FDA555ED20A1E4E000173691 /* dfslib_string.c in Sources */ = {isa = PBXBuildFile; fileRef = FDA555C120A1E4E000173691 /* dfslib_string.c */; };
+		FDA555EE20A1E4E000173691 /* dfsrsa.c in Sources */ = {isa = PBXBuildFile; fileRef = FDA555C520A1E4E000173691 /* dfsrsa.c */; };
 		FDA7E43320556A0400A914B1 /* AVCaptureSessionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDA7E43220556A0400A914B1 /* AVCaptureSessionManager.swift */; };
 		FDA7E4352055713000A914B1 /* AppPermissions.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDA7E4342055713000A914B1 /* AppPermissions.swift */; };
 		FDA7E437205D18BC00A914B1 /* ScanViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDA7E436205D18BC00A914B1 /* ScanViewController.swift */; };
@@ -62,6 +103,174 @@
 		F575BF24B3A94D152579D826 /* Pods_xdag_iosTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_xdag_iosTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		FD07F7CB204D081700BE86B9 /* SwiftNotice.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwiftNotice.swift; sourceTree = "<group>"; };
 		FD07F7CD204E6D1700BE86B9 /* SettingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingViewController.swift; sourceTree = "<group>"; };
+		FDA5550920A1E4E000173691 /* dnet_log.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = dnet_log.h; sourceTree = "<group>"; };
+		FDA5550A20A1E4E000173691 /* dnet_threads.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = dnet_threads.c; sourceTree = "<group>"; };
+		FDA5550B20A1E4E000173691 /* dnet_files.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = dnet_files.c; sourceTree = "<group>"; };
+		FDA5550C20A1E4E000173691 /* dnet_stream.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = dnet_stream.c; sourceTree = "<group>"; };
+		FDA5550D20A1E4E000173691 /* dnet_connection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = dnet_connection.h; sourceTree = "<group>"; };
+		FDA5550E20A1E4E000173691 /* dnet_database.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = dnet_database.h; sourceTree = "<group>"; };
+		FDA5550F20A1E4E000173691 /* dnet_command.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = dnet_command.h; sourceTree = "<group>"; };
+		FDA5551020A1E4E000173691 /* dnet_tap.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = dnet_tap.h; sourceTree = "<group>"; };
+		FDA5551120A1E4E000173691 /* dnet_history.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = dnet_history.h; sourceTree = "<group>"; };
+		FDA5551220A1E4E000173691 /* dnet_crypt.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = dnet_crypt.c; sourceTree = "<group>"; };
+		FDA5551320A1E4E000173691 /* dnet_main.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = dnet_main.c; sourceTree = "<group>"; };
+		FDA5551420A1E4E000173691 /* dnet_packet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = dnet_packet.h; sourceTree = "<group>"; };
+		FDA5551520A1E4E000173691 /* dthread.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = dthread.h; sourceTree = "<group>"; };
+		FDA5551620A1E4E000173691 /* dnet_log.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = dnet_log.c; sourceTree = "<group>"; };
+		FDA5551720A1E4E000173691 /* dnet_threads.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = dnet_threads.h; sourceTree = "<group>"; };
+		FDA5551820A1E4E000173691 /* dnet_command.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = dnet_command.c; sourceTree = "<group>"; };
+		FDA5551920A1E4E000173691 /* dnet_database.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = dnet_database.c; sourceTree = "<group>"; };
+		FDA5551A20A1E4E000173691 /* dnet_files.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = dnet_files.h; sourceTree = "<group>"; };
+		FDA5551B20A1E4E000173691 /* dnet_connection.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = dnet_connection.c; sourceTree = "<group>"; };
+		FDA5551C20A1E4E000173691 /* dnet_stream.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = dnet_stream.h; sourceTree = "<group>"; };
+		FDA5551D20A1E4E000173691 /* system.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = system.h; sourceTree = "<group>"; };
+		FDA5551E20A1E4E000173691 /* dnet_tap.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = dnet_tap.c; sourceTree = "<group>"; };
+		FDA5551F20A1E4E000173691 /* dnet_packet.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = dnet_packet.c; sourceTree = "<group>"; };
+		FDA5552020A1E4E000173691 /* dnet_main.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = dnet_main.h; sourceTree = "<group>"; };
+		FDA5552120A1E4E000173691 /* dnet_crypt.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = dnet_crypt.h; sourceTree = "<group>"; };
+		FDA5552320A1E4E000173691 /* utils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = utils.h; sourceTree = "<group>"; };
+		FDA5552420A1E4E000173691 /* utils.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = utils.c; sourceTree = "<group>"; };
+		FDA5552920A1E4E000173691 /* list.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = list.h; sourceTree = "<group>"; };
+		FDA5552A20A1E4E000173691 /* rbtree.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = rbtree.h; sourceTree = "<group>"; };
+		FDA5552B20A1E4E000173691 /* atomic.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = atomic.h; sourceTree = "<group>"; };
+		FDA5552D20A1E4E000173691 /* FSOpenSSL.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FSOpenSSL.h; sourceTree = "<group>"; };
+		FDA5552F20A1E4E000173691 /* opensslconf-template.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "opensslconf-template.h"; sourceTree = "<group>"; };
+		FDA5553120A1E4E000173691 /* pem2.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = pem2.h; sourceTree = "<group>"; };
+		FDA5553220A1E4E000173691 /* pem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = pem.h; sourceTree = "<group>"; };
+		FDA5553320A1E4E000173691 /* ssl3.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ssl3.h; sourceTree = "<group>"; };
+		FDA5553420A1E4E000173691 /* ossl_typ.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ossl_typ.h; sourceTree = "<group>"; };
+		FDA5553520A1E4E000173691 /* dtls1.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = dtls1.h; sourceTree = "<group>"; };
+		FDA5553620A1E4E000173691 /* err.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = err.h; sourceTree = "<group>"; };
+		FDA5553720A1E4E000173691 /* bn.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = bn.h; sourceTree = "<group>"; };
+		FDA5553820A1E4E000173691 /* blowfish.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = blowfish.h; sourceTree = "<group>"; };
+		FDA5553920A1E4E000173691 /* cms.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = cms.h; sourceTree = "<group>"; };
+		FDA5553A20A1E4E000173691 /* engine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = engine.h; sourceTree = "<group>"; };
+		FDA5553B20A1E4E000173691 /* conf_api.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = conf_api.h; sourceTree = "<group>"; };
+		FDA5553C20A1E4E000173691 /* x509.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = x509.h; sourceTree = "<group>"; };
+		FDA5553D20A1E4E000173691 /* asn1_mac.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = asn1_mac.h; sourceTree = "<group>"; };
+		FDA5553E20A1E4E000173691 /* opensslconf_ios_x86_64.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = opensslconf_ios_x86_64.h; sourceTree = "<group>"; };
+		FDA5553F20A1E4E000173691 /* ui.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ui.h; sourceTree = "<group>"; };
+		FDA5554020A1E4E000173691 /* kssl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = kssl.h; sourceTree = "<group>"; };
+		FDA5554120A1E4E000173691 /* opensslconf_tvos_x86_64.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = opensslconf_tvos_x86_64.h; sourceTree = "<group>"; };
+		FDA5554220A1E4E000173691 /* opensslconf_ios_armv7s.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = opensslconf_ios_armv7s.h; sourceTree = "<group>"; };
+		FDA5554320A1E4E000173691 /* sha.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = sha.h; sourceTree = "<group>"; };
+		FDA5554420A1E4E000173691 /* symhacks.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = symhacks.h; sourceTree = "<group>"; };
+		FDA5554520A1E4E000173691 /* asn1.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = asn1.h; sourceTree = "<group>"; };
+		FDA5554620A1E4E000173691 /* opensslconf.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = opensslconf.h; sourceTree = "<group>"; };
+		FDA5554720A1E4E000173691 /* opensslconf_ios_i386.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = opensslconf_ios_i386.h; sourceTree = "<group>"; };
+		FDA5554820A1E4E000173691 /* bio.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = bio.h; sourceTree = "<group>"; };
+		FDA5554920A1E4E000173691 /* rc2.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = rc2.h; sourceTree = "<group>"; };
+		FDA5554A20A1E4E000173691 /* dh.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = dh.h; sourceTree = "<group>"; };
+		FDA5554B20A1E4E000173691 /* ui_compat.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ui_compat.h; sourceTree = "<group>"; };
+		FDA5554C20A1E4E000173691 /* x509v3.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = x509v3.h; sourceTree = "<group>"; };
+		FDA5554D20A1E4E000173691 /* ssl23.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ssl23.h; sourceTree = "<group>"; };
+		FDA5554E20A1E4E000173691 /* conf.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = conf.h; sourceTree = "<group>"; };
+		FDA5554F20A1E4E000173691 /* md5.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = md5.h; sourceTree = "<group>"; };
+		FDA5555020A1E4E000173691 /* x509_vfy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = x509_vfy.h; sourceTree = "<group>"; };
+		FDA5555120A1E4E000173691 /* txt_db.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = txt_db.h; sourceTree = "<group>"; };
+		FDA5555220A1E4E000173691 /* safestack.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = safestack.h; sourceTree = "<group>"; };
+		FDA5555320A1E4E000173691 /* ecdsa.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ecdsa.h; sourceTree = "<group>"; };
+		FDA5555420A1E4E000173691 /* objects.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = objects.h; sourceTree = "<group>"; };
+		FDA5555520A1E4E000173691 /* pkcs12.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = pkcs12.h; sourceTree = "<group>"; };
+		FDA5555620A1E4E000173691 /* crypto.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = crypto.h; sourceTree = "<group>"; };
+		FDA5555720A1E4E000173691 /* opensslv.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = opensslv.h; sourceTree = "<group>"; };
+		FDA5555820A1E4E000173691 /* pkcs7.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = pkcs7.h; sourceTree = "<group>"; };
+		FDA5555920A1E4E000173691 /* obj_mac.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = obj_mac.h; sourceTree = "<group>"; };
+		FDA5555A20A1E4E000173691 /* buffer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = buffer.h; sourceTree = "<group>"; };
+		FDA5555B20A1E4E000173691 /* ssl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ssl.h; sourceTree = "<group>"; };
+		FDA5555C20A1E4E000173691 /* srp.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = srp.h; sourceTree = "<group>"; };
+		FDA5555D20A1E4E000173691 /* camellia.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = camellia.h; sourceTree = "<group>"; };
+		FDA5555E20A1E4E000173691 /* opensslconf_ios_arm64.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = opensslconf_ios_arm64.h; sourceTree = "<group>"; };
+		FDA5555F20A1E4E000173691 /* evp.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = evp.h; sourceTree = "<group>"; };
+		FDA5556020A1E4E000173691 /* e_os2.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = e_os2.h; sourceTree = "<group>"; };
+		FDA5556120A1E4E000173691 /* md4.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = md4.h; sourceTree = "<group>"; };
+		FDA5556220A1E4E000173691 /* hmac.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = hmac.h; sourceTree = "<group>"; };
+		FDA5556320A1E4E000173691 /* aes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = aes.h; sourceTree = "<group>"; };
+		FDA5556420A1E4E000173691 /* comp.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = comp.h; sourceTree = "<group>"; };
+		FDA5556520A1E4E000173691 /* cast.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = cast.h; sourceTree = "<group>"; };
+		FDA5556620A1E4E000173691 /* rc4.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = rc4.h; sourceTree = "<group>"; };
+		FDA5556720A1E4E000173691 /* stack.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = stack.h; sourceTree = "<group>"; };
+		FDA5556820A1E4E000173691 /* des.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = des.h; sourceTree = "<group>"; };
+		FDA5556920A1E4E000173691 /* ocsp.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ocsp.h; sourceTree = "<group>"; };
+		FDA5556A20A1E4E000173691 /* ec.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ec.h; sourceTree = "<group>"; };
+		FDA5556B20A1E4E000173691 /* ecdh.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ecdh.h; sourceTree = "<group>"; };
+		FDA5556C20A1E4E000173691 /* rand.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = rand.h; sourceTree = "<group>"; };
+		FDA5556D20A1E4E000173691 /* opensslconf_ios_armv7.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = opensslconf_ios_armv7.h; sourceTree = "<group>"; };
+		FDA5556E20A1E4E000173691 /* opensslconf_tvos_arm64.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = opensslconf_tvos_arm64.h; sourceTree = "<group>"; };
+		FDA5556F20A1E4E000173691 /* ts.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ts.h; sourceTree = "<group>"; };
+		FDA5557020A1E4E000173691 /* pqueue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = pqueue.h; sourceTree = "<group>"; };
+		FDA5557120A1E4E000173691 /* dso.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = dso.h; sourceTree = "<group>"; };
+		FDA5557220A1E4E000173691 /* seed.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = seed.h; sourceTree = "<group>"; };
+		FDA5557320A1E4E000173691 /* modes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = modes.h; sourceTree = "<group>"; };
+		FDA5557420A1E4E000173691 /* ssl2.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ssl2.h; sourceTree = "<group>"; };
+		FDA5557520A1E4E000173691 /* rsa.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = rsa.h; sourceTree = "<group>"; };
+		FDA5557620A1E4E000173691 /* krb5_asn.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = krb5_asn.h; sourceTree = "<group>"; };
+		FDA5557720A1E4E000173691 /* des_old.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = des_old.h; sourceTree = "<group>"; };
+		FDA5557820A1E4E000173691 /* ripemd.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ripemd.h; sourceTree = "<group>"; };
+		FDA5557920A1E4E000173691 /* whrlpool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = whrlpool.h; sourceTree = "<group>"; };
+		FDA5557A20A1E4E000173691 /* tls1.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = tls1.h; sourceTree = "<group>"; };
+		FDA5557B20A1E4E000173691 /* mdc2.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = mdc2.h; sourceTree = "<group>"; };
+		FDA5557C20A1E4E000173691 /* dsa.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = dsa.h; sourceTree = "<group>"; };
+		FDA5557D20A1E4E000173691 /* srtp.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = srtp.h; sourceTree = "<group>"; };
+		FDA5557E20A1E4E000173691 /* asn1t.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = asn1t.h; sourceTree = "<group>"; };
+		FDA5557F20A1E4E000173691 /* cmac.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = cmac.h; sourceTree = "<group>"; };
+		FDA5558020A1E4E000173691 /* ebcdic.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ebcdic.h; sourceTree = "<group>"; };
+		FDA5558120A1E4E000173691 /* idea.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = idea.h; sourceTree = "<group>"; };
+		FDA5558220A1E4E000173691 /* lhash.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = lhash.h; sourceTree = "<group>"; };
+		FDA5558320A1E4E000173691 /* FSOpenSSL.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FSOpenSSL.m; sourceTree = "<group>"; };
+		FDA5558520A1E4E000173691 /* libcrypto.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libcrypto.a; sourceTree = "<group>"; };
+		FDA5558620A1E4E000173691 /* libssl.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libssl.a; sourceTree = "<group>"; };
+		FDA5558820A1E4E000173691 /* log.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = log.c; sourceTree = "<group>"; };
+		FDA5558920A1E4E000173691 /* crypt.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = crypt.c; sourceTree = "<group>"; };
+		FDA5558A20A1E4E000173691 /* transport.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = transport.c; sourceTree = "<group>"; };
+		FDA5558B20A1E4E000173691 /* version.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = version.h; sourceTree = "<group>"; };
+		FDA5558C20A1E4E000173691 /* netdb.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = netdb.c; sourceTree = "<group>"; };
+		FDA5558D20A1E4E000173691 /* pool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = pool.h; sourceTree = "<group>"; };
+		FDA5558E20A1E4E000173691 /* block.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = block.c; sourceTree = "<group>"; };
+		FDA5558F20A1E4E000173691 /* memory.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = memory.c; sourceTree = "<group>"; };
+		FDA5559020A1E4E000173691 /* wallet.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = wallet.c; sourceTree = "<group>"; };
+		FDA5559120A1E4E000173691 /* terminal.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = terminal.c; sourceTree = "<group>"; };
+		FDA5559220A1E4E000173691 /* sync.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = sync.h; sourceTree = "<group>"; };
+		FDA5559320A1E4E000173691 /* storage.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = storage.c; sourceTree = "<group>"; };
+		FDA5559420A1E4E000173691 /* netdb-white-testnet.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "netdb-white-testnet.txt"; sourceTree = "<group>"; };
+		FDA5559520A1E4E000173691 /* init.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = init.c; sourceTree = "<group>"; };
+		FDA5559620A1E4E000173691 /* address.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = address.h; sourceTree = "<group>"; };
+		FDA5559720A1E4E000173691 /* sha256.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = sha256.h; sourceTree = "<group>"; };
+		FDA5559820A1E4E000173691 /* commands.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = commands.h; sourceTree = "<group>"; };
+		FDA5559920A1E4E000173691 /* netdb.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = netdb.txt; sourceTree = "<group>"; };
+		FDA5559A20A1E4E000173691 /* hash.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = hash.c; sourceTree = "<group>"; };
+		FDA5559B20A1E4E000173691 /* crypt.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = crypt.h; sourceTree = "<group>"; };
+		FDA5559C20A1E4E000173691 /* log.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = log.h; sourceTree = "<group>"; };
+		FDA5559D20A1E4E000173691 /* storage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = storage.h; sourceTree = "<group>"; };
+		FDA5559E20A1E4E000173691 /* sync.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = sync.c; sourceTree = "<group>"; };
+		FDA5559F20A1E4E000173691 /* terminal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = terminal.h; sourceTree = "<group>"; };
+		FDA555A020A1E4E000173691 /* wallet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = wallet.h; sourceTree = "<group>"; };
+		FDA555A120A1E4E000173691 /* block.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = block.h; sourceTree = "<group>"; };
+		FDA555A220A1E4E000173691 /* pool.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = pool.c; sourceTree = "<group>"; };
+		FDA555A320A1E4E000173691 /* netdb.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = netdb.h; sourceTree = "<group>"; };
+		FDA555A420A1E4E000173691 /* transport.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = transport.h; sourceTree = "<group>"; };
+		FDA555A520A1E4E000173691 /* memory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = memory.h; sourceTree = "<group>"; };
+		FDA555A620A1E4E000173691 /* sha256.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = sha256.c; sourceTree = "<group>"; };
+		FDA555A720A1E4E000173691 /* system.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = system.h; sourceTree = "<group>"; };
+		FDA555A820A1E4E000173691 /* netdb-testnet.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "netdb-testnet.txt"; sourceTree = "<group>"; };
+		FDA555A920A1E4E000173691 /* address.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = address.c; sourceTree = "<group>"; };
+		FDA555AA20A1E4E000173691 /* init.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = init.h; sourceTree = "<group>"; };
+		FDA555AB20A1E4E000173691 /* state.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = state.h; sourceTree = "<group>"; };
+		FDA555AC20A1E4E000173691 /* hash.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = hash.h; sourceTree = "<group>"; };
+		FDA555AD20A1E4E000173691 /* commands.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = commands.c; sourceTree = "<group>"; };
+		FDA555AE20A1E4E000173691 /* statsdaemon.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = statsdaemon.c; sourceTree = "<group>"; };
+		FDA555AF20A1E4E000173691 /* netdb-white.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "netdb-white.txt"; sourceTree = "<group>"; };
+		FDA555B520A1E4E000173691 /* crc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = crc.h; sourceTree = "<group>"; };
+		FDA555B720A1E4E000173691 /* crc_c.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = crc_c.c; sourceTree = "<group>"; };
+		FDA555BB20A1E4E000173691 /* dfslib_string.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = dfslib_string.h; sourceTree = "<group>"; };
+		FDA555BC20A1E4E000173691 /* dfslib_crypt.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = dfslib_crypt.h; sourceTree = "<group>"; };
+		FDA555BD20A1E4E000173691 /* dfslib_random.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = dfslib_random.h; sourceTree = "<group>"; };
+		FDA555BE20A1E4E000173691 /* dfslib_types.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = dfslib_types.h; sourceTree = "<group>"; };
+		FDA555BF20A1E4E000173691 /* dfslib_crypt.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = dfslib_crypt.c; sourceTree = "<group>"; };
+		FDA555C020A1E4E000173691 /* dfslib_random.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = dfslib_random.c; sourceTree = "<group>"; };
+		FDA555C120A1E4E000173691 /* dfslib_string.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = dfslib_string.c; sourceTree = "<group>"; };
+		FDA555C320A1E4E000173691 /* dfsrsa.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = dfsrsa.h; sourceTree = "<group>"; };
+		FDA555C520A1E4E000173691 /* dfsrsa.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = dfsrsa.c; sourceTree = "<group>"; };
 		FDA7E43220556A0400A914B1 /* AVCaptureSessionManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AVCaptureSessionManager.swift; sourceTree = "<group>"; };
 		FDA7E4342055713000A914B1 /* AppPermissions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppPermissions.swift; sourceTree = "<group>"; };
 		FDA7E436205D18BC00A914B1 /* ScanViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScanViewController.swift; sourceTree = "<group>"; };
@@ -94,7 +303,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FDA555D320A1E4E000173691 /* libcrypto.a in Frameworks */,
 				AED687D18D3BA32ECAA614DF /* Pods_xdag_ios.framework in Frameworks */,
+				FDA555D420A1E4E000173691 /* libssl.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -140,6 +351,357 @@
 			name = Pods;
 			sourceTree = "<group>";
 		};
+		FDA5550720A1E4E000173691 /* xdag */ = {
+			isa = PBXGroup;
+			children = (
+				FDA5550820A1E4E000173691 /* dnet */,
+				FDA5552220A1E4E000173691 /* utils */,
+				FDA5552520A1E4E000173691 /* ldus */,
+				FDA5552C20A1E4E000173691 /* openssl */,
+				FDA5558720A1E4E000173691 /* client */,
+				FDA555B020A1E4E000173691 /* dus */,
+			);
+			path = xdag;
+			sourceTree = "<group>";
+		};
+		FDA5550820A1E4E000173691 /* dnet */ = {
+			isa = PBXGroup;
+			children = (
+				FDA5550920A1E4E000173691 /* dnet_log.h */,
+				FDA5550A20A1E4E000173691 /* dnet_threads.c */,
+				FDA5550B20A1E4E000173691 /* dnet_files.c */,
+				FDA5550C20A1E4E000173691 /* dnet_stream.c */,
+				FDA5550D20A1E4E000173691 /* dnet_connection.h */,
+				FDA5550E20A1E4E000173691 /* dnet_database.h */,
+				FDA5550F20A1E4E000173691 /* dnet_command.h */,
+				FDA5551020A1E4E000173691 /* dnet_tap.h */,
+				FDA5551120A1E4E000173691 /* dnet_history.h */,
+				FDA5551220A1E4E000173691 /* dnet_crypt.c */,
+				FDA5551320A1E4E000173691 /* dnet_main.c */,
+				FDA5551420A1E4E000173691 /* dnet_packet.h */,
+				FDA5551520A1E4E000173691 /* dthread.h */,
+				FDA5551620A1E4E000173691 /* dnet_log.c */,
+				FDA5551720A1E4E000173691 /* dnet_threads.h */,
+				FDA5551820A1E4E000173691 /* dnet_command.c */,
+				FDA5551920A1E4E000173691 /* dnet_database.c */,
+				FDA5551A20A1E4E000173691 /* dnet_files.h */,
+				FDA5551B20A1E4E000173691 /* dnet_connection.c */,
+				FDA5551C20A1E4E000173691 /* dnet_stream.h */,
+				FDA5551D20A1E4E000173691 /* system.h */,
+				FDA5551E20A1E4E000173691 /* dnet_tap.c */,
+				FDA5551F20A1E4E000173691 /* dnet_packet.c */,
+				FDA5552020A1E4E000173691 /* dnet_main.h */,
+				FDA5552120A1E4E000173691 /* dnet_crypt.h */,
+			);
+			path = dnet;
+			sourceTree = "<group>";
+		};
+		FDA5552220A1E4E000173691 /* utils */ = {
+			isa = PBXGroup;
+			children = (
+				FDA5552320A1E4E000173691 /* utils.h */,
+				FDA5552420A1E4E000173691 /* utils.c */,
+			);
+			path = utils;
+			sourceTree = "<group>";
+		};
+		FDA5552520A1E4E000173691 /* ldus */ = {
+			isa = PBXGroup;
+			children = (
+				FDA5552620A1E4E000173691 /* source */,
+			);
+			path = ldus;
+			sourceTree = "<group>";
+		};
+		FDA5552620A1E4E000173691 /* source */ = {
+			isa = PBXGroup;
+			children = (
+				FDA5552720A1E4E000173691 /* include */,
+			);
+			path = source;
+			sourceTree = "<group>";
+		};
+		FDA5552720A1E4E000173691 /* include */ = {
+			isa = PBXGroup;
+			children = (
+				FDA5552820A1E4E000173691 /* ldus */,
+			);
+			path = include;
+			sourceTree = "<group>";
+		};
+		FDA5552820A1E4E000173691 /* ldus */ = {
+			isa = PBXGroup;
+			children = (
+				FDA5552920A1E4E000173691 /* list.h */,
+				FDA5552A20A1E4E000173691 /* rbtree.h */,
+				FDA5552B20A1E4E000173691 /* atomic.h */,
+			);
+			path = ldus;
+			sourceTree = "<group>";
+		};
+		FDA5552C20A1E4E000173691 /* openssl */ = {
+			isa = PBXGroup;
+			children = (
+				FDA5552D20A1E4E000173691 /* FSOpenSSL.h */,
+				FDA5552E20A1E4E000173691 /* include */,
+				FDA5558320A1E4E000173691 /* FSOpenSSL.m */,
+				FDA5558420A1E4E000173691 /* lib */,
+			);
+			path = openssl;
+			sourceTree = "<group>";
+		};
+		FDA5552E20A1E4E000173691 /* include */ = {
+			isa = PBXGroup;
+			children = (
+				FDA5552F20A1E4E000173691 /* opensslconf-template.h */,
+				FDA5553020A1E4E000173691 /* openssl */,
+			);
+			path = include;
+			sourceTree = "<group>";
+		};
+		FDA5553020A1E4E000173691 /* openssl */ = {
+			isa = PBXGroup;
+			children = (
+				FDA5553120A1E4E000173691 /* pem2.h */,
+				FDA5553220A1E4E000173691 /* pem.h */,
+				FDA5553320A1E4E000173691 /* ssl3.h */,
+				FDA5553420A1E4E000173691 /* ossl_typ.h */,
+				FDA5553520A1E4E000173691 /* dtls1.h */,
+				FDA5553620A1E4E000173691 /* err.h */,
+				FDA5553720A1E4E000173691 /* bn.h */,
+				FDA5553820A1E4E000173691 /* blowfish.h */,
+				FDA5553920A1E4E000173691 /* cms.h */,
+				FDA5553A20A1E4E000173691 /* engine.h */,
+				FDA5553B20A1E4E000173691 /* conf_api.h */,
+				FDA5553C20A1E4E000173691 /* x509.h */,
+				FDA5553D20A1E4E000173691 /* asn1_mac.h */,
+				FDA5553E20A1E4E000173691 /* opensslconf_ios_x86_64.h */,
+				FDA5553F20A1E4E000173691 /* ui.h */,
+				FDA5554020A1E4E000173691 /* kssl.h */,
+				FDA5554120A1E4E000173691 /* opensslconf_tvos_x86_64.h */,
+				FDA5554220A1E4E000173691 /* opensslconf_ios_armv7s.h */,
+				FDA5554320A1E4E000173691 /* sha.h */,
+				FDA5554420A1E4E000173691 /* symhacks.h */,
+				FDA5554520A1E4E000173691 /* asn1.h */,
+				FDA5554620A1E4E000173691 /* opensslconf.h */,
+				FDA5554720A1E4E000173691 /* opensslconf_ios_i386.h */,
+				FDA5554820A1E4E000173691 /* bio.h */,
+				FDA5554920A1E4E000173691 /* rc2.h */,
+				FDA5554A20A1E4E000173691 /* dh.h */,
+				FDA5554B20A1E4E000173691 /* ui_compat.h */,
+				FDA5554C20A1E4E000173691 /* x509v3.h */,
+				FDA5554D20A1E4E000173691 /* ssl23.h */,
+				FDA5554E20A1E4E000173691 /* conf.h */,
+				FDA5554F20A1E4E000173691 /* md5.h */,
+				FDA5555020A1E4E000173691 /* x509_vfy.h */,
+				FDA5555120A1E4E000173691 /* txt_db.h */,
+				FDA5555220A1E4E000173691 /* safestack.h */,
+				FDA5555320A1E4E000173691 /* ecdsa.h */,
+				FDA5555420A1E4E000173691 /* objects.h */,
+				FDA5555520A1E4E000173691 /* pkcs12.h */,
+				FDA5555620A1E4E000173691 /* crypto.h */,
+				FDA5555720A1E4E000173691 /* opensslv.h */,
+				FDA5555820A1E4E000173691 /* pkcs7.h */,
+				FDA5555920A1E4E000173691 /* obj_mac.h */,
+				FDA5555A20A1E4E000173691 /* buffer.h */,
+				FDA5555B20A1E4E000173691 /* ssl.h */,
+				FDA5555C20A1E4E000173691 /* srp.h */,
+				FDA5555D20A1E4E000173691 /* camellia.h */,
+				FDA5555E20A1E4E000173691 /* opensslconf_ios_arm64.h */,
+				FDA5555F20A1E4E000173691 /* evp.h */,
+				FDA5556020A1E4E000173691 /* e_os2.h */,
+				FDA5556120A1E4E000173691 /* md4.h */,
+				FDA5556220A1E4E000173691 /* hmac.h */,
+				FDA5556320A1E4E000173691 /* aes.h */,
+				FDA5556420A1E4E000173691 /* comp.h */,
+				FDA5556520A1E4E000173691 /* cast.h */,
+				FDA5556620A1E4E000173691 /* rc4.h */,
+				FDA5556720A1E4E000173691 /* stack.h */,
+				FDA5556820A1E4E000173691 /* des.h */,
+				FDA5556920A1E4E000173691 /* ocsp.h */,
+				FDA5556A20A1E4E000173691 /* ec.h */,
+				FDA5556B20A1E4E000173691 /* ecdh.h */,
+				FDA5556C20A1E4E000173691 /* rand.h */,
+				FDA5556D20A1E4E000173691 /* opensslconf_ios_armv7.h */,
+				FDA5556E20A1E4E000173691 /* opensslconf_tvos_arm64.h */,
+				FDA5556F20A1E4E000173691 /* ts.h */,
+				FDA5557020A1E4E000173691 /* pqueue.h */,
+				FDA5557120A1E4E000173691 /* dso.h */,
+				FDA5557220A1E4E000173691 /* seed.h */,
+				FDA5557320A1E4E000173691 /* modes.h */,
+				FDA5557420A1E4E000173691 /* ssl2.h */,
+				FDA5557520A1E4E000173691 /* rsa.h */,
+				FDA5557620A1E4E000173691 /* krb5_asn.h */,
+				FDA5557720A1E4E000173691 /* des_old.h */,
+				FDA5557820A1E4E000173691 /* ripemd.h */,
+				FDA5557920A1E4E000173691 /* whrlpool.h */,
+				FDA5557A20A1E4E000173691 /* tls1.h */,
+				FDA5557B20A1E4E000173691 /* mdc2.h */,
+				FDA5557C20A1E4E000173691 /* dsa.h */,
+				FDA5557D20A1E4E000173691 /* srtp.h */,
+				FDA5557E20A1E4E000173691 /* asn1t.h */,
+				FDA5557F20A1E4E000173691 /* cmac.h */,
+				FDA5558020A1E4E000173691 /* ebcdic.h */,
+				FDA5558120A1E4E000173691 /* idea.h */,
+				FDA5558220A1E4E000173691 /* lhash.h */,
+			);
+			path = openssl;
+			sourceTree = "<group>";
+		};
+		FDA5558420A1E4E000173691 /* lib */ = {
+			isa = PBXGroup;
+			children = (
+				FDA5558520A1E4E000173691 /* libcrypto.a */,
+				FDA5558620A1E4E000173691 /* libssl.a */,
+			);
+			path = lib;
+			sourceTree = "<group>";
+		};
+		FDA5558720A1E4E000173691 /* client */ = {
+			isa = PBXGroup;
+			children = (
+				FDA5558820A1E4E000173691 /* log.c */,
+				FDA5558920A1E4E000173691 /* crypt.c */,
+				FDA5558A20A1E4E000173691 /* transport.c */,
+				FDA5558B20A1E4E000173691 /* version.h */,
+				FDA5558C20A1E4E000173691 /* netdb.c */,
+				FDA5558D20A1E4E000173691 /* pool.h */,
+				FDA5558E20A1E4E000173691 /* block.c */,
+				FDA5558F20A1E4E000173691 /* memory.c */,
+				FDA5559020A1E4E000173691 /* wallet.c */,
+				FDA5559120A1E4E000173691 /* terminal.c */,
+				FDA5559220A1E4E000173691 /* sync.h */,
+				FDA5559320A1E4E000173691 /* storage.c */,
+				FDA5559420A1E4E000173691 /* netdb-white-testnet.txt */,
+				FDA5559520A1E4E000173691 /* init.c */,
+				FDA5559620A1E4E000173691 /* address.h */,
+				FDA5559720A1E4E000173691 /* sha256.h */,
+				FDA5559820A1E4E000173691 /* commands.h */,
+				FDA5559920A1E4E000173691 /* netdb.txt */,
+				FDA5559A20A1E4E000173691 /* hash.c */,
+				FDA5559B20A1E4E000173691 /* crypt.h */,
+				FDA5559C20A1E4E000173691 /* log.h */,
+				FDA5559D20A1E4E000173691 /* storage.h */,
+				FDA5559E20A1E4E000173691 /* sync.c */,
+				FDA5559F20A1E4E000173691 /* terminal.h */,
+				FDA555A020A1E4E000173691 /* wallet.h */,
+				FDA555A120A1E4E000173691 /* block.h */,
+				FDA555A220A1E4E000173691 /* pool.c */,
+				FDA555A320A1E4E000173691 /* netdb.h */,
+				FDA555A420A1E4E000173691 /* transport.h */,
+				FDA555A520A1E4E000173691 /* memory.h */,
+				FDA555A620A1E4E000173691 /* sha256.c */,
+				FDA555A720A1E4E000173691 /* system.h */,
+				FDA555A820A1E4E000173691 /* netdb-testnet.txt */,
+				FDA555A920A1E4E000173691 /* address.c */,
+				FDA555AA20A1E4E000173691 /* init.h */,
+				FDA555AB20A1E4E000173691 /* state.h */,
+				FDA555AC20A1E4E000173691 /* hash.h */,
+				FDA555AD20A1E4E000173691 /* commands.c */,
+				FDA555AE20A1E4E000173691 /* statsdaemon.c */,
+				FDA555AF20A1E4E000173691 /* netdb-white.txt */,
+			);
+			path = client;
+			sourceTree = "<group>";
+		};
+		FDA555B020A1E4E000173691 /* dus */ = {
+			isa = PBXGroup;
+			children = (
+				FDA555B120A1E4E000173691 /* programs */,
+			);
+			path = dus;
+			sourceTree = "<group>";
+		};
+		FDA555B120A1E4E000173691 /* programs */ = {
+			isa = PBXGroup;
+			children = (
+				FDA555B220A1E4E000173691 /* dar */,
+				FDA555B820A1E4E000173691 /* dfstools */,
+			);
+			path = programs;
+			sourceTree = "<group>";
+		};
+		FDA555B220A1E4E000173691 /* dar */ = {
+			isa = PBXGroup;
+			children = (
+				FDA555B320A1E4E000173691 /* source */,
+			);
+			path = dar;
+			sourceTree = "<group>";
+		};
+		FDA555B320A1E4E000173691 /* source */ = {
+			isa = PBXGroup;
+			children = (
+				FDA555B420A1E4E000173691 /* include */,
+				FDA555B620A1E4E000173691 /* lib */,
+			);
+			path = source;
+			sourceTree = "<group>";
+		};
+		FDA555B420A1E4E000173691 /* include */ = {
+			isa = PBXGroup;
+			children = (
+				FDA555B520A1E4E000173691 /* crc.h */,
+			);
+			path = include;
+			sourceTree = "<group>";
+		};
+		FDA555B620A1E4E000173691 /* lib */ = {
+			isa = PBXGroup;
+			children = (
+				FDA555B720A1E4E000173691 /* crc_c.c */,
+			);
+			path = lib;
+			sourceTree = "<group>";
+		};
+		FDA555B820A1E4E000173691 /* dfstools */ = {
+			isa = PBXGroup;
+			children = (
+				FDA555B920A1E4E000173691 /* source */,
+			);
+			path = dfstools;
+			sourceTree = "<group>";
+		};
+		FDA555B920A1E4E000173691 /* source */ = {
+			isa = PBXGroup;
+			children = (
+				FDA555BA20A1E4E000173691 /* dfslib */,
+				FDA555C220A1E4E000173691 /* include */,
+				FDA555C420A1E4E000173691 /* lib */,
+			);
+			path = source;
+			sourceTree = "<group>";
+		};
+		FDA555BA20A1E4E000173691 /* dfslib */ = {
+			isa = PBXGroup;
+			children = (
+				FDA555BB20A1E4E000173691 /* dfslib_string.h */,
+				FDA555BC20A1E4E000173691 /* dfslib_crypt.h */,
+				FDA555BD20A1E4E000173691 /* dfslib_random.h */,
+				FDA555BE20A1E4E000173691 /* dfslib_types.h */,
+				FDA555BF20A1E4E000173691 /* dfslib_crypt.c */,
+				FDA555C020A1E4E000173691 /* dfslib_random.c */,
+				FDA555C120A1E4E000173691 /* dfslib_string.c */,
+			);
+			path = dfslib;
+			sourceTree = "<group>";
+		};
+		FDA555C220A1E4E000173691 /* include */ = {
+			isa = PBXGroup;
+			children = (
+				FDA555C320A1E4E000173691 /* dfsrsa.h */,
+			);
+			path = include;
+			sourceTree = "<group>";
+		};
+		FDA555C420A1E4E000173691 /* lib */ = {
+			isa = PBXGroup;
+			children = (
+				FDA555C520A1E4E000173691 /* dfsrsa.c */,
+			);
+			path = lib;
+			sourceTree = "<group>";
+		};
 		FDD5AA2820464BF000C84CC1 /* Common */ = {
 			isa = PBXGroup;
 			children = (
@@ -172,6 +734,7 @@
 		FDDFDD972042805200B3D0DE = {
 			isa = PBXGroup;
 			children = (
+				FDA5550720A1E4E000173691 /* xdag */,
 				FDDFDDA22042805200B3D0DE /* xdag-ios */,
 				FDDFDDB92042805200B3D0DE /* xdag-iosTests */,
 				FDDFDDC42042805200B3D0DE /* xdag-iosUITests */,
@@ -368,8 +931,12 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FDA555DE20A1E4E000173691 /* netdb-white-testnet.txt in Resources */,
+				FDA555E020A1E4E000173691 /* netdb.txt in Resources */,
 				FDDFDDB02042805200B3D0DE /* LaunchScreen.storyboard in Resources */,
+				FDA555E920A1E4E000173691 /* netdb-white.txt in Resources */,
 				FDDFDDAD2042805200B3D0DE /* Assets.xcassets in Resources */,
+				FDA555E520A1E4E000173691 /* netdb-testnet.txt in Resources */,
 				FDDFDDAB2042805200B3D0DE /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -547,20 +1114,55 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FDA555EC20A1E4E000173691 /* dfslib_random.c in Sources */,
+				FDA555DF20A1E4E000173691 /* init.c in Sources */,
 				FDD5AA272045B7B800C84CC1 /* TransactionViewController.swift in Sources */,
+				FDA555DC20A1E4E000173691 /* terminal.c in Sources */,
+				FDA555D620A1E4E000173691 /* crypt.c in Sources */,
+				FDA555DB20A1E4E000173691 /* wallet.c in Sources */,
+				FDA555D120A1E4E000173691 /* utils.c in Sources */,
+				FDA555D920A1E4E000173691 /* block.c in Sources */,
 				FDA7E437205D18BC00A914B1 /* ScanViewController.swift in Sources */,
+				FDA555C720A1E4E000173691 /* dnet_files.c in Sources */,
 				FDA7E4352055713000A914B1 /* AppPermissions.swift in Sources */,
+				FDA555DA20A1E4E000173691 /* memory.c in Sources */,
 				FD07F7CE204E6D1700BE86B9 /* SettingViewController.swift in Sources */,
+				FDA555CB20A1E4E000173691 /* dnet_log.c in Sources */,
+				FDA555EE20A1E4E000173691 /* dfsrsa.c in Sources */,
+				FDA555CF20A1E4E000173691 /* dnet_tap.c in Sources */,
+				FDA555D720A1E4E000173691 /* transport.c in Sources */,
+				FDA555CE20A1E4E000173691 /* dnet_connection.c in Sources */,
+				FDA555C620A1E4E000173691 /* dnet_threads.c in Sources */,
+				FDA555E320A1E4E000173691 /* pool.c in Sources */,
+				FDA555CD20A1E4E000173691 /* dnet_database.c in Sources */,
 				FDA7E439205D1FA900A914B1 /* SendTransactionController.swift in Sources */,
+				FDA555D520A1E4E000173691 /* log.c in Sources */,
 				FDA7E43320556A0400A914B1 /* AVCaptureSessionManager.swift in Sources */,
 				FDD5AA2C2046882100C84CC1 /* UIColorExtension.swift in Sources */,
 				FDD5AA30204689D000C84CC1 /* TransactionTableViewCell.swift in Sources */,
+				FDA555D220A1E4E000173691 /* FSOpenSSL.m in Sources */,
 				FD07F7CC204D081800BE86B9 /* SwiftNotice.swift in Sources */,
 				FDD5AA2A20464C5500C84CC1 /* Util.swift in Sources */,
+				FDA555DD20A1E4E000173691 /* storage.c in Sources */,
+				FDA555C820A1E4E000173691 /* dnet_stream.c in Sources */,
+				FDA555E720A1E4E000173691 /* commands.c in Sources */,
 				FDDFDDA82042805200B3D0DE /* ReceiveViewController.swift in Sources */,
+				FDA555CA20A1E4E000173691 /* dnet_main.c in Sources */,
+				FDA555E220A1E4E000173691 /* sync.c in Sources */,
+				FDA555E420A1E4E000173691 /* sha256.c in Sources */,
 				FDDFDDD62042B28900B3D0DE /* GuideViewController.swift in Sources */,
+				FDA555CC20A1E4E000173691 /* dnet_command.c in Sources */,
+				FDA555EB20A1E4E000173691 /* dfslib_crypt.c in Sources */,
+				FDA555D020A1E4E000173691 /* dnet_packet.c in Sources */,
+				FDA555E820A1E4E000173691 /* statsdaemon.c in Sources */,
+				FDA555ED20A1E4E000173691 /* dfslib_string.c in Sources */,
+				FDA555D820A1E4E000173691 /* netdb.c in Sources */,
+				FDA555EA20A1E4E000173691 /* crc_c.c in Sources */,
 				FDDFDDA42042805200B3D0DE /* AppDelegate.swift in Sources */,
+				FDA555E120A1E4E000173691 /* hash.c in Sources */,
 				FDD5AA3320468A8700C84CC1 /* XDAGTransaction.swift in Sources */,
+				FDA555E620A1E4E000173691 /* address.c in Sources */,
+				FDA555C920A1E4E000173691 /* dnet_crypt.c in Sources */,
 				FDDFDDA62042805200B3D0DE /* HomeViewController.swift in Sources */,
 				FDA7E43B205D2BE800A914B1 /* XDagQuerySerialization.swift in Sources */,
 			);
@@ -731,8 +1333,13 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = N5NF38L9NH;
+				HEADER_SEARCH_PATHS = "$(PROJECT_DIR)/xdag/openssl/include";
 				INFOPLIST_FILE = "xdag-ios/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/xdag/openssl/lib",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = org.xdag.app;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
@@ -747,8 +1354,13 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = N5NF38L9NH;
+				HEADER_SEARCH_PATHS = "$(PROJECT_DIR)/xdag/openssl/include";
 				INFOPLIST_FILE = "xdag-ios/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/xdag/openssl/lib",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = org.xdag.app;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
