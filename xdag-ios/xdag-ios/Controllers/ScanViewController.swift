@@ -47,11 +47,15 @@ class ScanViewController: UIViewController {
     
     func parserQRSchemeResult (_ qrScheme:String) {
         guard XDagQuerySerialization.validateUrlScheme(uriScheme: qrScheme) == true else {
+            self.noticeError("invalid qrcode", autoClear: true, autoClearTime: 2)
+            self.navigationController?.popViewController(animated: true)
             return
         }
        
         let (address, params) = XDagQuerySerialization.decode(uriScheme: qrScheme)
         if address == nil {
+            self.noticeError("invalid qrcode", autoClear: true, autoClearTime: 2)
+            self.navigationController?.popViewController(animated: true)
             return
         }
         
