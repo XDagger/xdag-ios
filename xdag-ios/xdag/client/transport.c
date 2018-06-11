@@ -8,17 +8,18 @@
 #include "storage.h"
 #include "block.h"
 #include "netdb.h"
-#include "init.h"
+#include "xdagmain.h"
 #include "sync.h"
 #include "pool.h"
 #include "version.h"
 #include "../dnet/dnet_main.h"
+#include "log.h"
 
 #define NEW_BLOCK_TTL   5
 #define REQUEST_WAIT    64
 #define N_CONNS         4096
 
-time_t g_xdag_last_received = 0;
+xdag_time_t g_xdag_last_received = 0;
 static void *reply_data;
 static void *(*reply_callback)(void *block, void *data) = 0;
 static void *reply_connection;
@@ -85,7 +86,7 @@ static int conn_add_rm(void *conn, int addrm)
 static void *xdag_send_thread(void *arg)
 {
 	struct xdag_send_data *d = (struct xdag_send_data *)arg;
-
+	xdag_app_debug("Xdag Send Thread Loading blocks from local storage...");
 	d->b.field[0].time = xdag_load_blocks(d->b.field[0].time, d->b.field[0].end_time, d->connection, dnet_send_xdag_packet);
 	d->b.field[0].type = XDAG_FIELD_NONCE | XDAG_MESSAGE_BLOCKS_REPLY << 4;
 
@@ -110,10 +111,12 @@ static int block_arrive_callback(void *packet, void *connection)
 
 	switch (xdag_type(b, 0)) {
 		case XDAG_FIELD_HEAD:
+            xdag_app_debug("xdag block XDAG_FIELD_HEAD arrived ");
 			xdag_sync_add_block(b, connection);
 			break;
 
 		case XDAG_FIELD_NONCE: {
+            xdag_app_debug("xdag block XDAG_FIELD_NONCE arrived ");
 			struct xdag_stats *s = (struct xdag_stats *)&b->field[2], *g = &g_xdag_stats;
 			xdag_time_t t0 = xdag_start_main_time(), t = xdag_main_time();
 			
@@ -131,8 +134,9 @@ static int block_arrive_callback(void *packet, void *connection)
 			if (s->total_nhosts   > g->total_nhosts)
 				g->total_nhosts = s->total_nhosts;
 			
-			g_xdag_last_received = time(0);
-			
+			g_xdag_last_received = (xdag_time_t)time(0);
+            xdag_app_debug("xdag last received XDAG_FIELD_NONCE block time %x",g_xdag_last_received);
+
 			xdag_netdb_receive((uint8_t*)&b->field[2] + sizeof(struct xdag_stats),
 									(xdag_type(b, 1) == XDAG_MESSAGE_SUMS_REPLY ? 6 : 14) * sizeof(struct xdag_field)
 									- sizeof(struct xdag_stats));
@@ -255,19 +259,6 @@ int xdag_transport_start(int flags, const char *bindto, int npairs, const char *
 	if (!argv) return -1;
 
 	argv[argc++] = "dnet";
-#if !defined(_WIN32) && !defined(_WIN64)
-	if (flags & XDAG_DAEMON) {
-		argv[argc++] = "-d";
-	}
-#endif
-	
-	if (bindto) {
-		argv[argc++] = "-s"; argv[argc++] = bindto;
-	}
-
-	for (i = 0; i < npairs; ++i) {
-		argv[argc++] = addr_port_pairs[i];
-	}
 	argv[argc] = 0;
 	
 	dnet_set_xdag_callback(block_arrive_callback);
@@ -275,15 +266,29 @@ int xdag_transport_start(int flags, const char *bindto, int npairs, const char *
 	dnet_connection_close_notify = &conn_close_notify;
 	
 	connections = (void**)malloc(N_CONNS * sizeof(void *));
-	if (!connections) return -1;
+	if (!connections) {
+		xdag_app_err("transport malloc connections failed");
+		return -1;
+	}
 	
-	res = dnet_init(argc, (char**)argv);
+	res = dnet_init();
 	if (!res) {
 		version = strchr(XDAG_VERSION, '-');
 		if (version) dnet_set_self_version(version + 1);
 	}
 	
 	return res;
+}
+/*
+    stop transfer whille program exit
+*/
+void xdag_transport_stop(){
+    //free connections
+    if(connections){
+        free(connections);
+    }
+    //dnet uninit
+    dnet_uninit();
 }
 
 /* generates an array with random data */

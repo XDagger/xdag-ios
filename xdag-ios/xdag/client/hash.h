@@ -7,6 +7,10 @@
 #include <stdint.h>
 #include "system.h"
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 typedef uint64_t xdag_hash_t[4];
 typedef uint64_t xdag_hashlow_t[3];
 
@@ -32,5 +36,9 @@ extern uint64_t xdag_hash_final_multi(void *ctxv, uint64_t *nonce, int attempts,
 extern void xdag_hash_get_state(void *ctxv, xdag_hash_t state);
 
 extern void xdag_hash_set_state(void *ctxv, xdag_hash_t state, size_t size);
+
+#ifdef __cplusplus
+}
+#endif
 
 #endif

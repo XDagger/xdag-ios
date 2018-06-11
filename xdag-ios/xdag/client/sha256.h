@@ -13,6 +13,10 @@
 #include <stddef.h>
 #include <openssl/sha.h>
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 /****************************** MACROS ******************************/
 #define SHA256_BLOCK_SIZE 32            // SHA256 outputs a 32 byte digest
 
@@ -39,5 +43,9 @@ typedef SHA256_CTX SHA256REF_CTX;
 void sha256_init(SHA256REF_CTX *ctx);
 void sha256_update(SHA256REF_CTX *ctx, const xBYTE data[], size_t len);
 void sha256_final(SHA256REF_CTX *ctx, xBYTE hash[]);
+
+#ifdef __cplusplus
+}
+#endif
 
 #endif   // SHA256_H

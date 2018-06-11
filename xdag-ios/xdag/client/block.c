@@ -8,21 +8,20 @@
 #include <unistd.h>
 #include <sys/time.h>
 #include "system.h"
-#include "../ldus/source/include/ldus/rbtree.h"
+#include "../ldus/rbtree.h"
 #include "block.h"
 #include "crypt.h"
 #include "wallet.h"
 #include "storage.h"
 #include "transport.h"
 #include "log.h"
-#include "init.h"
+#include "xdagmain.h"
 #include "sync.h"
 #include "pool.h"
 #include "memory.h"
 #include "address.h"
-#include "commands.h"
 
-#define MAIN_CHAIN_PERIOD       (64 << 10)
+#define MAIN_CHAIN_PERIOD       (xdag_time_t)(64 << 10)
 #define MAX_WAITING_MAIN        1
 #define DEF_TIME_LIMIT          0 // (MAIN_CHAIN_PERIOD / 2)
 #define XDAG_TEST_ERA           0x16900000000ll
@@ -76,15 +75,21 @@ static struct ldus_rbtree *root = 0;
 static struct block_internal * volatile top_main_chain = 0, *volatile pretop_main_chain = 0;
 static struct block_internal *ourfirst = 0, *ourlast = 0, *noref_first = 0, *noref_last = 0;
 static pthread_mutex_t block_mutex;
-static int g_light_mode = 0;
+//light wallet set g_light_mode default value 1
+static int g_light_mode = 1;
+
+/* for block thread safe quit */
+static int g_is_block_thread_run = 0;
+static pthread_cond_t g_block_cancel_cond = PTHREAD_COND_INITIALIZER;
+static pthread_mutex_t g_block_cancel_mutex = PTHREAD_MUTEX_INITIALIZER;
+static pthread_t g_block_thread_t;
 
 static uint64_t get_timestamp(void)
 {
 	struct timeval tp;
-
 	gettimeofday(&tp, 0);
-
-	return (uint64_t)(unsigned long)tp.tv_sec << 10 | ((tp.tv_usec << 10) / 1000000);
+    uint64_t result = (uint64_t)(unsigned long)tp.tv_sec << 10 | ((tp.tv_usec << 10) / 1000000);
+	return result;
 }
 
 // returns a time period index, where a period is 64 seconds long
@@ -114,7 +119,7 @@ static struct block_internal *block_by_hash(const xdag_hashlow_t hash)
 static void log_block(const char *mess, xdag_hash_t h, xdag_time_t t, uint64_t pos)
 {
 	xdag_info("%s: %016llx%016llx%016llx%016llx t=%llx pos=%llx", mess,
-		((uint64_t*)h)[3], ((uint64_t*)h)[2], ((uint64_t*)h)[1], ((uint64_t*)h)[0], t, pos);
+				   ((uint64_t*)h)[3], ((uint64_t*)h)[2], ((uint64_t*)h)[1], ((uint64_t*)h)[0], t, pos);
 }
 
 static inline void accept_amount(struct block_internal *bi, xdag_amount_t sum)
@@ -270,9 +275,11 @@ static void set_main(struct block_internal *m)
 
 static void unset_main(struct block_internal *m)
 {
+	xdag_amount_t amount;
+
 	g_xdag_stats.nmain--;
 	g_xdag_stats.total_nmain--;
-	xdag_amount_t amount = MAIN_START_AMOUNT >> (g_xdag_stats.nmain >> MAIN_BIG_PERIOD_LOG);
+	amount = MAIN_START_AMOUNT >> (g_xdag_stats.nmain >> MAIN_BIG_PERIOD_LOG);
 	m->flags &= ~BI_MAIN;
 	accept_amount(m, (xdag_amount_t)0 - amount);
 	accept_amount(m, unapply_block(m));
@@ -298,7 +305,9 @@ static void check_new_main(void)
 
 static void unwind_main(struct block_internal *b)
 {
-	for (struct block_internal *t = top_main_chain; t != b; t = t->link[t->max_diff_link]) {
+	struct block_internal *t;
+
+	for (t = top_main_chain; t != b; t = t->link[t->max_diff_link]) {
 		t->flags &= ~BI_MAIN_CHAIN;
 		if (t->flags & BI_MAIN) {
 			unset_main(t);
@@ -710,8 +719,10 @@ static void *add_block_callback(void *block, void *data)
 /* checks and adds block to the storage. Returns non-zero value in case of error. */
 int xdag_add_block(struct xdag_block *b)
 {
+	int res;
+
 	pthread_mutex_lock(&block_mutex);
-	int res = add_block_nolock(b, time_limit);
+	res = add_block_nolock(b, time_limit);
 	pthread_mutex_unlock(&block_mutex);
 
 	return res;
@@ -735,7 +746,7 @@ int xdag_create_block(struct xdag_field *fields, int ninput, int noutput, xdag_a
 	int i, j, res, res0, mining, defkeynum, keysnum[XDAG_BLOCK_FIELDS], nkeys, nkeysnum = 0, outsigkeyind = -1;
 	struct xdag_public_key *defkey = xdag_wallet_default_key(&defkeynum), *keys = xdag_wallet_our_keys(&nkeys), *key;
 	xdag_hash_t hash, min_hash;
-	struct block_internal *ref, *pretop = pretop_block();
+	struct block_internal *ref, *pretop = pretop_block(), *pretop_new;
 
 	for (i = 0; i < ninput; ++i) {
 		ref = block_by_hash(fields[i].hash);
@@ -819,12 +830,12 @@ int xdag_create_block(struct xdag_field *fields, int ninput, int noutput, xdag_a
 	}
 	
 	if (mining) {
-		int ntask = g_xdag_pool_task_index + 1;
+		int ntask = g_xdag_pool_ntask + 1;
 		struct xdag_pool_task *task = &g_xdag_pool_task[ntask & 1];
 		
 		xdag_generate_random_array(b[0].field[XDAG_BLOCK_FIELDS - 1].data, sizeof(xdag_hash_t));
 		
-		task->task_time = MAIN_TIME(send_time);
+		task->main_time = MAIN_TIME(send_time);
 		
 		xdag_hash_init(task->ctx0);
 		xdag_hash_update(task->ctx0, b, sizeof(struct xdag_block) - 2 * sizeof(struct xdag_field));
@@ -838,11 +849,11 @@ int xdag_create_block(struct xdag_field *fields, int ninput, int noutput, xdag_a
 		memcpy(task->lastfield.data, b[0].field[XDAG_BLOCK_FIELDS - 1].data, sizeof(struct xdag_field));
 		
 		xdag_hash_final(task->ctx, &task->nonce.amount, sizeof(uint64_t), task->minhash.data);
-		g_xdag_pool_task_index = ntask;
+		g_xdag_pool_ntask = ntask;
 
 		while (get_timestamp() <= send_time) {
 			sleep(1);
-			struct block_internal *pretop_new = pretop_block();
+			pretop_new = pretop_block();
 			if (pretop != pretop_new && get_timestamp() < send_time) {
 				pretop = pretop_new;
 				xdag_info("Mining: start from beginning because of pre-top block changed");
@@ -878,7 +889,7 @@ int xdag_create_block(struct xdag_field *fields, int ninput, int noutput, xdag_a
 
 static int request_blocks(xdag_time_t t, xdag_time_t dt)
 {
-	int i, res = 0;
+	int i, res;
 
 	if (!g_xdag_sync_on) return -1;
 
@@ -927,10 +938,10 @@ static int request_blocks(xdag_time_t t, xdag_time_t dt)
 /* a long procedure of synchronization */
 static void *sync_thread(void *arg)
 {
-	xdag_time_t t = 0;
+	xdag_time_t t = 0, st;
 
 	for (;;) {
-		xdag_time_t st = get_timestamp();
+		st = get_timestamp();
 		if (st - t >= MAIN_CHAIN_PERIOD) {
 			t = st;
 			request_blocks(0, 1ll << 48);
@@ -946,47 +957,65 @@ static void reset_callback(struct ldus_rbtree *node)
 	free(node);
 }
 
+static void work_thread_cleanup(){
+    xdag_app_debug(" work thread clean up called ");
+    g_is_block_thread_run = 0;
+    pthread_mutex_unlock(&block_mutex);
+    pthread_mutex_lock(&g_block_cancel_mutex);
+
+    if (xdag_free_all()) {
+        ldus_rbtree_walk_up(root, reset_callback);
+    }
+
+    root = 0;
+    g_balance = 0;
+    g_xdag_sync_on = 0;
+    g_xdag_mining_threads = 0;
+    g_xdag_state = XDAG_STATE_NINT;
+    top_main_chain = pretop_main_chain = 0;
+    ourfirst = ourlast = noref_first = noref_last = 0;
+    memset(&g_xdag_stats, 0, sizeof(g_xdag_stats));
+    memset(&g_xdag_extstats, 0, sizeof(g_xdag_extstats));
+
+    pthread_cond_signal(&g_block_cancel_cond);
+
+    pthread_mutex_unlock(&g_block_cancel_mutex);
+    xdag_app_debug(" work thread clean up finished ");
+}
+
 // main thread which works with block
 static void *work_thread(void *arg)
 {
-	xdag_time_t t = XDAG_ERA, conn_time = 0, sync_time = 0, t0;
+    int oldcancelstate;
+    int oldcanceltype;
+
+    xdag_time_t t = XDAG_ERA,conn_time = 0, sync_time = 0, t0;
 	int n_mining_threads = (int)(unsigned)(uintptr_t)arg, sync_thread_running = 0;
+	struct block_internal *ours;
 	uint64_t nhashes0 = 0, nhashes = 0;
 	pthread_t th;
 
- begin:
+    pthread_setcancelstate(PTHREAD_CANCEL_ENABLE,&oldcancelstate);
+    pthread_setcanceltype(PTHREAD_CANCEL_DEFERRED,&oldcanceltype);
+
+    pthread_cleanup_push(work_thread_cleanup,NULL);
+
 	// loading block from the local storage
 	g_xdag_state = XDAG_STATE_LOAD;
-	xdag_mess("Loading blocks from local storage...");
+    xdag_app_debug("Work Thread Loading blocks from local storage...");
 	xdag_show_state(0);
-	xdag_load_blocks(t, get_timestamp(), &t, add_block_callback);
+    xdag_time_t end_time = get_timestamp();
+    xdag_app_debug("load blocks from start time %llu  end time  %llu",t,end_time);
+	xdag_load_blocks_x(t, end_time, (void*)&t, add_block_callback);
 
-	// waiting for command "run"
-	while (!g_xdag_run) {
-		g_xdag_state = XDAG_STATE_STOP;
-		sleep(1);
-	}
-
-	// launching of synchronization thread
+begin:
+    g_is_block_thread_run = 1;
 	g_xdag_sync_on = 1;
-	if (!g_light_mode && !sync_thread_running) {
-		xdag_mess("Starting sync thread...");
-		if (!pthread_create(&th, 0, sync_thread, 0)) {
-			sync_thread_running = 1;
-			pthread_detach(th);
-		}
-	}
-
-	// start mining threads
-	xdag_mess("Starting mining threads...");
-	xdag_mining_start(n_mining_threads);
-
-	// periodic generation of blocks and determination of the main block
-	xdag_mess("Entering main cycle...");
 
 	for (;;) {
 		unsigned nblk;
-		
+        //test is canceled while ui disconnected from the pool
+        pthread_iscancel(g_block_thread_t);
 		t0 = t;
 		t = get_timestamp();
 		nhashes0 = nhashes;
@@ -1003,13 +1032,12 @@ static void *work_thread(void *arg)
 				xdag_create_block(0, 0, 0, 0, 0);
 			}
 		}
-		
+
 		pthread_mutex_lock(&block_mutex);
-		
+
 		if (g_xdag_state == XDAG_STATE_REST) {
 			g_xdag_sync_on = 0;
 			pthread_mutex_unlock(&block_mutex);
-			xdag_mining_start(g_light_mode ? ~0 : 0);
 
 			while (get_timestamp() - t < MAIN_CHAIN_PERIOD + (3 << 10)) {
 				sleep(1);
@@ -1017,9 +1045,9 @@ static void *work_thread(void *arg)
 
 			pthread_mutex_lock(&block_mutex);
 
-			if (xdag_free_all()) {
-				ldus_rbtree_walk_up(root, reset_callback);
-			}
+            if (xdag_free_all()) {
+                ldus_rbtree_walk_up(root, reset_callback);
+            }
 
 			root = 0;
 			g_balance = 0;
@@ -1030,8 +1058,10 @@ static void *work_thread(void *arg)
 			pthread_mutex_unlock(&block_mutex);
 			conn_time = sync_time = 0;
 
-			goto begin;
-		} else if (t > (g_xdag_last_received << 10) && t - (g_xdag_last_received << 10) > 3 * MAIN_CHAIN_PERIOD) {
+            goto begin;
+
+		} else if (t > (g_xdag_last_received << 10) && t - (g_xdag_last_received << 10) > (3 * MAIN_CHAIN_PERIOD)) {
+
 			g_xdag_state = (g_light_mode ? (g_xdag_testnet ? XDAG_STATE_TTST : XDAG_STATE_TRYP)
 								 : (g_xdag_testnet ? XDAG_STATE_WTST : XDAG_STATE_WAIT));
 			conn_time = sync_time = 0;
@@ -1050,8 +1080,9 @@ static void *work_thread(void *arg)
 			} else if (g_light_mode) {
 				g_xdag_state = (g_xdag_mining_threads > 0 ?
 									 (g_xdag_testnet ? XDAG_STATE_MTST : XDAG_STATE_MINE)
-									 : (g_xdag_testnet ? XDAG_STATE_PTST : XDAG_STATE_POOL));
-			} else if (t - sync_time > 8 * MAIN_CHAIN_PERIOD) {
+                                     : (g_xdag_testnet ? XDAG_STATE_PTST : XDAG_STATE_POOL));
+
+            } else if (t - sync_time > 8 * MAIN_CHAIN_PERIOD) {
 				g_xdag_state = (g_xdag_testnet ? XDAG_STATE_CTST : XDAG_STATE_CONN);
 			} else {
 				g_xdag_state = (g_xdag_testnet ? XDAG_STATE_STST : XDAG_STATE_SYNC);
@@ -1062,16 +1093,19 @@ static void *work_thread(void *arg)
 			check_new_main();
 		}
 
-		struct block_internal *ours = ourfirst;
+		ours = ourfirst;
 		pthread_mutex_unlock(&block_mutex);
 		xdag_show_state(ours ? ours->hash : 0);
+
+        //test is canceled while ui disconnected from the pool
+        pthread_iscancel(g_block_thread_t);
 
 		while (get_timestamp() - t < 1024) {
 			sleep(1);
 		}
 	}
 
-	return 0;
+    pthread_cleanup_pop(0);
 }
 
 /* start of regular block processing
@@ -1082,26 +1116,22 @@ static void *work_thread(void *arg)
 int xdag_blocks_start(int n_mining_threads, int miner_address)
 {
 	pthread_mutexattr_t attr;
-	pthread_t th;
+    //pthread_t th;
+	int res;
 
-	if (g_xdag_testnet) {
-		xdag_era = XDAG_TEST_ERA;
-	}
-
-	if (n_mining_threads < 0) {
-		g_light_mode = 1;
-	}
-
+	//do nothing in windows ,memmap file in linux
+	/*
 	if (xdag_mem_init(g_light_mode && !miner_address ? 0 : (((get_timestamp() - XDAG_ERA) >> 10) + (uint64_t)365 * 24 * 60 * 60) * 2 * sizeof(struct block_internal))) {
 		return -1;
 	}
+	*/
 
 	pthread_mutexattr_init(&attr);
 	pthread_mutexattr_settype(&attr, PTHREAD_MUTEX_RECURSIVE);
 	pthread_mutex_init(&block_mutex, &attr);
-	int res = pthread_create(&th, 0, work_thread, (void*)(uintptr_t)(unsigned)n_mining_threads);
+    res = pthread_create(&g_block_thread_t, 0, work_thread, (void*)(uintptr_t)(unsigned)n_mining_threads);
 	if (!res) {
-		pthread_detach(th);
+        pthread_detach(g_block_thread_t);
 	}
 	
 	return res;
@@ -1110,8 +1140,10 @@ int xdag_blocks_start(int n_mining_threads, int miner_address)
 /* returns our first block. If there is no blocks yet - the first block is created. */
 int xdag_get_our_block(xdag_hash_t hash)
 {
+	struct block_internal *bi;
+
 	pthread_mutex_lock(&block_mutex);
-	struct block_internal *bi = ourfirst;
+	bi = ourfirst;
 	pthread_mutex_unlock(&block_mutex);
 	
 	if (!bi) {
@@ -1172,12 +1204,14 @@ int xdag_traverse_all_blocks(void *data, int (*callback)(void *data, xdag_hash_t
 /* returns current balance for specified address or balance for all addresses if hash == 0 */
 xdag_amount_t xdag_get_balance(xdag_hash_t hash)
 {
+	struct block_internal *bi;
+
 	if (!hash) {
 		return g_balance;
 	}
 
 	pthread_mutex_lock(&block_mutex);
-	struct block_internal *bi = block_by_hash(hash);
+	bi = block_by_hash(hash);
 	pthread_mutex_unlock(&block_mutex);
 	
 	if (!bi) {
@@ -1187,14 +1221,26 @@ xdag_amount_t xdag_get_balance(xdag_hash_t hash)
 	return bi->amount;
 }
 
+//for debug
+static long double amount2cheatcoins(xdag_amount_t amount)
+{
+	return xdag_amount2xdag(amount) + (long double)xdag_amount2cheato(amount) / 1000000000;
+}
+//for debug end
+
 /* sets current balance for the specified address */
 extern int xdag_set_balance(xdag_hash_t hash, xdag_amount_t balance)
 {
-	if (!hash) return -1;
+	struct block_internal *bi;
+
+    if (!hash) {
+        xdag_app_debug("set balance failed hash is null");
+        return -1;
+    }
 	
 	pthread_mutex_lock(&block_mutex);
 	
-	struct block_internal *bi = block_by_hash(hash);
+	bi = block_by_hash(hash);
 	if (bi->flags & BI_OURS && bi != ourfirst) {
 		if (bi->ourprev) {
 			bi->ourprev->ournext = bi->ournext;
@@ -1222,7 +1268,10 @@ extern int xdag_set_balance(xdag_hash_t hash, xdag_amount_t balance)
 
 	pthread_mutex_unlock(&block_mutex);
 
-	if (!bi) return -1;
+    if (!bi){
+        xdag_app_debug("set balance failed bi is null");
+        return -1;
+    }
 
 	if (bi->amount != balance) {
 		xdag_hash_t hash0;
@@ -1245,6 +1294,7 @@ extern int xdag_set_balance(xdag_hash_t hash, xdag_amount_t balance)
 		}
 
 		bi->amount = balance;
+        xdag_app_debug("set balance success amount is %.9Lf",amount2cheatcoins(bi->amount));
 	}
 
 	return 0;
@@ -1253,8 +1303,10 @@ extern int xdag_set_balance(xdag_hash_t hash, xdag_amount_t balance)
 // returns position and time of block by hash
 int64_t xdag_get_block_pos(const xdag_hash_t hash, xdag_time_t *t)
 {
+	struct block_internal *bi;
+
 	pthread_mutex_lock(&block_mutex);
-	struct block_internal *bi = block_by_hash(hash);
+	bi = block_by_hash(hash);
 	pthread_mutex_unlock(&block_mutex);
 
 	if (!bi) {
@@ -1269,8 +1321,10 @@ int64_t xdag_get_block_pos(const xdag_hash_t hash, xdag_time_t *t)
 //returns a number of key by hash of block, or -1 if block is not ours
 int xdag_get_key(xdag_hash_t hash)
 {
+	struct block_internal *bi;
+
 	pthread_mutex_lock(&block_mutex);
-	struct block_internal *bi = block_by_hash(hash);
+	bi = block_by_hash(hash);
 	pthread_mutex_unlock(&block_mutex);
 	
 	if (!bi || !(bi->flags & BI_OURS)) {
@@ -1306,20 +1360,24 @@ static int bi_compar(const void *l, const void *r)
 /* prints detailed information about block */
 int xdag_print_block_info(xdag_hash_t hash, FILE *out)
 {
+	struct block_internal *bi, **ba, **ba1, *ri;
+	struct block_backrefs *br;
 	struct tm tm;
 	char tbuf[64];
-	int i, j;
+	uint64_t *h;
+	time_t t;
+	int i, j, n, N;
 
 	pthread_mutex_lock(&block_mutex);
-	struct block_internal *bi = block_by_hash(hash);
+	bi = block_by_hash(hash);
 	pthread_mutex_unlock(&block_mutex);
 	
 	if (!bi) {
 		return -1;
 	}
 	
-	uint64_t *h = bi->hash;
-	time_t t = bi->time >> 10;
+	h = bi->hash;
+	t = bi->time >> 10;
 	localtime_r(&t, &tm);
 	strftime(tbuf, 64, "%Y-%m-%d %H:%M:%S", &tm);
 	fprintf(out, "      time: %s.%03d\n", tbuf, (int)((bi->time & 0x3ff) * 1000) >> 10);
@@ -1353,13 +1411,12 @@ int xdag_print_block_info(xdag_hash_t hash, FILE *out)
 				tbuf, (int)((bi->time & 0x3ff) * 1000) >> 10);
 	}
 	
-	int N = 0x10000; 
-	int n = 0;
-	struct block_internal **ba = malloc(N * sizeof(struct block_internal *));
+	N = 0x10000; n = 0;
+	ba = malloc(N * sizeof(struct block_internal *));
 	
 	if (!ba) return -1;
 
-	for (struct block_backrefs *br = bi->backrefs; br; br = br->next) {
+	for (br = bi->backrefs; br; br = br->next) {
 		for (i = N_BACKREFS; i && !br->backrefs[i - 1]; i--);
 			
 		if (!i) {
@@ -1368,7 +1425,7 @@ int xdag_print_block_info(xdag_hash_t hash, FILE *out)
 
 		if (n + i > N) {
 			N *= 2;
-			struct block_internal **ba1 = realloc(ba, N * sizeof(struct block_internal *));
+			ba1 = realloc(ba, N * sizeof(struct block_internal *));
 			if (!ba1) {
 				free(ba);
 				return -1;
@@ -1390,7 +1447,7 @@ int xdag_print_block_info(xdag_hash_t hash, FILE *out)
 
 	for (i = 0; i < n; ++i) {
 		if (!i || ba[i] != ba[i - 1]) {
-			struct block_internal *ri = ba[i];
+			ri = ba[i];
 			if (ri->flags & BI_APPLIED) {
 				for (j = 0; j < ri->nlinks; j++) {
 					if (ri->link[j] == bi && ri->linkamount[j]) {
@@ -1422,4 +1479,16 @@ int xdagGetLastMainBlocks(int count, char** addressArray)
 		}
 	}
 	return i;
+}
+
+void xdag_block_uninit(){
+    //safe quit the work_thread
+    if(g_is_block_thread_run){
+        g_is_block_thread_run = 0;
+        pthread_mutex_lock(&g_block_cancel_mutex);
+        pthread_cond_init(&g_block_cancel_cond,NULL);
+        pthread_cancel(g_block_thread_t);
+        pthread_cond_wait(&g_block_cancel_cond,&g_block_cancel_mutex);
+        pthread_mutex_unlock(&g_block_cancel_mutex);
+    }
 }

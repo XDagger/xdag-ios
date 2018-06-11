@@ -9,6 +9,10 @@
 #include "dnet_packet.h"
 #include "dnet_log.h"
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 enum dnet_counters {
     DNET_C_IN_BYTES,
     DNET_C_OUT_BYTES,
@@ -39,5 +43,9 @@ struct dnet_connection {
 extern int dnet_connection_main(struct dnet_connection *conn);
 extern int dnet_traverse_connections(int (*callback)(struct dnet_connection *conn, void *data), void *data);
 extern int dnet_print_connection(struct dnet_connection *conn, struct dnet_output *out);
+
+#ifdef __cplusplus
+extern "C" {
+#endif
 
 #endif

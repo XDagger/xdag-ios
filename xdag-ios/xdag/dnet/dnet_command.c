@@ -13,7 +13,6 @@
 #include "dnet_stream.h"
 #include "dnet_files.h"
 #include "dnet_main.h"
-#include "../utils/utils.h"
 
 #define HISTORY_FILE "dnet_history.txt"
 
@@ -52,10 +51,10 @@ begin:
 	len = strlen(cmd);
 	while (len && isspace(cmd[len - 1])) cmd[--len] = 0;
 	if (!*cmd) return 0;
-	f = xdag_open_file(HISTORY_FILE, "a");
+	f = fopen(HISTORY_FILE, "a");
 	if (f) {
 		fprintf(f, "%s\n", cmd);
-		xdag_close_file(f);
+		fclose(f);
 	}
 	cmd = strtok_r(cmd, " \t\r\n", &lasts);
 	if (!cmd) {

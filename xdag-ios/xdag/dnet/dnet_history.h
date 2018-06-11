@@ -1,4 +1,8 @@
 /* dnet: история и версия; */
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 #define DNET_VERSION "T11.231-T13.714" /* $DVS:time$
 
 T13.714 добавлена команда connect ip:port, закомментирован ненужный в cheatcoin код
@@ -147,3 +151,6 @@ T11.254 работающая версия, позволяющая обменив
 T11.231	начало проекта
 
 */
+#ifdef __cplusplus
+}
+#endif

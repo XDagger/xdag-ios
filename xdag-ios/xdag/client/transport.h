@@ -8,6 +8,10 @@
 #include "block.h"
 #include "storage.h"
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 enum xdag_transport_flags {
 	XDAG_DAEMON = 1,
 };
@@ -17,6 +21,8 @@ enum xdag_transport_flags {
  * npairs - count of the strings
  */
 extern int xdag_transport_start(int flags, const char *bindto, int npairs, const char **addr_port_pairs);
+
+extern void xdag_transport_stop();
 
 /* generates an array with random data */
 extern int xdag_generate_random_array(void *array, unsigned long size);
@@ -49,6 +55,10 @@ extern int xdag_send_packet(struct xdag_block *b, void *conn);
 /* see dnet_user_crypt_action */
 extern int xdag_user_crypt_action(unsigned *data, unsigned long long data_id, unsigned size, int action);
 
-extern time_t g_xdag_last_received;
+extern xdag_time_t g_xdag_last_received;
+
+#ifdef __cplusplus
+}
+#endif
 
 #endif

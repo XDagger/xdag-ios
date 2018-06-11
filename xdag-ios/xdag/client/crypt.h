@@ -6,6 +6,10 @@
 #include <stdint.h>
 #include "hash.h"
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 // initialization of the encryption system
 extern int xdag_crypt_init(int withrandom);
 
@@ -26,5 +30,9 @@ extern int xdag_sign(const void *key, const xdag_hash_t hash, xdag_hash_t sign_r
 
 // verify that the signature (sign_r, sign_s) corresponds to a hash 'hash', a version for its own key
 extern int xdag_verify_signature(const void *key, const xdag_hash_t hash, const xdag_hash_t sign_r, const xdag_hash_t sign_s);
+
+#ifdef __cplusplus
+}
+#endif
 
 #endif

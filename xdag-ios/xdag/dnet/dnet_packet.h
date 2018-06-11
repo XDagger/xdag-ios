@@ -8,6 +8,10 @@
 #include "dnet_database.h"
 #include "dnet_log.h"
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 #define DNET_PKT_STREAM_DATA_MAX   0x1000
 
 enum dnet_packet_types {
@@ -87,5 +91,9 @@ extern int dnet_process_packet(struct dnet_packet *p, struct dnet_connection *co
 extern int dnet_send_packet(struct dnet_packet *p, struct dnet_connection *conn);
 extern int dnet_send_command_packet(struct dnet_packet_stream *st, struct dnet_output *output);
 extern int dnet_cancel_command(struct dnet_output *output);
+
+#ifdef __cplusplus
+}
+#endif
 
 #endif

@@ -7,11 +7,11 @@
 #include "crypt.h"
 #include "wallet.h"
 #include "log.h"
-#include "init.h"
+#include "xdagmain.h"
 #include "transport.h"
-#include "../utils/utils.h"
 
-#define WALLET_FILE (g_xdag_testnet ? "wallet-testnet.dat" : "wallet.dat")
+#define WALLET_FILE "wallet.dat"
+
 
 struct key_internal {
 	xdag_hash_t pub, priv;
@@ -42,7 +42,7 @@ static int add_key(xdag_hash_t priv)
 
 		k->key = xdag_create_key(k->priv, k->pub, &k->pub_bit);
 		
-		f = xdag_open_file(WALLET_FILE, "ab");
+		f = fopen(WALLET_FILE, "ab");
 		if (!f) goto fail;
 		
 		memcpy(priv32, k->priv, sizeof(xdag_hash_t));
@@ -50,11 +50,11 @@ static int add_key(xdag_hash_t priv)
 		xdag_user_crypt_action(priv32, nkeys, sizeof(xdag_hash_t) / sizeof(uint32_t), 1);
 		
 		if (fwrite(priv32, sizeof(xdag_hash_t), 1, f) != 1) {
-			xdag_close_file(f);
+			fclose(f);
 			goto fail;
 		}
 
-		xdag_close_file(f);
+		fclose(f);
 	}
 
 	if (!k->key) goto fail;
@@ -106,14 +106,14 @@ int xdag_wallet_init(void)
 {
 	uint32_t priv32[sizeof(xdag_hash_t) / sizeof(uint32_t)];
 	xdag_hash_t priv;
-	FILE *f = xdag_open_file(WALLET_FILE, "rb");
+	FILE *f = fopen(WALLET_FILE, "rb");
 	int n;
 
 	if (!f) {
 		if (add_key(0)) return -1;
 		
-		f = xdag_open_file(WALLET_FILE, "r");
-		if (!f) return -1;
+		f = fopen(WALLET_FILE, "r");
+                if (!f) return -1;
 		
 		fread(priv32, sizeof(xdag_hash_t), 1, f);
 		
@@ -128,7 +128,7 @@ int xdag_wallet_init(void)
 		add_key(priv);
 	}
 
-	xdag_close_file(f);
+	fclose(f);
 	
 	return 0;
 }
@@ -159,3 +159,20 @@ void xdag_wallet_finish(void)
 {
 	pthread_mutex_lock(&wallet_mutex);
 }
+
+/* release wallet resource while program exit */
+int xdag_wallet_uninit(void){
+    if(keys_arr){
+        free(keys_arr);
+        keys_arr = 0;
+    }
+    nkeys = 0;
+    maxnkeys = 0;
+    return 0;
+//TODO:make sure def_key need release
+//    if(def_key){
+//        free(def_key);
+//        def_key = 0;
+//    }
+}
+

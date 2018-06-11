@@ -5,17 +5,24 @@
 #include <stdlib.h>
 #include <unistd.h>
 #include <termios.h>
+#include <errno.h>
+#include "../client/log.h"
+#include "../wrapper/xdagwrapper.h"
 #include "system.h"
-#include "../dus/programs/dfstools/source/dfslib/dfslib_random.h"
-#include "../dus/programs/dfstools/source/dfslib/dfslib_crypt.h"
-#include "../dus/programs/dfstools/source/dfslib/dfslib_string.h"
-#include "../dus/programs/dar/source/include/crc.h"
+#include "../dus/dfslib_random.h"
+#include "../dus/dfslib_crypt.h"
+#include "../dus/dfslib_string.h"
+#include "../dus/crc.h"
 #include "dnet_database.h"
 #include "dnet_crypt.h"
 #include "dnet_main.h"
-#include "../utils/utils.h"
+#include "../wrapper/xdagwrapper.h"
 
+#if defined(ANDROID) || defined(__ANDROID__)
+#define KEYFILE	    "/sdcard/xdag/dnet_key.dat"
+#else
 #define KEYFILE	    "dnet_key.dat"
+#endif
 #define PWDLEN	    64
 #define SECTOR_LOG  9
 #define SECTOR_SIZE (1 << SECTOR_LOG)
@@ -63,14 +70,75 @@ static int input_password(const char *prompt, char *buf, unsigned len) {
 		t->c_lflag &= ~ECHO;
 		tcsetattr(0, TCSANOW, t);
 	}
-	fgets(buf, len, stdin);
-	if (noecho) {
-		t->c_lflag |= ECHO;
-		tcsetattr(0, TCSANOW, t);
-		printf("\n");
-	}
+
+    //invoke ui callback
+    st_xdag_event event;
+    event.procedure_type = en_procedure_init_wallet;
+
+    if(0 == strncmp(prompt,"Password",strlen("Password"))){
+        event.event_type = en_event_type_pwd;
+    }else if(0 == strncmp(prompt,"Set password",strlen("Set password"))){
+        event.event_type = en_event_set_pwd;
+    }else if(0 == strncmp(prompt,"Re-type password",strlen("Re-type password"))){
+        event.event_type = en_event_retype_pwd;
+    }else if(0 == strncmp(prompt,"Type random keys",strlen("Type random keys"))){
+        event.event_type = en_event_set_rdm;
+    }
+
+    st_xdag_app_msg *msg = g_app_callback_func(g_callback_object,&event);
+    xdag_app_info("receive message from ui eventtype 0x%x  msg address %p",event.event_type,msg);
+    if(!msg){
+        xdag_app_info("error ui pass empty auth info ");
+        return -1;
+    }
+
+    switch (event.event_type) {
+        case en_event_type_pwd:
+            if(msg->xdag_pwd){
+                strcpy(buf,msg->xdag_pwd);
+            }
+            break;
+        case en_event_set_pwd:
+            if(msg->xdag_pwd){
+                xdag_app_info(" set password from ui %s ",msg->xdag_pwd);
+                strcpy(buf,msg->xdag_pwd);
+            }
+            break;
+        case en_event_retype_pwd:
+            xdag_app_info("user retype password ");
+            if(msg->xdag_retype_pwd){
+                xdag_app_info(" retype password from ui %s ",msg->xdag_retype_pwd);
+                strcpy(buf,msg->xdag_retype_pwd);
+            }
+            break;
+        case en_event_set_rdm:
+            if(msg->xdag_rdm){
+                xdag_app_info(" set random keys from ui %s ",msg->xdag_rdm);
+                strcpy(buf,msg->xdag_rdm);
+            }
+            break;
+        default:
+            {
+                //event can not processed
+                xdag_app_err(" can not process event type  0x%x",event.event_type);
+            }
+            return -1;
+    }
+
+    //fgets(buf, len, stdin);
+    if (noecho) {
+        t->c_lflag |= ECHO;
+        tcsetattr(0, TCSANOW, t);
+        printf("\n");
+    }
+
 	len = strlen(buf);
-	if (len && buf[len - 1] == '\n') buf[len - 1] = 0;
+    if (len && buf[len - 1] == '\n')
+        buf[len - 1] = 0;
+
+    //free msg
+    //xdag_free_app_msg(msg);
+
 	return 0;
 }
 
@@ -196,7 +264,11 @@ int dnet_user_crypt_action(unsigned *data, unsigned long long data_id, unsigned 
 				if (!crypt) return -1;
 				memset(pwd, 0, 256);
 				memset(&str, 0, sizeof(struct dfslib_string));
-				(*g_input_password)("Password", pwd, 256);
+
+                res = (*g_input_password)("Password", pwd, 256);
+                if(res == -1){
+                    return -1;
+                }
 				dfslib_utf8_string(&str, pwd, strlen(pwd));
 				memset(crypt->pwd, 0, sizeof(crypt->pwd));
 				crypt->ispwd = 0;
@@ -210,10 +282,15 @@ int dnet_user_crypt_action(unsigned *data, unsigned long long data_id, unsigned 
 			{
 				struct dfslib_crypt *crypt = malloc(sizeof(struct dfslib_crypt));
 				struct dfslib_string str;
+                int res;
 				char pwd[256];
 				memset(pwd, 0, 256);
 				memset(&str, 0, sizeof(struct dfslib_string));
-				(*g_input_password)("Password", pwd, 256);
+
+                res = (*g_input_password)("Password", pwd, 256);
+                if(res == -1){
+                    return -1;
+                }
 				dfslib_utf8_string(&str, pwd, strlen(pwd));
 				memset(crypt->pwd, 0, sizeof(crypt->pwd));
 				dfslib_crypt_set_password(crypt, &str);
@@ -232,96 +309,164 @@ int dnet_user_crypt_action(unsigned *data, unsigned long long data_id, unsigned 
 }
 
 int dnet_crypt_init(const char *version) {
+
     FILE *f;
     struct dnet_keys *keys;
     struct dnet_host *host;
-	int i;
+    int i;
     g_dnet_keys = malloc(sizeof(struct dnet_keys));
-    if (!g_dnet_keys) return 1;
+	if (!g_dnet_keys) {
+		xdag_app_err(" malloc memory for g_dnet_keys failed \n ");
+		return 1;
+	}
+
     keys = g_dnet_keys;
     dfslib_random_init();
-	if (crc_init()) return 2;
-	f = xdag_open_file(KEYFILE, "rb");
+    xdag_app_debug("dnet crc init start");
+    if (crc_init()) {
+        xdag_app_err(" crc init error \n");
+        return 2;
+    }
+
+    xdag_app_debug("dnet crypt init open dnet.dat start");
+    f = fopen(KEYFILE, "rb");
     if (f) {
-        if (fread(keys, sizeof(struct dnet_keys), 1, f) != 1) xdag_close_file(f), f = 0;
-		else {
-			g_keylen = dnet_detect_keylen(keys->pub.key, DNET_KEYLEN);
-			if (dnet_test_keys()) {
-				struct dfslib_string str;
-				char pwd[256];
-				(*g_input_password)("Password", pwd, 256);
-				dfslib_utf8_string(&str, pwd, strlen(pwd));
-				set_user_crypt(&str);
-				if (g_dnet_user_crypt) for (i = 0; i < (sizeof(struct dnet_keys) >> 9); ++i)
-					dfslib_uncrypt_sector(g_dnet_user_crypt, (uint32_t *)keys + 128 * i, ~(uint64_t)i);
-				g_keylen = 0;
-				g_keylen = dnet_detect_keylen(keys->pub.key, DNET_KEYLEN);
-			}
-		}
+        if (fread(keys, sizeof(struct dnet_keys), 1, f) != 1) {
+                xdag_app_debug("dnet crypt init open %s failed generate it !!!",KEYFILE);
+                fclose(f);
+                f = 0;
+        }
+        else {
+                g_keylen = dnet_detect_keylen(keys->pub.key, DNET_KEYLEN);
+                if (dnet_test_keys()) {
+                    int res;
+                    struct dfslib_string str;
+                    char pwd[256];
+
+                    res = (*g_input_password)("Password", pwd, 256);
+                    if(res == -1){
+                        xdag_app_debug("dnet crypt user cancel password type in");
+                        fclose(f);
+                        return -1;
+                    }
+
+                    dfslib_utf8_string(&str, pwd, strlen(pwd));
+                    set_user_crypt(&str);
+                    if (g_dnet_user_crypt) {
+                        for (i = 0; i < (sizeof(struct dnet_keys) >> 9); ++i)
+                                dfslib_uncrypt_sector(g_dnet_user_crypt, (uint32_t *)keys + 128 * i, ~(uint64_t)i);
+                    }
+                    g_keylen = 0;
+                    g_keylen = dnet_detect_keylen(keys->pub.key, DNET_KEYLEN);
+                }
+        }
     }
     if (!f) {
+        int res;
+        int len;
         char buf[256];
-        struct dfslib_string str;
-		f = xdag_open_file(KEYFILE, "wb");
-		if (!f) return 3;
-#ifndef QDNET
-        if (dnet_limited_version)
-#endif
-        {
-			int len;
-			memset(buf, 0, 256);
-#ifndef __LDuS__
-			gethostname(buf, 255);
-			len = strlen(buf);
-			buf[len++] = ',';
-#if !defined(QDNET) || !defined(__arm__)
-			getlogin_r(buf + len, 255 - len);
-			len += strlen(buf + len);
-            buf[len++] = ',';
-#endif
-#else
-			len = 0;
-#endif
-			dfslib_random_fill(buf + len, 255 - len, 0, 0);
-			for (; len < 255; len++) buf[len] %= (0x80 - ' '), buf[len] += ' ';
-#ifndef QDNET
-        } else {
-			struct dfslib_string str, str1;
-			char pwd[256], pwd1[256];
-			(*g_input_password)("Set password", pwd, 256);
-			dfslib_utf8_string(&str, pwd, strlen(pwd));
-			(*g_input_password)("Re-type password", pwd1, 256);
-			dfslib_utf8_string(&str1, pwd1, strlen(pwd1));
-			if (str.len != str1.len || memcmp(str.utf8, str1.utf8, str.len)) {
-				printf("Passwords differ.\n"); return 4;
-			}
-			if (str.len) set_user_crypt(&str);
-			(*g_input_password)("Type random keys", buf, 256);
-#endif
-		}
+        char pwd[256], pwd1[256];
+
+        struct dfslib_string str, str1;
+        xdag_app_debug("dnet crypt generate %s start !!!",KEYFILE);
+        f = fopen(KEYFILE, "wb");
+
+        if (!f) {
+            xdag_app_debug("dnet crypt generate %s failed %s  !!!",KEYFILE,strerror(errno));
+            report_ui_walletinit_event(en_event_open_dnetfile_error,NULL);
+            return 3;
+        }
+
+        //request user to input password
+        memset(buf, 0, 256);
+
+        res = (*g_input_password)("Set password", pwd, 256);
+        xdag_app_info("dnet crypt set passwd %s",pwd);
+        if(res == -1){
+            xdag_app_debug("dnet crypt set passwd user cancel password type in");
+            fclose(f);
+            return -1;
+        }
+
+        dfslib_utf8_string(&str, pwd, strlen(pwd));
+        res = (*g_input_password)("Re-type password", pwd1, 256);
+        xdag_app_info("dnet crypt re-type passwd %s",pwd1);
+        if(res == -1){
+            fclose(f);
+            xdag_app_debug("dnet crypt re-type passwd user cancel password re-type in");
+            return -1;
+        }
+        dfslib_utf8_string(&str1, pwd1, strlen(pwd1));
+        if (str.len != str1.len || memcmp(str.utf8, str1.utf8, str.len)) {
+            fclose(f);
+            report_ui_walletinit_event(en_event_pwd_not_same,NULL);
+            return 4;
+        }
+
+        if (str.len) set_user_crypt(&str);
+        res = (*g_input_password)("Type random keys", buf, 256);
+        if(res == -1){
+            fclose(f);
+            xdag_app_debug("dnet crypt set random user cancel random type in");
+            return -1;
+        }
+
         dfslib_random_fill(keys->pub.key, DNET_KEYLEN * sizeof(dfsrsa_t), 0, dfslib_utf8_string(&str, buf, strlen(buf)));
-		printf("Generating host keys... "); fflush(stdout);
-#ifdef __arm__
-		g_keylen = KEYLEN_MIN;
-#else
-		if (dnet_limited_version) g_keylen = DNET_KEYLEN / 2;
-		else g_keylen = DNET_KEYLEN;
-#endif
-		dfsrsa_keygen(keys->priv.key, keys->pub.key, g_keylen);
-		dnet_make_key(keys->priv.key, g_keylen);
-		dnet_make_key(keys->pub.key, g_keylen);
-		printf("OK.\n"); fflush(stdout);
-		if (g_dnet_user_crypt) for (i = 0; i < (sizeof(struct dnet_keys) >> 9); ++i)
-			dfslib_encrypt_sector(g_dnet_user_crypt, (uint32_t *)keys + 128 * i, ~(uint64_t)i);
-		if (fwrite(keys, sizeof(struct dnet_keys), 1, f) != 1) return 5;
-		if (g_dnet_user_crypt) for (i = 0; i < (sizeof(struct dnet_keys) >> 9); ++i)
-			dfslib_uncrypt_sector(g_dnet_user_crypt, (uint32_t *)keys + 128 * i, ~(uint64_t)i);
-	}
-    xdag_close_file(f);
-	if (!(host = dnet_add_host(&g_dnet_keys->pub, 0, 127 << 24 | 1, 0, DNET_ROUTE_LOCAL))) return 6;
-	version = strchr(version, '-');
-	if (version) dnet_set_host_version(host, version + 1);
-    return -dnet_test_keys();
+        xdag_app_debug("Generating host keys... \n");
+        g_keylen = DNET_KEYLEN;
+
+        //generate public key and private key
+        dfsrsa_keygen(keys->priv.key, keys->pub.key, g_keylen);
+        dnet_make_key(keys->priv.key, g_keylen);
+        dnet_make_key(keys->pub.key, g_keylen);
+
+        if (g_dnet_user_crypt) {
+            for (i = 0; i < (sizeof(struct dnet_keys) >> 9); ++i) {
+                dfslib_encrypt_sector(g_dnet_user_crypt, (uint32_t *)keys + 128 * i, ~(uint64_t)i);
+            }
+        }
+
+        //store public and private key to dnet.dat
+        if (fwrite(keys, sizeof(struct dnet_keys), 1, f) != 1) {
+            xdag_app_debug("dnet crypt generate dnet key start !!!");
+            fclose(f);
+            report_ui_walletinit_event(en_event_write_dnet_file_error,NULL);
+            return 5;
+        }
+
+        if (g_dnet_user_crypt) {
+            for (i = 0; i < (sizeof(struct dnet_keys) >> 9); ++i) {
+                dfslib_uncrypt_sector(g_dnet_user_crypt, (uint32_t *)keys + 128 * i, ~(uint64_t)i);
+            }
+        }
+    }
+
+    fclose(f);
+
+    //add trust hosts
+    if (!(host = dnet_add_host(&g_dnet_keys->pub, 0, 127 << 24 | 1, 0, DNET_ROUTE_LOCAL))) {
+        xdag_app_debug("dnet crypt add trust host failed !!!");
+        report_ui_walletinit_event(en_event_add_trust_host_error,NULL);
+        return 6;
+    }
+
+    version = strchr(version, '-');
+    if (version) {
+        dnet_set_host_version(host, version + 1);
+    }
+
+    int res = -dnet_test_keys();
+    if(res){
+        xdag_app_debug("dnet crypt test keys failed !!!");
+        report_ui_walletinit_event(en_event_pwd_error,NULL);
+    }
+
+    return res;
+}
+
+void dnet_crypt_uninit(){
+    //uninit crc
+    crc_uninit();
 }
 
 static void dnet_session_init_crypt(struct dfslib_crypt *crypt, uint32_t sector[SECTOR_SIZE / 4]) {
