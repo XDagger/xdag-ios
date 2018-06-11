@@ -18,11 +18,9 @@
 #include "dnet_main.h"
 #include "../wrapper/xdagwrapper.h"
 
-#if defined(ANDROID) || defined(__ANDROID__)
-#define KEYFILE	    "/sdcard/xdag/dnet_key.dat"
-#else
+
 #define KEYFILE	    "dnet_key.dat"
-#endif
+
 #define PWDLEN	    64
 #define SECTOR_LOG  9
 #define SECTOR_SIZE (1 << SECTOR_LOG)

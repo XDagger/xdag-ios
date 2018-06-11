@@ -44,3 +44,4 @@ class CStringArray {
         pointers = _strings.map { $0.buffer }
     }
 }
+

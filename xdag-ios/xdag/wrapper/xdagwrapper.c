@@ -101,8 +101,8 @@ void report_ui_xfer_event(en_xdag_event_type event_type,const char* err_msg){
     g_app_callback_func(g_callback_object,&event);
 }
 
+
 void xdag_wrapper_uninit(){
     xdag_uninit();
 }
-
 
