@@ -20,6 +20,7 @@ func charArrayToString(_ array: UnsafePointer<Int8>, capacity: Int) -> String {
 
 class HomeViewController: UIViewController {
 
+    @IBOutlet weak var labelAddress: UIButton!
     let passwordCallback: @convention(c) (UnsafePointer<Int8>?, UnsafeMutablePointer<Int8>?, UInt32) -> Int32 = {
         (prompt, buf, size) -> Int32 in
         
@@ -76,6 +77,8 @@ class HomeViewController: UIViewController {
             
             (sender:UnsafeRawPointer?, event:UnsafeMutablePointer<st_xdag_event>?) -> UnsafeMutablePointer<st_xdag_app_msg>? in
             
+            var msg: UnsafeMutablePointer<st_xdag_app_msg>? = UnsafeMutablePointer.allocate(capacity: MemoryLayout<st_xdag_app_msg>.size)
+            
             if let v = event?.pointee.event_type.rawValue {
 //                print (String(v, radix:16))
                 let eType = XdagEvent(rawValue: Int32(v))!
@@ -91,11 +94,31 @@ class HomeViewController: UIViewController {
                     
                     print(logMsg)
                     break
-                case .en_event_set_pwd:fallthrough
-                case .en_event_set_rdm:fallthrough
-                case .en_event_retype_pwd:fallthrough
+                case .en_event_set_pwd:
+                    let passBuffer = CString("123456");
+                    msg?.pointee.xdag_pwd = UnsafeMutablePointer.allocate(capacity: MemoryLayout<Int8>.size);
+                    strncpy(msg?.pointee.xdag_pwd, passBuffer.buffer,
+                            MemoryLayout.size(ofValue: passBuffer));
+                    break;
+                case .en_event_set_rdm:
+                    let passBuffer = CString("123456");
+
+                     msg?.pointee.xdag_rdm = UnsafeMutablePointer.allocate(capacity: MemoryLayout<Int8>.size)
+                     strncpy(msg?.pointee.xdag_rdm, passBuffer.buffer,
+                             MemoryLayout.size(ofValue: passBuffer));
+                    break;
+                case .en_event_retype_pwd:
+                    let passBuffer = CString("123456");
+
+                     msg?.pointee.xdag_retype_pwd = UnsafeMutablePointer.allocate(capacity: MemoryLayout<Int8>.size)
+                     strncpy(msg?.pointee.xdag_retype_pwd, passBuffer.buffer,
+                             MemoryLayout.size(ofValue: passBuffer));
+                    break;
                 case .en_event_type_pwd:
-                    print(eType)
+                    let passBuffer = CString("123456");
+                    msg?.pointee.xdag_pwd = UnsafeMutablePointer.allocate(capacity: MemoryLayout<Int8>.size);
+                    strncpy(msg?.pointee.xdag_pwd, passBuffer.buffer,
+                            MemoryLayout.size(ofValue: passBuffer));
                     break
                 case .en_event_open_dnetfile_error:
                     var errorMsg =  event!.pointee.error_msg;
@@ -113,22 +136,26 @@ class HomeViewController: UIViewController {
                     }
                     
                     print("address", address)
+                    
+//                    self.labelAddress.titleLabel?.text  = address;
                     var bufferBalance =  event!.pointee.balance;
                     let balance = withUnsafeBytes(of: &bufferBalance) { (rawPtr) -> String in
                         let ptr = rawPtr.baseAddress!.assumingMemoryBound(to: CChar.self)
                         return String(cString: ptr)
                     }
                     print("balance", balance)
+                    
+                    let notificationName = Notification.Name(rawValue: "updateXdagState")
+                    NotificationCenter.default.post(name: notificationName, object: nil,
+                                                    userInfo: ["address":address, "balance" : balance])
+                    
                     break;
                 default:
                     break
                 }
                 
             }
-            var msg: UnsafeMutablePointer<st_xdag_app_msg>?
-            msg?.pointee.xdag_pwd = CString("123456").buffer
-            msg?.pointee.xdag_rdm = CString("123456").buffer
-            msg?.pointee.xdag_retype_pwd = CString("123456").buffer
+            
             return msg
             
         })
@@ -138,6 +165,45 @@ class HomeViewController: UIViewController {
 //        var test = "xdag:sadfasdf/asdfsdf3=dsfasdf?k1=v1&k2=v2"
         
         // Do any additional setup after loading the view, typically from a nib.
+    }
+    
+    func registerNotify() {
+        let notificationName = Notification.Name(rawValue: "updateXdagState")
+        NotificationCenter.default.addObserver(self,
+                                               selector:#selector(updateXdagState(notification:)),
+                                               name: notificationName, object: nil)
+    }
+    
+    var address:String?
+    
+    @objc func updateXdagState(notification: Notification) {
+        let userInfo = notification.userInfo as! [String: AnyObject]
+        let address = userInfo["address"] as! String
+        let balance = userInfo["balance"] as! String
+        print("updateXdagState: \(address):\(balance)")
+        self.address = address;
+//        self.labelAddress.titleLabel?.text = address;
+        
+//        DispatchQueue.global().async {
+//            DispatchQueue.main.async {
+//                 [unowned self] in
+//                self.labelAddress.titleLabel?.text = self.address;
+//            }
+//        }
+        
+//        DispatchQueue.main.async {
+//            
+//          self.labelAddress.titleLabel?.text = self.address;
+//        }
+
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        registerNotify();
+
+    }
+    override func viewDidDisappear(_ animated: Bool) {
+         NotificationCenter.default.removeObserver(self)
     }
     
    func xdag_callback(sender:UnsafeRawPointer?, event:UnsafeMutablePointer<st_xdag_event>?) -> UnsafeMutablePointer<st_xdag_app_msg>? {
