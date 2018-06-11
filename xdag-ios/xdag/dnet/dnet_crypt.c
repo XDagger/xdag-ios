@@ -17,7 +17,7 @@
 #include "dnet_crypt.h"
 #include "dnet_main.h"
 #include "../wrapper/xdagwrapper.h"
-
+#include "utils.h"
 
 #define KEYFILE	    "dnet_key.dat"
 
@@ -327,7 +327,7 @@ int dnet_crypt_init(const char *version) {
     }
 
     xdag_app_debug("dnet crypt init open dnet.dat start");
-    f = fopen(KEYFILE, "rb");
+    f = xdag_open_file(KEYFILE, "rb");
     if (f) {
         if (fread(keys, sizeof(struct dnet_keys), 1, f) != 1) {
                 xdag_app_debug("dnet crypt init open %s failed generate it !!!",KEYFILE);
@@ -367,7 +367,7 @@ int dnet_crypt_init(const char *version) {
 
         struct dfslib_string str, str1;
         xdag_app_debug("dnet crypt generate %s start !!!",KEYFILE);
-        f = fopen(KEYFILE, "wb");
+        f = xdag_open_file(KEYFILE, "wb");
 
         if (!f) {
             xdag_app_debug("dnet crypt generate %s failed %s  !!!",KEYFILE,strerror(errno));

@@ -9,6 +9,7 @@
 #include "system.h"
 #include "log.h"
 #include "xdagmain.h"
+#include "utils.h"
 
 #define XDAG_LOG_FILE "%s.log"
 #define XDAG_APP_LOG_BUF_SIZE 4096
@@ -48,7 +49,7 @@ int xdag_log(int level, const char *format, ...)
 	pthread_mutex_lock(&log_mutex);
 	sprintf(buf, XDAG_LOG_FILE, g_progname);
 	
-	f = fopen(buf, "a");
+	f = xdag_open_file(buf, "a");
 	if (!f) {
 		done = -1; goto end;
 	}

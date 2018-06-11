@@ -10,6 +10,7 @@
 		2610121345B6067DADE417BE /* Pods_xdag_iosTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F575BF24B3A94D152579D826 /* Pods_xdag_iosTests.framework */; };
 		6BB6FF58956E36C24BC09567 /* Pods_xdag_iosUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B16B9CA38ADF1393659ED547 /* Pods_xdag_iosUITests.framework */; };
 		AED687D18D3BA32ECAA614DF /* Pods_xdag_ios.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 25C83CF0A0B916236770A5D6 /* Pods_xdag_ios.framework */; };
+		FD0638BD20CE2B63009CC3A2 /* utils.c in Sources */ = {isa = PBXBuildFile; fileRef = FD0638BC20CE2B63009CC3A2 /* utils.c */; };
 		FD07F7CC204D081800BE86B9 /* SwiftNotice.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD07F7CB204D081700BE86B9 /* SwiftNotice.swift */; };
 		FD07F7CE204E6D1700BE86B9 /* SettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD07F7CD204E6D1700BE86B9 /* SettingViewController.swift */; };
 		FD9043C420CE0AD1008B9D6A /* XdagEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD9043C320CE0AD1008B9D6A /* XdagEvent.swift */; };
@@ -101,6 +102,8 @@
 		B16B9CA38ADF1393659ED547 /* Pods_xdag_iosUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_xdag_iosUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		B2B0194D1EE6B527C4E28409 /* Pods-xdag-iosUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-xdag-iosUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-xdag-iosUITests/Pods-xdag-iosUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		F575BF24B3A94D152579D826 /* Pods_xdag_iosTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_xdag_iosTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		FD0638BB20CE2B63009CC3A2 /* utils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = utils.h; sourceTree = "<group>"; };
+		FD0638BC20CE2B63009CC3A2 /* utils.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = utils.c; sourceTree = "<group>"; };
 		FD07F7CB204D081700BE86B9 /* SwiftNotice.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwiftNotice.swift; sourceTree = "<group>"; };
 		FD07F7CD204E6D1700BE86B9 /* SettingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingViewController.swift; sourceTree = "<group>"; };
 		FD9043C320CE0AD1008B9D6A /* XdagEvent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XdagEvent.swift; sourceTree = "<group>"; };
@@ -350,9 +353,19 @@
 			name = Pods;
 			sourceTree = "<group>";
 		};
+		FD0638BA20CE2B63009CC3A2 /* utils */ = {
+			isa = PBXGroup;
+			children = (
+				FD0638BB20CE2B63009CC3A2 /* utils.h */,
+				FD0638BC20CE2B63009CC3A2 /* utils.c */,
+			);
+			path = utils;
+			sourceTree = "<group>";
+		};
 		FDA5550720A1E4E000173691 /* xdag */ = {
 			isa = PBXGroup;
 			children = (
+				FD0638BA20CE2B63009CC3A2 /* utils */,
 				FDCF1D7220C81FC90049C3CC /* client */,
 				FDCF1D9720C81FC90049C3CC /* dnet */,
 				FDCF1D6620C81FC90049C3CC /* dus */,
@@ -1041,6 +1054,7 @@
 				FDCF1DC920C81FCA0049C3CC /* address.c in Sources */,
 				FD07F7CC204D081800BE86B9 /* SwiftNotice.swift in Sources */,
 				FDCF1DD120C81FCA0049C3CC /* dnet_log.c in Sources */,
+				FD0638BD20CE2B63009CC3A2 /* utils.c in Sources */,
 				FDCF1DCA20C81FCA0049C3CC /* statsdaemon.c in Sources */,
 				FDCF1DB820C81FCA0049C3CC /* dfslib_string.c in Sources */,
 				FDCF1DD320C81FCA0049C3CC /* dnet_database.c in Sources */,

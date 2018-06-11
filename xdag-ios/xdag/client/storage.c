@@ -11,6 +11,7 @@
 #include "log.h"
 #include "xdagmain.h"
 #include "hash.h"
+#include "utils.h"
 
 #if defined(_WIN32) || defined(_WIN64)
 #define SLASH "\\"
@@ -41,8 +42,8 @@ static int in_adding_all = 0;
 static int correct_storage_sum(const char *path, int pos, const struct xdag_storage_sum *sum, int add)
 {
 	struct xdag_storage_sum sums[256];
-	FILE *f = fopen(path, "r+b");
-
+//    FILE *f = fopen(path, "r+b");
+    FILE *f = xdag_open_file(path, "r+b");
 	if (f) {
 		if (fread(sums, sizeof(struct xdag_storage_sum), 256, f) != 256) {
 			fclose(f);
@@ -51,7 +52,7 @@ static int correct_storage_sum(const char *path, int pos, const struct xdag_stor
 		}
 		rewind(f);
 	} else {
-		f = fopen(path, "wb");
+		f = xdag_open_file(path, "wb");
 		if (!f) {
             xdag_app_err("Storag: can't create file %s", path);
             return -1;
@@ -135,7 +136,7 @@ int64_t xdag_storage_save(const struct xdag_block *b)
 	
 	pthread_mutex_lock(&storage_mutex);
 	
-	f = fopen(path, "ab");
+	f = xdag_open_file(path, "ab");
 	if (f) {
 		fseek(f, 0, SEEK_END);
 		res = ftell(f);
@@ -168,7 +169,7 @@ struct xdag_block *xdag_storage_load(xdag_hash_t hash, xdag_time_t time, uint64_
 
 	pthread_mutex_lock(&storage_mutex);
 	
-	f = fopen(path, "rb");
+	f = xdag_open_file(path, "rb");
 	if (f) {
 		if (fseek(f, pos, SEEK_SET) < 0 || fread(buf, sizeof(struct xdag_block), 1, f) != 1) buf = 0;
 		fclose(f);
@@ -230,7 +231,7 @@ uint64_t xdag_load_blocks(xdag_time_t start_time, xdag_time_t end_time, void *da
 		sprintf(path, STORAGE_FILE, STORAGE_FILE_ARGS(start_time));
 		xdag_app_debug("load storage file path %s",path);
 		pthread_mutex_lock(&storage_mutex);
-		f = fopen(path, "rb");
+		f = xdag_open_file(path, "rb");
 		if (f) {
 			if (fseek(f, pos, SEEK_SET) < 0)
                 todo = 0;
@@ -327,7 +328,7 @@ int xdag_load_sums(xdag_time_t start_time, xdag_time_t end_time, struct xdag_sto
 		sprintf(path, STORAGE_DIR0 SLASH SUMS_FILE, STORAGE_DIR0_ARGS(start_time & 0x000000000000l));
 	}
 
-	f = fopen(path, "rb");
+	f = xdag_open_file(path, "rb");
 	if (f) {
 		fread(buf, sizeof(struct xdag_storage_sum), 256, f); fclose(f);
 	} else {

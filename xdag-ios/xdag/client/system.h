@@ -48,7 +48,7 @@ extern "C" {
 #endif
 
 #define pthread_self_ptr()      pthread_self()
-#define xdag_mkdir(d)      mkdir(d, 0770)
+//#define xdag_mkdir(d)      mkdir(d, 0770)
 #define INVALID_SOCKET          -1
 
 #endif

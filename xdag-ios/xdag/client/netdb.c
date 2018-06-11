@@ -13,6 +13,7 @@
 #include "xdagmain.h"
 #include "block.h"
 #include "sync.h"
+#include "utils.h"
 
 #define MAX_SELECTED_HOSTS  64
 #define MAX_BLOCKED_IPS     64
@@ -73,7 +74,8 @@ static struct host *find_add_host(struct host *h)
 		}
 
 		if (!(h->flags & HOST_INDB)) {
-			FILE *f = fopen(DATABASE, "a");
+//            FILE *f = fopen(DATABASE, "a");
+            FILE *f = xdag_open_file(DATABASE, "a");
 			if (f) {
 				fprintf(f, "%u.%u.%u.%u:%u\n", h->ip & 0xff, h->ip >> 8 & 0xff, h->ip >> 16 & 0xff, h->ip >> 24 & 0xff, h->port);
 				fclose(f);
@@ -226,7 +228,7 @@ static void *monitor_thread(void *arg)
 		n = read_database("netdb.tmp", HOST_CONNECTED | HOST_SET | HOST_NOT_ADD);
 		if (n < 0) n = 0;
 
-		f = fopen("netdb.log", "a");
+		f = xdag_open_file("netdb.log", "a");
 
 		for (i = 0; i < MAX_SELECTED_HOSTS; ++i) {
 			struct host *h = random_host(HOST_CONNECTED | HOST_OUR);

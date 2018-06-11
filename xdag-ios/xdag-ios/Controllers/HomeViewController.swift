@@ -47,9 +47,9 @@ class HomeViewController: UIViewController {
         let docPath = home.appendingPathComponent("Documents")
         
         print(docPath)
-        let cs = CString(docPath)
+        let cs = CString(docPath+"/xdag")
         
-        let buffer = cs.buffer
+        let pathBuffer = cs.buffer
         
         var arrs:[UnsafeMutablePointer<Int8>?] = [CString(docPath).buffer, CString("-m").buffer ,CString("0").buffer, CString("cn.xdag.vspool.com:13654").buffer]
 
@@ -71,7 +71,7 @@ class HomeViewController: UIViewController {
 //        xdag_set_password_callback(passwordCallback)
 //
 
-        
+        xdag_init_path(pathBuffer)
         xdag_wrapper_init(nil, {
             
             (sender:UnsafeRawPointer?, event:UnsafeMutablePointer<st_xdag_event>?) -> UnsafeMutablePointer<st_xdag_app_msg>? in

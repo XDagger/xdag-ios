@@ -13,6 +13,7 @@
 #include "dnet_connection.h"
 #include "dnet_stream.h"
 #include "dnet_log.h"
+#include "utils.h"
 
 #define DNET_LOG_PERIOD 300
 
@@ -71,7 +72,7 @@ static void dnet_log_open(struct dnet_output *out) {
     localtime_r(&t, &tm);
     strftime(tbuf, 64, "%Y-%m-%d %H:%M:%S  ", &tm);
     pthread_mutex_lock(&dnet_log_mutex);
-    out->f = fopen("dnet.log", "a");
+    out->f = xdag_open_file("dnet.log", "a");
     if (!out->f) out->f = stderr;
     dnet_printf(out, "%s", tbuf);
 }
