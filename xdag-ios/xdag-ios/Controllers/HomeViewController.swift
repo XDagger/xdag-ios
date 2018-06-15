@@ -204,12 +204,16 @@ class HomeViewController: UIViewController {
         let address = userInfo["address"] as! String
         let balance = userInfo["balance"] as! String
         print("updateXdagState: \(address):\(balance)")
+        
+//        self.labelAddress.titleLabel?.text = address;
+        if(self.address == address) {
+            return
+        }
         self.address = address;
         self.balance = balance
-//        self.labelAddress.titleLabel?.text = address;
         
-       
-        DispatchQueue.global().async {
+        DispatchQueue.global(qos: .background).async {
+            
             DispatchQueue.main.async {
                  [unowned self] in
                 self.labelAddress.text = self.address!;
