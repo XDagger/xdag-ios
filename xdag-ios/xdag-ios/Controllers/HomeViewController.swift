@@ -85,6 +85,7 @@ class HomeViewController: UIViewController {
         
         // Do any additional setup after loading the view, typically from a nib.
     }
+    var pool:CString? = nil
     
     func initWallet() {
         
@@ -184,8 +185,8 @@ class HomeViewController: UIViewController {
             
         })
         
-//        let xdagPool = CString("pool.xdag.us:13654").buffer;
-        xdag_main(CString("pool.xdag.us:13654").buffer)
+         pool = CString("xdagmine.com:13654");
+        xdag_main(pool!.buffer)
     }
     
     
@@ -206,7 +207,7 @@ class HomeViewController: UIViewController {
         print("updateXdagState: \(address):\(balance)")
         
 //        self.labelAddress.titleLabel?.text = address;
-        if(self.address == address) {
+        if(self.address == address && self.balance == balance) {
             return
         }
         self.address = address;
@@ -216,7 +217,7 @@ class HomeViewController: UIViewController {
             
             DispatchQueue.main.async {
                  [unowned self] in
-                self.labelAddress.text = self.address!;
+                self.labelAddress.text = self.address!
                 self.labelBalance.text = self.balance!
             }
         }
