@@ -314,7 +314,7 @@ static void *miner_net_thread(void *arg)
     if (!s) {
         pthread_mutex_unlock(&g_pool_mutex);
         mess = "host is not given";
-        report_ui_pool_event(en_event_host_is_not_given,mess);
+        report_ui_pool_event(en_event_host_is_not_given, mess);
         pthread_exit((void*)NULL);
     }
     if (!strcmp(s, "any")) {

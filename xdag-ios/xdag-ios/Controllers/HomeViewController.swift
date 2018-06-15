@@ -167,7 +167,7 @@ class HomeViewController: UIViewController {
                         return String(cString: ptr)
                     }
                     print("balance", balance)
-                    DispatchQueue.global().async {
+                    DispatchQueue.global(qos: .background).async {
                         let notificationName = Notification.Name(rawValue: "updateXdagState")
                         NotificationCenter.default.post(name: notificationName, object: nil,userInfo: ["address":address, "balance" : balance])
                    }
@@ -184,8 +184,8 @@ class HomeViewController: UIViewController {
             
         })
         
-        let xdagPool = CString("xdagmine.com:13654").buffer;
-        xdag_main(xdagPool)
+//        let xdagPool = CString("pool.xdag.us:13654").buffer;
+        xdag_main(CString("pool.xdag.us:13654").buffer)
     }
     
     

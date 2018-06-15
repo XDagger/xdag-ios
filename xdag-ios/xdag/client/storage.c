@@ -19,11 +19,8 @@
 #define SLASH "/"
 #endif
 
-#if defined(ANDROID) || defined(__ANDROID__)
-#define STORAGE_DIR0            "/sdcard/xdag/storage%s"
-#else
 #define STORAGE_DIR0            "storage%s"
-#endif
+
 
 #define STORAGE_DIR0_ARGS(t)    (g_xdag_testnet ? "-testnet" : "")
 #define STORAGE_DIR1            STORAGE_DIR0 SLASH "%02x"
