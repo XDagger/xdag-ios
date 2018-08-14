@@ -251,8 +251,10 @@ class HomeViewController: UIViewController {
                  [unowned self] in
                 self.labelAddress.text = self.address!
                 self.labelBalance.text = self.balance!
-                
-                self.loadTransactions(address: self.address!)
+                if(self.address != "Not ready") {
+                    self.loadTransactions(address: self.address!)
+
+                }
 
             }
         }
