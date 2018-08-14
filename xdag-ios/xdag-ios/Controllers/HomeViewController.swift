@@ -61,7 +61,7 @@ class HomeViewController: UIViewController {
 //            return buffer.baseAddress!
 //        }
         
-        DispatchQueue.global(qos: .background).async {
+        DispatchQueue.global(qos: .default).async {
               [unowned self] in
              self.initWallet()
         }
@@ -97,12 +97,18 @@ class HomeViewController: UIViewController {
         let pathBuffer = cs.buffer
 
         xdag_init_path(pathBuffer)
-        xdag_wrapper_init(nil, {
+        
+       
+        var msg: UnsafeMutablePointer<st_xdag_app_msg>? =  UnsafeMutablePointer.allocate(capacity: MemoryLayout<st_xdag_app_msg>.size)
+        
+        print("msg",msg)
+
+        xdag_wrapper_init(msg, {
             
             (sender:UnsafeRawPointer?, event:UnsafeMutablePointer<st_xdag_event>?) -> UnsafeMutablePointer<st_xdag_app_msg>? in
             
-            var msg: UnsafeMutablePointer<st_xdag_app_msg>? = UnsafeMutablePointer.allocate(capacity: MemoryLayout<st_xdag_app_msg>.size)
-            
+            let msg = UnsafeMutablePointer<st_xdag_app_msg>.init(OpaquePointer(sender))
+           
             if let v = event?.pointee.event_type.rawValue {
                 //                print (String(v, radix:16))
                 let eType = XdagEvent(rawValue: Int32(v))!
@@ -113,36 +119,57 @@ class HomeViewController: UIViewController {
                     var buffer =  event!.pointee.app_log_msg;
                     let logMsg = withUnsafeBytes(of: &buffer) { (rawPtr) -> String in
                         let ptr = rawPtr.baseAddress!.assumingMemoryBound(to: CChar.self)
-                        return String(cString: ptr)
+                        let ret = String(cString: ptr)
+//                        ptr.deallocate()
+                        return ret;
                     }
-                    
+
                     print(logMsg)
                     break
                 case .en_event_set_pwd:
-                    let passBuffer = CString("123456");
+                   
+                    var passBuffer:CString? = CString("123456");
+                    
                     msg?.pointee.xdag_pwd = UnsafeMutablePointer.allocate(capacity: MemoryLayout<Int8>.size);
-                    strncpy(msg?.pointee.xdag_pwd, passBuffer.buffer,
+                    strncpy(msg?.pointee.xdag_pwd, passBuffer!.buffer,
                             MemoryLayout.size(ofValue: passBuffer));
+                    passBuffer = nil
+                    return msg
                     break;
                 case .en_event_set_rdm:
-                    let passBuffer = CString("123456");
-                    
+                   
+
+                    var passBuffer:CString? = CString("123456");
+
                     msg?.pointee.xdag_rdm = UnsafeMutablePointer.allocate(capacity: MemoryLayout<Int8>.size)
-                    strncpy(msg?.pointee.xdag_rdm, passBuffer.buffer,
+                    strncpy(msg?.pointee.xdag_rdm, passBuffer!.buffer,
                             MemoryLayout.size(ofValue: passBuffer));
+                    passBuffer = nil
+                    return msg
+
                     break;
                 case .en_event_retype_pwd:
-                    let passBuffer = CString("123456");
                     
+
+                    var passBuffer:CString? = CString("123456");
+
                     msg?.pointee.xdag_retype_pwd = UnsafeMutablePointer.allocate(capacity: MemoryLayout<Int8>.size)
-                    strncpy(msg?.pointee.xdag_retype_pwd, passBuffer.buffer,
+                    strncpy(msg?.pointee.xdag_retype_pwd, passBuffer!.buffer,
                             MemoryLayout.size(ofValue: passBuffer));
+                    passBuffer = nil
+                    return msg
+
                     break;
                 case .en_event_type_pwd:
-                    let passBuffer = CString("123456");
+                   
+
+                    var passBuffer:CString? = CString("123456");
                     msg?.pointee.xdag_pwd = UnsafeMutablePointer.allocate(capacity: MemoryLayout<Int8>.size);
-                    strncpy(msg?.pointee.xdag_pwd, passBuffer.buffer,
+                    strncpy(msg?.pointee.xdag_pwd, passBuffer!.buffer,
                             MemoryLayout.size(ofValue: passBuffer));
+                    passBuffer = nil
+                    return msg
+
                     break
                 case .en_event_open_dnetfile_error:
                     var errorMsg =  event!.pointee.error_msg;
@@ -153,14 +180,16 @@ class HomeViewController: UIViewController {
                     print("error", error)
                     break;
                 case .en_event_update_state:
+
+                    print("en_event_update_state:")
                     var bufferAddress =  event!.pointee.address;
                     let address = withUnsafeBytes(of: &bufferAddress) { (rawPtr) -> String in
                         let ptr = rawPtr.baseAddress!.assumingMemoryBound(to: CChar.self)
                         return String(cString: ptr)
                     }
-                    
+
                     print("address", address)
-                    
+
                     //                    self.labelAddress.titleLabel?.text  = address;
                     var bufferBalance =  event!.pointee.balance;
                     let balance = withUnsafeBytes(of: &bufferBalance) { (rawPtr) -> String in
@@ -173,7 +202,7 @@ class HomeViewController: UIViewController {
                         NotificationCenter.default.post(name: notificationName, object: nil,userInfo: ["address":address, "balance" : balance])
                    }
 //
-                    
+                    return nil
                     break;
                 default:
                     break
@@ -181,7 +210,7 @@ class HomeViewController: UIViewController {
                 
             }
             
-            return msg
+            return nil
             
         })
         

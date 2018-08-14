@@ -37,7 +37,7 @@ void xdag_init_path(char *path)
 
 	strcpy(g_xdag_current_path, szBuffer);
 #else
-	char pathcopy[PATH_MAX];
+    char pathcopy[PATH_MAX]={0};
 	strcpy(pathcopy, path);
 	char *prefix = dirname(pathcopy);
 	if (*prefix != '/' && *prefix != '\\') {
@@ -61,7 +61,7 @@ void xdag_init_path(char *path)
 
 FILE* xdag_open_file(const char *path, const char *mode)
 {
-	char abspath[1024];
+    char abspath[1024]={0};
 	sprintf(abspath, "%s%s", g_xdag_current_path, path);
 	FILE* f = fopen(abspath, mode);
 	return f;
@@ -74,7 +74,7 @@ void xdag_close_file(FILE *f)
 
 int xdag_file_exists(const char *path)
 {
-	char abspath[1024];
+    char abspath[1024]={0};
 	sprintf(abspath, "%s%s", g_xdag_current_path, path);
 	struct stat st;
 	return !stat(abspath, &st);
@@ -82,7 +82,7 @@ int xdag_file_exists(const char *path)
 
 int xdag_mkdir(const char *path)
 {
-	char abspath[1024];
+    char abspath[1024]={0};
 	sprintf(abspath, "%s%s", g_xdag_current_path, path);
 
 #if defined(_WIN32)
