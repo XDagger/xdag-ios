@@ -8,6 +8,8 @@ target 'xdag-ios' do
   # Pods for xdag-ios
   pod 'paper-onboarding', :git => 'https://github.com/Ramotion/paper-onboarding.git'
   pod 'SnapKit', '~> 4.0.0'
+  pod 'Alamofire', :git => 'https://github.com/Alamofire/Alamofire.git'
+  pod 'SwiftyJSON', :git => 'https://github.com/SwiftyJSON/SwiftyJSON.git'
 
   target 'xdag-iosTests' do
     inherit! :search_paths

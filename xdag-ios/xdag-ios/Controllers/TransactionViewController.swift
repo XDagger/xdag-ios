@@ -10,12 +10,8 @@ import UIKit
 
 class TransactionViewController: UITableViewController {
 
-    private let items = [
-        XDAGTransaction(txHash: "eAHUyypJGd...jG4nIzMFjNhAlDV7h ", txType: 1, txAmount: 0.001, txTime: "3秒前"),
-        XDAGTransaction(txHash: "asdfdedd...jG4nIzMFjNhAlDV7h ", txType: 0, txAmount: 5.120, txTime: "2分前"),
-        XDAGTransaction(txHash: "d3dd3dc...jG4nIzMFjNhAlDV7h ", txType: 0, txAmount: 1.200, txTime: "2018-02-28"),
-        XDAGTransaction(txHash: "deasdf3...jG4nIzMFjNhAlDV7h ", txType: 1, txAmount: 3.231, txTime: "2018-02-28"),
-        XDAGTransaction(txHash: "oiinknijd...jG4nIzMFjNhAlDV7h ", txType: 1, txAmount: 4.32, txTime: "2018-02-27")
+    public var items:[XDAGTransaction] = [
+     
     ]
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -44,14 +40,14 @@ class TransactionViewController: UITableViewController {
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        return 20
+        return items.count
     }
 
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "txTableViewCell", for: indexPath) as! TransactionTableViewCell
         
-        cell.setData(tx: items[indexPath.row % 5])
+        cell.setData(tx: items[indexPath.row])
 //         Configure the cell...
 //        cell.textLabel?.text = String(indexPath.row)
         return cell

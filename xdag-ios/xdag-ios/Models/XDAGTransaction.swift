@@ -11,10 +11,10 @@ import Foundation
 public class XDAGTransaction: NSObject{
     var txHash:String!
     var type:Int!
-    var amount:Decimal!
+    var amount:String!
     var time:String!
     
-    public init(txHash:String, txType:Int, txAmount:Decimal, txTime:String) {
+    public init(txHash:String, txType:Int, txAmount:String, txTime:String) {
         self.type = txType
         self.txHash = txHash
         self.amount = txAmount

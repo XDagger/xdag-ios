@@ -8,6 +8,8 @@
 
 import UIKit
 import SnapKit
+import Alamofire
+import SwiftyJSON
 
 
 func charArrayToString(_ array: UnsafePointer<Int8>, capacity: Int) -> String {
@@ -32,10 +34,11 @@ class HomeViewController: UIViewController {
         
         return 0
     }
+    var hv:TransactionViewController!
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        var hv:TransactionViewController = Util.GetViewController(controllerName: "transactionView")
+        hv = Util.GetViewController(controllerName: "transactionView")
         self.addChildViewController(hv)
         self.view.addSubview(hv.view)
         hv.view.snp.makeConstraints { (maker) in
@@ -248,6 +251,9 @@ class HomeViewController: UIViewController {
                  [unowned self] in
                 self.labelAddress.text = self.address!
                 self.labelBalance.text = self.balance!
+                
+                self.loadTransactions(address: self.address!)
+
             }
         }
         
@@ -265,6 +271,52 @@ class HomeViewController: UIViewController {
     }
     override func viewDidDisappear(_ animated: Bool) {
          NotificationCenter.default.removeObserver(self)
+    }
+    
+    func loadTransactions(address: String) {
+  
+        Alamofire.request(Router.getBlock(address: address)).responseJSON {
+            res in
+            
+            if res.result.isFailure {
+                let alertController = UIAlertController(title: "网络", message: "请检查网络设置", preferredStyle: .alert)
+                let cancelAction = UIAlertAction(title: "取消", style: UIAlertActionStyle.cancel, handler: nil)
+                let okAction = UIAlertAction(title: "好的", style: UIAlertActionStyle.default, handler: nil)
+                alertController.addAction(cancelAction)
+                alertController.addAction(okAction)
+                self.present(alertController, animated: true, completion: nil)
+                return
+            }
+            
+            let json = res.result.value
+            print(json)
+            let result = JSON(json!)
+           
+            if result["state"].stringValue == "Accepted" {
+                
+                let items = result["block_as_address"].array
+                
+                var index = 0
+                
+                var list:[XDAGTransaction] = []
+                for it in items! {
+                    if(index > 100) {
+                        break
+                    }
+                    let txType = it["direction"].stringValue == "input" ? 1: 0
+                    var tx = XDAGTransaction(txHash: it["address"].stringValue,txType:txType,txAmount:it["amount"].stringValue,txTime: it["time"].stringValue)
+                    list.append(tx)
+                    index = index + 1;
+                }
+                
+                DispatchQueue.main.async {
+                    self.hv.items = list;
+                    self.hv.tableView.reloadData()
+                }
+            }
+            
+        }
+        
     }
     
    func xdag_callback(sender:UnsafeRawPointer?, event:UnsafeMutablePointer<st_xdag_event>?) -> UnsafeMutablePointer<st_xdag_app_msg>? {

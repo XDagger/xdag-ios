@@ -13,6 +13,8 @@
 		FD0638BD20CE2B63009CC3A2 /* utils.c in Sources */ = {isa = PBXBuildFile; fileRef = FD0638BC20CE2B63009CC3A2 /* utils.c */; };
 		FD07F7CC204D081800BE86B9 /* SwiftNotice.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD07F7CB204D081700BE86B9 /* SwiftNotice.swift */; };
 		FD07F7CE204E6D1700BE86B9 /* SettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD07F7CD204E6D1700BE86B9 /* SettingViewController.swift */; };
+		FD209CFE21231EAD00CD4080 /* Router.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD209CFD21231EAD00CD4080 /* Router.swift */; };
+		FD209D0021231F7200CD4080 /* ServiceApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD209CFF21231F7200CD4080 /* ServiceApi.swift */; };
 		FD9043C420CE0AD1008B9D6A /* XdagEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD9043C320CE0AD1008B9D6A /* XdagEvent.swift */; };
 		FDA555D220A1E4E000173691 /* FSOpenSSL.m in Sources */ = {isa = PBXBuildFile; fileRef = FDA5558320A1E4E000173691 /* FSOpenSSL.m */; };
 		FDA555D320A1E4E000173691 /* libcrypto.a in Frameworks */ = {isa = PBXBuildFile; fileRef = FDA5558520A1E4E000173691 /* libcrypto.a */; };
@@ -106,6 +108,8 @@
 		FD0638BC20CE2B63009CC3A2 /* utils.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = utils.c; sourceTree = "<group>"; };
 		FD07F7CB204D081700BE86B9 /* SwiftNotice.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwiftNotice.swift; sourceTree = "<group>"; };
 		FD07F7CD204E6D1700BE86B9 /* SettingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingViewController.swift; sourceTree = "<group>"; };
+		FD209CFD21231EAD00CD4080 /* Router.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Router.swift; sourceTree = "<group>"; };
+		FD209CFF21231F7200CD4080 /* ServiceApi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceApi.swift; sourceTree = "<group>"; };
 		FD9043C320CE0AD1008B9D6A /* XdagEvent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XdagEvent.swift; sourceTree = "<group>"; };
 		FDA5552D20A1E4E000173691 /* FSOpenSSL.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FSOpenSSL.h; sourceTree = "<group>"; };
 		FDA5552F20A1E4E000173691 /* opensslconf-template.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "opensslconf-template.h"; sourceTree = "<group>"; };
@@ -360,6 +364,15 @@
 				FD0638BC20CE2B63009CC3A2 /* utils.c */,
 			);
 			path = utils;
+			sourceTree = "<group>";
+		};
+		FD209CFC21231E9800CD4080 /* services */ = {
+			isa = PBXGroup;
+			children = (
+				FD209CFD21231EAD00CD4080 /* Router.swift */,
+				FD209CFF21231F7200CD4080 /* ServiceApi.swift */,
+			);
+			path = services;
 			sourceTree = "<group>";
 		};
 		FDA5550720A1E4E000173691 /* xdag */ = {
@@ -663,6 +676,7 @@
 		FDDFDDA22042805200B3D0DE /* xdag-ios */ = {
 			isa = PBXGroup;
 			children = (
+				FD209CFC21231E9800CD4080 /* services */,
 				FDD5AA3120468A7C00C84CC1 /* Models */,
 				FDD5AA2D2046899D00C84CC1 /* Views */,
 				FDD5AA2820464BF000C84CC1 /* Common */,
@@ -938,12 +952,16 @@
 			);
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-xdag-ios/Pods-xdag-ios-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
 				"${BUILT_PRODUCTS_DIR}/SnapKit/SnapKit.framework",
+				"${BUILT_PRODUCTS_DIR}/SwiftyJSON/SwiftyJSON.framework",
 				"${BUILT_PRODUCTS_DIR}/paper-onboarding/paper_onboarding.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SnapKit.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftyJSON.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/paper_onboarding.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1029,6 +1047,8 @@
 				FDA7E4352055713000A914B1 /* AppPermissions.swift in Sources */,
 				FDCF1DD020C81FCA0049C3CC /* dnet_main.c in Sources */,
 				FD07F7CE204E6D1700BE86B9 /* SettingViewController.swift in Sources */,
+				FD209D0021231F7200CD4080 /* ServiceApi.swift in Sources */,
+				FD209CFE21231EAD00CD4080 /* Router.swift in Sources */,
 				FDCF1DCE20C81FCA0049C3CC /* dnet_stream.c in Sources */,
 				FDCF1DD720C81FCA0049C3CC /* xdagwrapper.c in Sources */,
 				FDCF1DBB20C81FCA0049C3CC /* crypt.c in Sources */,
@@ -1274,11 +1294,7 @@
 					__LDuS__,
 					__APPLE__,
 				);
-				"GCC_PREPROCESSOR_DEFINITIONS[arch=*]" = (
-					"$(inherited)",
-					"COCOAPODS=1",
-					__APPLE__,
-				);
+				"GCC_PREPROCESSOR_DEFINITIONS[arch=*]" = "$(inherited) COCOAPODS=1 __APPLE__";
 				HEADER_SEARCH_PATHS = "$(PROJECT_DIR)/xdag/openssl/include";
 				INFOPLIST_FILE = "xdag-ios/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";

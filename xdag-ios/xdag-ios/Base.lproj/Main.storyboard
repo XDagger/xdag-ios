@@ -168,9 +168,9 @@
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="30 秒前" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QRp-Hr-g0g">
-                                            <rect key="frame" x="49" y="34.5" width="82" height="15"/>
+                                            <rect key="frame" x="49" y="34.5" width="180" height="15"/>
                                             <constraints>
-                                                <constraint firstAttribute="width" constant="82" id="ioY-xX-KVU"/>
+                                                <constraint firstAttribute="width" constant="180" id="ioY-xX-KVU"/>
                                                 <constraint firstAttribute="height" constant="15" id="qLf-c5-hoG"/>
                                             </constraints>
                                             <fontDescription key="fontDescription" type="system" pointSize="12"/>
