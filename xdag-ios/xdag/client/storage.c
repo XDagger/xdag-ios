@@ -168,11 +168,16 @@ struct xdag_block *xdag_storage_load(xdag_hash_t hash, xdag_time_t time, uint64_
     xdag_app_debug(path);
 
 	f = xdag_open_file(path, "rb");
-    
+    xdag_app_debug("buf=0 %d %d %d",pos,fseek(f, pos, SEEK_SET) < 0,fseek(f, pos, SEEK_SET) < 0,fread(buf, sizeof(struct xdag_block), 1, f));
+
 	if (f) {
-		if (fseek(f, pos, SEEK_SET) < 0 || fread(buf, sizeof(struct xdag_block), 1, f) != 1) buf = 0;
+		if (fseek(f, pos, SEEK_SET) < 0 || fread(buf, sizeof(struct xdag_block), 1, f) != 1)
+        {
+            buf = 0;
+        }
 		fclose(f);
 	} else {
+
 		buf = 0;
 	}
     xdag_app_debug("storage %s%d",path, buf);
@@ -225,7 +230,7 @@ uint64_t xdag_load_blocks(xdag_time_t start_time, xdag_time_t end_time, void *da
 	s.size = s.sum = 0;
     
     struct xdag_block *buf =  (struct xdag_block*)malloc(1024 * sizeof(struct xdag_block));
-    struct xdag_block *pbuf = (struct xdag_block *)malloc(1024 * sizeof(struct xdag_block));
+    struct xdag_block **pbuf = (struct xdag_block **)malloc(1024 * sizeof(struct xdag_block*));
 
 	while (start_time < end_time) {
 		sprintf(path, STORAGE_FILE, STORAGE_FILE_ARGS(start_time));
@@ -255,7 +260,7 @@ uint64_t xdag_load_blocks(xdag_time_t start_time, xdag_time_t end_time, void *da
 					s.sum += ((uint64_t*)(buf + i))[j];
 				}
 
-				pbuf[k++] = *(buf + i);
+                pbuf[k++] = (buf + i);
 			}
 		}
 
@@ -264,8 +269,8 @@ uint64_t xdag_load_blocks(xdag_time_t start_time, xdag_time_t end_time, void *da
 		}
 
 		for (i = 0; i < k; ++i) {
-			pbuf[i].field[0].transport_header = pos0 + ((uint8_t*)&pbuf[i] - (uint8_t*)buf);
-			if (callback(&pbuf[i], data)) return sum;
+            pbuf[i]->field[0].transport_header = pos0 + ((uint8_t*)pbuf[i] - (uint8_t*)buf);
+			if (callback(pbuf[i], data)) return sum;
 			sum++;
 		}
 
