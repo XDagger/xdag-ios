@@ -165,15 +165,17 @@ struct xdag_block *xdag_storage_load(xdag_hash_t hash, xdag_time_t time, uint64_
 	sprintf(path, STORAGE_FILE, STORAGE_FILE_ARGS(time));
 
 	pthread_mutex_lock(&storage_mutex);
-	
+    xdag_app_debug(path);
+
 	f = xdag_open_file(path, "rb");
+    
 	if (f) {
 		if (fseek(f, pos, SEEK_SET) < 0 || fread(buf, sizeof(struct xdag_block), 1, f) != 1) buf = 0;
 		fclose(f);
 	} else {
 		buf = 0;
 	}
-
+    xdag_app_debug("storage %s%d",path, buf);
 	pthread_mutex_unlock(&storage_mutex);
 	
 	if (buf) {
@@ -283,11 +285,11 @@ uint64_t xdag_load_blocks(xdag_time_t start_time, xdag_time_t end_time, void *da
 
 				s.size = s.sum = 0;
 				mask = (1l << 16) - 1;
-			} else if (sprintf(path, STORAGE_DIR3, STORAGE_DIR3_ARGS(start_time)), !xdag_file_exists(path)) {
+			} else if (sprintf(path, STORAGE_DIR3, STORAGE_DIR3_ARGS(start_time)), xdag_file_exists(path)) {
 				mask = (1l << 16) - 1;
-			} else if (sprintf(path, STORAGE_DIR2, STORAGE_DIR2_ARGS(start_time)), !xdag_file_exists(path)) {
+			} else if (sprintf(path, STORAGE_DIR2, STORAGE_DIR2_ARGS(start_time)), xdag_file_exists(path)) {
 				mask = (1l << 24) - 1;
-			} else if (sprintf(path, STORAGE_DIR1, STORAGE_DIR1_ARGS(start_time)), !xdag_file_exists(path)) {
+			} else if (sprintf(path, STORAGE_DIR1, STORAGE_DIR1_ARGS(start_time)), xdag_file_exists(path)) {
 				mask = (1ll << 32) - 1;
 			} else {
 				mask = (1ll << 40) - 1;

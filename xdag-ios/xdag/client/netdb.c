@@ -151,7 +151,7 @@ static int read_database(const char *fname, int flags)
 	uint8_t ips_count[MAX_BLOCKED_IPS * MAX_ALLOWED_FROM_IP];
 	struct host h0, *h;
 	char str[64], *p;
-	FILE *f = fopen(fname, "r");
+	FILE *f = xdag_open_file(fname, "r");
 	int n = 0, n_ips = 0, n_blocked = 0, i;
 
 	if (!f) return -1;
@@ -204,7 +204,7 @@ static void *monitor_thread(void *arg)
 	}
 
 	for (;;) {
-		FILE *f = fopen("netdb.tmp", "w");
+		FILE *f = xdag_open_file("netdb.tmp", "w");
 		int n, i, j;
 		time_t t = time(0);
 

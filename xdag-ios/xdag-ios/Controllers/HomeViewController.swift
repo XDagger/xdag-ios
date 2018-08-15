@@ -25,15 +25,7 @@ class HomeViewController: UIViewController {
     @IBOutlet weak var labelBalance: UILabel!
     
     @IBOutlet weak var labelAddress: UILabel!
-    let passwordCallback: @convention(c) (UnsafePointer<Int8>?, UnsafeMutablePointer<Int8>?, UInt32) -> Int32 = {
-        (prompt, buf, size) -> Int32 in
-        
-        let pass = CString("123456xdag")
-        print("input pass", pass);
-        strncpy(buf, pass.buffer, Int(size));
-        
-        return 0
-    }
+    
     var hv:TransactionViewController!
     override func viewDidLoad() {
         super.viewDidLoad()

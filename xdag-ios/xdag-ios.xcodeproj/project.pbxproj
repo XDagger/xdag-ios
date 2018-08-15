@@ -15,6 +15,12 @@
 		FD07F7CE204E6D1700BE86B9 /* SettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD07F7CD204E6D1700BE86B9 /* SettingViewController.swift */; };
 		FD209CFE21231EAD00CD4080 /* Router.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD209CFD21231EAD00CD4080 /* Router.swift */; };
 		FD209D0021231F7200CD4080 /* ServiceApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD209CFF21231F7200CD4080 /* ServiceApi.swift */; };
+		FD209D0B2124782500CD4080 /* PasswordInputView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD209D042124782500CD4080 /* PasswordInputView.swift */; };
+		FD209D0C2124782500CD4080 /* PasswordContainerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD209D052124782500CD4080 /* PasswordContainerView.swift */; };
+		FD209D0D2124782500CD4080 /* PasswordDotView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD209D062124782500CD4080 /* PasswordDotView.swift */; };
+		FD209D0E2124782500CD4080 /* PasswordUIValidation.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD209D072124782500CD4080 /* PasswordUIValidation.swift */; };
+		FD209D0F2124782500CD4080 /* PasswordContainerView.xib in Resources */ = {isa = PBXBuildFile; fileRef = FD209D092124782500CD4080 /* PasswordContainerView.xib */; };
+		FD209D102124782500CD4080 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FD209D0A2124782500CD4080 /* Assets.xcassets */; };
 		FD9043C420CE0AD1008B9D6A /* XdagEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD9043C320CE0AD1008B9D6A /* XdagEvent.swift */; };
 		FDA555D220A1E4E000173691 /* FSOpenSSL.m in Sources */ = {isa = PBXBuildFile; fileRef = FDA5558320A1E4E000173691 /* FSOpenSSL.m */; };
 		FDA555D320A1E4E000173691 /* libcrypto.a in Frameworks */ = {isa = PBXBuildFile; fileRef = FDA5558520A1E4E000173691 /* libcrypto.a */; };
@@ -110,6 +116,12 @@
 		FD07F7CD204E6D1700BE86B9 /* SettingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingViewController.swift; sourceTree = "<group>"; };
 		FD209CFD21231EAD00CD4080 /* Router.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Router.swift; sourceTree = "<group>"; };
 		FD209CFF21231F7200CD4080 /* ServiceApi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceApi.swift; sourceTree = "<group>"; };
+		FD209D042124782500CD4080 /* PasswordInputView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PasswordInputView.swift; sourceTree = "<group>"; };
+		FD209D052124782500CD4080 /* PasswordContainerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PasswordContainerView.swift; sourceTree = "<group>"; };
+		FD209D062124782500CD4080 /* PasswordDotView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PasswordDotView.swift; sourceTree = "<group>"; };
+		FD209D072124782500CD4080 /* PasswordUIValidation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PasswordUIValidation.swift; sourceTree = "<group>"; };
+		FD209D092124782500CD4080 /* PasswordContainerView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PasswordContainerView.xib; sourceTree = "<group>"; };
+		FD209D0A2124782500CD4080 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		FD9043C320CE0AD1008B9D6A /* XdagEvent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XdagEvent.swift; sourceTree = "<group>"; };
 		FDA5552D20A1E4E000173691 /* FSOpenSSL.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FSOpenSSL.h; sourceTree = "<group>"; };
 		FDA5552F20A1E4E000173691 /* opensslconf-template.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "opensslconf-template.h"; sourceTree = "<group>"; };
@@ -373,6 +385,43 @@
 				FD209CFF21231F7200CD4080 /* ServiceApi.swift */,
 			);
 			path = services;
+			sourceTree = "<group>";
+		};
+		FD209D012124780200CD4080 /* controls */ = {
+			isa = PBXGroup;
+			children = (
+				FD209D022124782500CD4080 /* SmileLock */,
+			);
+			path = controls;
+			sourceTree = "<group>";
+		};
+		FD209D022124782500CD4080 /* SmileLock */ = {
+			isa = PBXGroup;
+			children = (
+				FD209D032124782500CD4080 /* Classes */,
+				FD209D082124782500CD4080 /* Assets */,
+			);
+			path = SmileLock;
+			sourceTree = "<group>";
+		};
+		FD209D032124782500CD4080 /* Classes */ = {
+			isa = PBXGroup;
+			children = (
+				FD209D042124782500CD4080 /* PasswordInputView.swift */,
+				FD209D052124782500CD4080 /* PasswordContainerView.swift */,
+				FD209D062124782500CD4080 /* PasswordDotView.swift */,
+				FD209D072124782500CD4080 /* PasswordUIValidation.swift */,
+			);
+			path = Classes;
+			sourceTree = "<group>";
+		};
+		FD209D082124782500CD4080 /* Assets */ = {
+			isa = PBXGroup;
+			children = (
+				FD209D092124782500CD4080 /* PasswordContainerView.xib */,
+				FD209D0A2124782500CD4080 /* Assets.xcassets */,
+			);
+			path = Assets;
 			sourceTree = "<group>";
 		};
 		FDA5550720A1E4E000173691 /* xdag */ = {
@@ -676,6 +725,7 @@
 		FDDFDDA22042805200B3D0DE /* xdag-ios */ = {
 			isa = PBXGroup;
 			children = (
+				FD209D012124780200CD4080 /* controls */,
 				FD209CFC21231E9800CD4080 /* services */,
 				FDD5AA3120468A7C00C84CC1 /* Models */,
 				FDD5AA2D2046899D00C84CC1 /* Views */,
@@ -855,9 +905,11 @@
 				FDCF1DC220C81FCA0049C3CC /* netdb-white-testnet.txt in Resources */,
 				FDCF1DC320C81FCA0049C3CC /* netdb.txt in Resources */,
 				FDDFDDB02042805200B3D0DE /* LaunchScreen.storyboard in Resources */,
+				FD209D0F2124782500CD4080 /* PasswordContainerView.xib in Resources */,
 				FDCF1DCB20C81FCA0049C3CC /* netdb-white.txt in Resources */,
 				FDDFDDAD2042805200B3D0DE /* Assets.xcassets in Resources */,
 				FDCF1DC820C81FCA0049C3CC /* netdb-testnet.txt in Resources */,
+				FD209D102124782500CD4080 /* Assets.xcassets in Resources */,
 				FDDFDDAB2042805200B3D0DE /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1070,6 +1122,8 @@
 				FDCF1DB920C81FCA0049C3CC /* xdagmain.c in Sources */,
 				FDA555D220A1E4E000173691 /* FSOpenSSL.m in Sources */,
 				FDCF1DB620C81FCA0049C3CC /* dfslib_crypt.c in Sources */,
+				FD209D0E2124782500CD4080 /* PasswordUIValidation.swift in Sources */,
+				FD209D0B2124782500CD4080 /* PasswordInputView.swift in Sources */,
 				FDCF1DC420C81FCA0049C3CC /* hash.c in Sources */,
 				FDCF1DC920C81FCA0049C3CC /* address.c in Sources */,
 				FD07F7CC204D081800BE86B9 /* SwiftNotice.swift in Sources */,
@@ -1077,6 +1131,7 @@
 				FD0638BD20CE2B63009CC3A2 /* utils.c in Sources */,
 				FDCF1DCA20C81FCA0049C3CC /* statsdaemon.c in Sources */,
 				FDCF1DB820C81FCA0049C3CC /* dfslib_string.c in Sources */,
+				FD209D0C2124782500CD4080 /* PasswordContainerView.swift in Sources */,
 				FDCF1DD320C81FCA0049C3CC /* dnet_database.c in Sources */,
 				FDCF1DBA20C81FCA0049C3CC /* log.c in Sources */,
 				FDD5AA2A20464C5500C84CC1 /* Util.swift in Sources */,
@@ -1084,6 +1139,7 @@
 				FDCF1DBF20C81FCA0049C3CC /* memory.c in Sources */,
 				FDCF1DC520C81FCA0049C3CC /* sync.c in Sources */,
 				FDDFDDA82042805200B3D0DE /* ReceiveViewController.swift in Sources */,
+				FD209D0D2124782500CD4080 /* PasswordDotView.swift in Sources */,
 				FDDFDDD62042B28900B3D0DE /* GuideViewController.swift in Sources */,
 				FDDFDDA42042805200B3D0DE /* AppDelegate.swift in Sources */,
 				FDD5AA3320468A8700C84CC1 /* XDAGTransaction.swift in Sources */,

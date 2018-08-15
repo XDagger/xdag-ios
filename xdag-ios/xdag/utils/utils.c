@@ -21,6 +21,7 @@
 #include <linux/limits.h>
 #include <unistd.h>
 #endif
+#include "log.h"
 
 static char g_xdag_current_path[4096] = {0};
 
@@ -63,6 +64,8 @@ FILE* xdag_open_file(const char *path, const char *mode)
 {
     char abspath[1024]={0};
 	sprintf(abspath, "%s%s", g_xdag_current_path, path);
+//    xdag_app_debug("storage %s",abspath);
+
 	FILE* f = fopen(abspath, mode);
 	return f;
 }
