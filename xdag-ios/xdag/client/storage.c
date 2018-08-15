@@ -19,7 +19,7 @@
 #define SLASH "/"
 #endif
 
-#define STORAGE_DIR0            "storage%s"
+#define STORAGE_DIR0             "storage%s"
 
 
 #define STORAGE_DIR0_ARGS(t)    (g_xdag_testnet ? "-testnet" : "")
@@ -267,6 +267,8 @@ uint64_t xdag_load_blocks(xdag_time_t start_time, xdag_time_t end_time, void *da
 			sum++;
 		}
 
+//        char abspath[1024]={0};
+//        sprintf(path, "%s%s", g_xdag_current_path, path);
 		if (todo != bufsize) {
 			if (f) {
 				int res;
@@ -281,11 +283,11 @@ uint64_t xdag_load_blocks(xdag_time_t start_time, xdag_time_t end_time, void *da
 
 				s.size = s.sum = 0;
 				mask = (1l << 16) - 1;
-			} else if (sprintf(path, STORAGE_DIR3, STORAGE_DIR3_ARGS(start_time)), !stat(path, &st)) {
+			} else if (sprintf(path, STORAGE_DIR3, STORAGE_DIR3_ARGS(start_time)), !xdag_file_exists(path)) {
 				mask = (1l << 16) - 1;
-			} else if (sprintf(path, STORAGE_DIR2, STORAGE_DIR2_ARGS(start_time)), !stat(path, &st)) {
+			} else if (sprintf(path, STORAGE_DIR2, STORAGE_DIR2_ARGS(start_time)), !xdag_file_exists(path)) {
 				mask = (1l << 24) - 1;
-			} else if (sprintf(path, STORAGE_DIR1, STORAGE_DIR1_ARGS(start_time)), !stat(path, &st)) {
+			} else if (sprintf(path, STORAGE_DIR1, STORAGE_DIR1_ARGS(start_time)), !xdag_file_exists(path)) {
 				mask = (1ll << 32) - 1;
 			} else {
 				mask = (1ll << 40) - 1;
