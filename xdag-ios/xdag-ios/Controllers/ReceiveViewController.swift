@@ -17,7 +17,9 @@ class ReceiveViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
-        xdagAdress = "4f1Sp/UD5533ddxxevUCpyenaPwqmpC"; // for testing
+        
+        xdagAdress = Util.getCurrentAddress()
+        
         setupViews(address: xdagAdress!)
         
     }

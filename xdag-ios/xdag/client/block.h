@@ -5,7 +5,12 @@
 
 #include <stdint.h>
 #include <stdio.h>
+#include <pthread.h>
 #include "hash.h"
+
+#ifdef __cplusplus
+extern "C" {
+#endif
 
 enum xdag_field_type {
 	XDAG_FIELD_NONCE,
@@ -109,5 +114,12 @@ extern int xdag_print_block_info(xdag_hash_t hash, FILE *out);
 // retrieves addresses of N last main blocks
 // return count of retrieved blocks
 extern int xdagGetLastMainBlocks(int count, char** addressArray);
+
+//uninit block module
+extern void xdag_block_uninit();
+
+#ifdef __cplusplus
+}
+#endif
 
 #endif

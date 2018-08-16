@@ -4,34 +4,6 @@
 #include <stdint.h>
 #include "memory.h"
 
-#if defined(_WIN32) || defined(_WIN64)
-
-int xdag_mem_init(size_t size)
-{
-	return 0;
-}
-
-void *xdag_malloc(size_t size)
-{
-	return malloc(size);
-}
-
-void xdag_free(void *mem)
-{
-	return free(mem);
-}
-
-void xdag_mem_finish(void)
-{
-}
-
-int xdag_free_all(void)
-{
-	return -1;
-}
-
-#else
-
 #include <stdio.h>
 #include <unistd.h>
 #include <pthread.h>
@@ -109,6 +81,12 @@ void xdag_free(void *mem)
 {
 }
 
+int xdag_free_all(void)
+{
+	g_pos = 0;
+	return 0;
+}
+
 void xdag_mem_finish(void)
 {
 	if (g_fd < 0) return;
@@ -121,13 +99,11 @@ void xdag_mem_finish(void)
 	remove(g_tmpname);
 }
 
-int xdag_free_all(void)
+void xdag_mem_uninit(void)
 {
 	g_pos = 0;
-	return 0;
 }
 
-#endif
 
 char** xdagCreateStringArray(int count, int stringLen)
 {

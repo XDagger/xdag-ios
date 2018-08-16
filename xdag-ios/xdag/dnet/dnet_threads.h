@@ -5,9 +5,13 @@
 
 #include <stdint.h>
 #include <pthread.h>
-#include "../ldus/source/include/ldus/list.h"
+#include "../ldus/list.h"
 #include "dnet_connection.h"
 #include "dnet_stream.h"
+
+#ifdef __cplusplus
+extern "C" {
+#endif
 
 enum dnet_thread_type {
     DNET_THREAD_CLIENT,
@@ -43,5 +47,9 @@ extern int dnet_threads_init(void);
 
 /* maximum allowed number of connections */
 extern int g_conn_limit;
+
+#ifdef __cplusplus
+}
+#endif
 
 #endif

@@ -6,14 +6,14 @@
 #include <pthread.h>
 #include <unistd.h>
 #include "system.h"
-#include "../ldus/source/include/ldus/rbtree.h"
+#include "../ldus/rbtree.h"
 #include "transport.h"
 #include "netdb.h"
 #include "log.h"
-#include "init.h"
+#include "xdagmain.h"
 #include "block.h"
 #include "sync.h"
-#include "../utils/utils.h"
+#include "utils.h"
 
 #define MAX_SELECTED_HOSTS  64
 #define MAX_BLOCKED_IPS     64
@@ -74,10 +74,11 @@ static struct host *find_add_host(struct host *h)
 		}
 
 		if (!(h->flags & HOST_INDB)) {
-			FILE *f = xdag_open_file(DATABASE, "a");
+//            FILE *f = fopen(DATABASE, "a");
+            FILE *f = xdag_open_file(DATABASE, "a");
 			if (f) {
 				fprintf(f, "%u.%u.%u.%u:%u\n", h->ip & 0xff, h->ip >> 8 & 0xff, h->ip >> 16 & 0xff, h->ip >> 24 & 0xff, h->port);
-				xdag_close_file(f);
+				fclose(f);
 			}
 		}
 	}
@@ -182,7 +183,7 @@ static int read_database(const char *fname, int flags)
 		n++;
 	}
 
-	xdag_close_file(f);
+	fclose(f);
 	
 	if (flags & HOST_CONNECTED) g_xdag_n_blocked_ips = n_blocked;
 	
@@ -211,7 +212,7 @@ static void *monitor_thread(void *arg)
 
 		xdag_net_command("conn", f);
 		
-		xdag_close_file(f);
+		fclose(f);
 		
 		pthread_mutex_lock(&host_mutex);
 		
@@ -252,7 +253,7 @@ static void *monitor_thread(void *arg)
 			if (n_selected_hosts < MAX_SELECTED_HOSTS) selected_hosts[n_selected_hosts++] = h;
 		}
 
-		if (f) xdag_close_file(f);
+		if (f) fclose(f);
 		
 		g_xdag_n_white_ips = 0;
 		
@@ -336,4 +337,10 @@ unsigned xdag_netdb_receive(const uint8_t *data, unsigned len)
 void xdag_netdb_finish(void)
 {
 	pthread_mutex_lock(&host_mutex);
+}
+
+/* release wallet resource while program exit */
+void xdag_netdb_uninit(void)
+{
+        //TODO: release resource netdb used
 }

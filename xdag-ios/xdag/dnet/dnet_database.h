@@ -8,6 +8,10 @@
 #include "dnet_crypt.h"
 #include "dnet_log.h"
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 #define DNET_HOST_NAME_MAX 256
 
 enum dnet_host_route_types {
@@ -57,5 +61,9 @@ extern int dnet_hosts_init(void);
 static inline uint32_t dnet_host_time_ago(struct dnet_host *h, time_t now) {
 	return h->is_local || now <= h->last_active ? 0 : (uint32_t)(now - h->last_active);
 }
+
+#ifdef __cplusplus
+}
+#endif
 
 #endif

@@ -1,24 +1,40 @@
 PODS:
+  - Alamofire (4.7.3)
   - paper-onboarding (4.0.1)
   - SnapKit (4.0.0)
+  - SwiftyJSON (4.1.0)
 
 DEPENDENCIES:
+  - Alamofire (from `https://github.com/Alamofire/Alamofire.git`)
   - paper-onboarding (from `https://github.com/Ramotion/paper-onboarding.git`)
   - SnapKit (~> 4.0.0)
+  - SwiftyJSON (from `https://github.com/SwiftyJSON/SwiftyJSON.git`)
 
 EXTERNAL SOURCES:
+  Alamofire:
+    :git: https://github.com/Alamofire/Alamofire.git
   paper-onboarding:
     :git: https://github.com/Ramotion/paper-onboarding.git
+  SwiftyJSON:
+    :git: https://github.com/SwiftyJSON/SwiftyJSON.git
 
 CHECKOUT OPTIONS:
+  Alamofire:
+    :commit: 85badad3170652de2aa0469fb6570e00b10ae340
+    :git: https://github.com/Alamofire/Alamofire.git
   paper-onboarding:
     :commit: f35e0a88532f0100e453837bc39cdd93f449517b
     :git: https://github.com/Ramotion/paper-onboarding.git
+  SwiftyJSON:
+    :commit: b93c5d2bd883959262b4c7aabe333667dadb1ab0
+    :git: https://github.com/SwiftyJSON/SwiftyJSON.git
 
 SPEC CHECKSUMS:
+  Alamofire: c7287b6e5d7da964a70935e5db17046b7fde6568
   paper-onboarding: ecb43c83e4e4f90137f228b8e9d87ca5aee591ee
   SnapKit: a42d492c16e80209130a3379f73596c3454b7694
+  SwiftyJSON: c29297daf073d2aa016295d5809cdd68045c39b3
 
-PODFILE CHECKSUM: 033711e24109533ee7d38874ab2ba4551c2713e0
+PODFILE CHECKSUM: 998efc4f331e603b991c8bc1c61e38b929c38d70
 
 COCOAPODS: 1.4.0

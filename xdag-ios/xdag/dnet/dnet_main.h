@@ -7,7 +7,9 @@
 extern "C" {
 #endif
 
-extern int dnet_init(int argc, char **argv);
+extern int dnet_init();
+
+extern void dnet_uninit();
 
 extern int dnet_generate_random_array(void *array, unsigned long size);
 

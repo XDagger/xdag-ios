@@ -5,10 +5,14 @@
 
 #include <pthread.h>
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 #if !defined(__LDuS__) && !defined(_WIN32) && !defined(_WIN64)
 
 #include <sched.h>
-#include "../ldus/source/include/ldus/atomic.h"
+#include "../ldus/atomic.h"
 
 typedef struct dthread_mutex {
 	ldus_atomic head, tail;
@@ -45,6 +49,10 @@ static inline int dthread_mutex_unlock(dthread_mutex_t *mutex) {
 #define dthread_mutex_unlock	pthread_mutex_unlock
 #define dthread_mutex_destroy	pthread_mutex_destroy
 
+#endif
+
+#ifdef __cplusplus
+}
 #endif
 
 #endif

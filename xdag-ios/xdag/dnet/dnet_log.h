@@ -7,6 +7,10 @@
 #include <stdint.h>
 #include "system.h"
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 struct dnet_output {
     FILE *f;
     char *str;
@@ -27,5 +31,9 @@ extern void dnet_print_streams(struct dnet_output *out);
 extern void dnet_log_periodic(void);
 extern int dnet_log_printf(const char *format, ...);
 extern void dnet_log_watchdog(int count);
+
+#ifdef __cplusplus
+}
+#endif
 
 #endif

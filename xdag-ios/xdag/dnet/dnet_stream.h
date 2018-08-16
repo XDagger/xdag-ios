@@ -11,6 +11,10 @@
 #include "dnet_packet.h"
 #include "dnet_log.h"
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 struct dnet_tty_params {
     uint16_t xwinsize, ywinsize;
 };
@@ -57,5 +61,9 @@ extern int dnet_traverse_streams(int (*callback)(struct dnet_stream *st, void *d
 extern int dnet_print_stream(struct dnet_stream *st, struct dnet_output *out);
 extern int dnet_process_stream_packet(struct dnet_packet_stream *p);
 extern int dnet_finish_stream(uint16_t id);
+
+#ifdef __cplusplus
+}
+#endif
 
 #endif

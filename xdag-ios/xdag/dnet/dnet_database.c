@@ -7,10 +7,10 @@
 #include <limits.h>
 #include <pthread.h>
 #include <unistd.h>
-#include "../dus/programs/dar/source/include/crc.h"
+#include "../dus/crc.h"
 #include "dnet_database.h"
 #include "dnet_main.h"
-#include "../utils/utils.h"
+#include "utils.h"
 
 #define DNET_HOST_MAX           0x1000
 #define DNET_NEW_HOST_TIMEOUT	DNET_ACTIVE_PERIOD
@@ -70,7 +70,7 @@ begin:
 		FILE *f = xdag_open_file(NAME_FILE, "rb");
 		if (f) {
 			int len = fread(host->name, 1, DNET_HOST_NAME_MAX, f);
-			xdag_close_file(f);
+			fclose(f);
 			if (len > 0) host->name_len = len;
 		}
 		host->is_local = 1;
@@ -86,7 +86,7 @@ begin:
 					break;
 				}
 			}
-			xdag_close_file(f);
+			fclose(f);
 		}
 	}
 	g_dnet_n_hosts++;
@@ -183,15 +183,15 @@ int dnet_trust_host(struct dnet_host *host) {
 			g_dnet_hosts[i].is_trusted = 0;
 		}
 	}
-	xdag_close_file(f);
+	fclose(f);
 	if (host->is_trusted) return 0;
 	f = xdag_open_file(KEYS_FILE, "ab");
 	if (!f) return 2;
 	if (fwrite(&host->key, sizeof(struct dnet_key), 1, f) != 1) {
-		xdag_close_file(f);
+		fclose(f);
 		return 3;
 	}
-	xdag_close_file(f);
+	fclose(f);
 	host->is_trusted = 1;
 	return 0;
 }
@@ -214,7 +214,7 @@ int dnet_set_host_name(struct dnet_host *host, const char *name, size_t len) {
 		FILE *f = xdag_open_file(NAME_FILE, "wb");
 		if (f) {
 			fwrite(host->name, 1, host->name_len, f);
-			xdag_close_file(f);
+			fclose(f);
 		}
 	}
 	return 0;

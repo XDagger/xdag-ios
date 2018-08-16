@@ -10,6 +10,7 @@ import UIKit
 
 class SendTransactionController: UIViewController {
 
+    @IBOutlet weak var availabelBalance: UILabel!
     @IBOutlet weak var txtToAddress: UITextField!
     
     
@@ -17,6 +18,7 @@ class SendTransactionController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        self.availabelBalance.text = Util.getCurrentBalance()
         // Do any additional setup after loading the view.
     }
 

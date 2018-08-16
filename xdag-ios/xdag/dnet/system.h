@@ -1,6 +1,10 @@
 #ifndef _SYSTEM_DNET_H
 #define _SYSTEM_DNET_H
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 #if defined(_WIN32) || defined(_WIN64)
 #include <Windows.h>
 #include <pthread.h>
@@ -29,6 +33,10 @@ extern int system_init(void);
 #define pthread_invalid -1
 #define system_init()	0
 #define INVALID_SOCKET	-1
+#endif
+
+#ifdef __cplusplus
+}
 #endif
 
 #endif

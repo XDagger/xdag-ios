@@ -9,7 +9,7 @@
 #include <ldus/atomic.h>
 #include <ldus/system/kernel.h>
 #endif
-#include "../dus/programs/dar/source/include/crc.h"
+#include "../dus/crc.h"
 #include "dnet_database.h"
 #include "dnet_packet.h"
 #include "dnet_connection.h"
