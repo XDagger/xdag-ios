@@ -27,6 +27,7 @@ class HomeViewController: UIViewController {
     @IBOutlet weak var labelAddress: UILabel!
     
     var hv:TransactionViewController!
+    var isRunning:Bool = false
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -40,20 +41,21 @@ class HomeViewController: UIViewController {
             maker.bottom.equalTo(self.view).offset(-49)
             
         }
-   
         
-//        DispatchQueue.global(qos: .default).async {
-//            [unowned self] in
-//            self.initWallet()
-//        }
+        
+        
     }
     
     override func viewDidAppear(_ animated: Bool) {
-        self.presentPasswordVC()
+        
+        if !self.isRunning {
+            self.presentPasswordVC()
+        }
     }
     
     func presentPasswordVC() {
         let pvc:PasswordViewController = Util.GetViewController(controllerName: "passwordViewController")
+        pvc.homeViewController = self
         pvc.modalPresentationStyle = .overCurrentContext
         self.present(pvc, animated: true, completion: nil)
     }
@@ -61,7 +63,42 @@ class HomeViewController: UIViewController {
     
     var pool:CString? = nil
     
+    func loadXDagWallet() {
+        if self.isRunning {
+            return
+        }
+        self.isRunning = true
+        self.pleaseWait()
+        
+        DispatchQueue.global(qos: .default).async {
+            [unowned self] in
+            self.initWallet()
+        }
+    }
+    
+    // TODO:
+    func setWalletPassword(msg: UnsafeMutablePointer<st_xdag_app_msg>?) {
+        let password = KeychainWrapper.stringForKey("xdag-password")!
+        if password.count > 0 {
+            var passBuffer:CString? = CString(password);
+            msg?.pointee.xdag_pwd = UnsafeMutablePointer.allocate(capacity: MemoryLayout<Int8>.size);
+            strncpy(msg?.pointee.xdag_pwd, passBuffer!.buffer,
+                    MemoryLayout.size(ofValue: passBuffer));
+            
+            msg?.pointee.xdag_rdm = UnsafeMutablePointer.allocate(capacity: MemoryLayout<Int8>.size)
+            strncpy(msg?.pointee.xdag_rdm, passBuffer!.buffer,
+                    MemoryLayout.size(ofValue: passBuffer));
+            
+            msg?.pointee.xdag_retype_pwd = UnsafeMutablePointer.allocate(capacity: MemoryLayout<Int8>.size)
+            strncpy(msg?.pointee.xdag_retype_pwd, passBuffer!.buffer,
+                    MemoryLayout.size(ofValue: passBuffer));
+            
+            passBuffer = nil
+        }
+    }
+    
     func initWallet() {
+        
         
         let home = NSHomeDirectory() as NSString
         let docPath = home.appendingPathComponent("Documents")
@@ -75,19 +112,18 @@ class HomeViewController: UIViewController {
         
         var msg: UnsafeMutablePointer<st_xdag_app_msg>? =  UnsafeMutablePointer.allocate(capacity: MemoryLayout<st_xdag_app_msg>.size)
         //
-        print("msg",msg)
+//        print("msg",msg)
+        self.setWalletPassword(msg: msg)
         
         xdag_wrapper_init(msg, {
             
             (sender:UnsafeRawPointer?, event:UnsafeMutablePointer<st_xdag_event>?) -> UnsafeMutablePointer<st_xdag_app_msg>? in
             
-            let msg = UnsafeMutablePointer<st_xdag_app_msg>.init(OpaquePointer(sender))
-            //            var msg: UnsafeMutablePointer<st_xdag_app_msg>? =  UnsafeMutablePointer.allocate(capacity: MemoryLayout<st_xdag_app_msg>.size)
             
             if let v = event?.pointee.event_type.rawValue {
                 //                print (String(v, radix:16))
                 let eType = XdagEvent(rawValue: Int32(v))!
-                print("EventType", eType)
+//                print("EventType", eType)
                 switch eType {
                 case .en_event_xdag_log_print:
                     
@@ -103,46 +139,25 @@ class HomeViewController: UIViewController {
                     break
                 case .en_event_set_pwd:
                     
-                    var passBuffer:CString? = CString("123456");
-                    
-                    msg?.pointee.xdag_pwd = UnsafeMutablePointer.allocate(capacity: MemoryLayout<Int8>.size);
-                    strncpy(msg?.pointee.xdag_pwd, passBuffer!.buffer,
-                            MemoryLayout.size(ofValue: passBuffer));
-                    passBuffer = nil
+                    let msg = UnsafeMutablePointer<st_xdag_app_msg>.init(OpaquePointer(sender))
+
                     return msg
                     break;
                 case .en_event_set_rdm:
-                    
-                    
-                    var passBuffer:CString? = CString("123456");
-                    
-                    msg?.pointee.xdag_rdm = UnsafeMutablePointer.allocate(capacity: MemoryLayout<Int8>.size)
-                    strncpy(msg?.pointee.xdag_rdm, passBuffer!.buffer,
-                            MemoryLayout.size(ofValue: passBuffer));
-                    passBuffer = nil
+                    let msg = UnsafeMutablePointer<st_xdag_app_msg>.init(OpaquePointer(sender))
+
                     return msg
                     
                     break;
                 case .en_event_retype_pwd:
                     
-                    
-                    var passBuffer:CString? = CString("123456");
-                    
-                    msg?.pointee.xdag_retype_pwd = UnsafeMutablePointer.allocate(capacity: MemoryLayout<Int8>.size)
-                    strncpy(msg?.pointee.xdag_retype_pwd, passBuffer!.buffer,
-                            MemoryLayout.size(ofValue: passBuffer));
-                    passBuffer = nil
+                    let msg = UnsafeMutablePointer<st_xdag_app_msg>.init(OpaquePointer(sender))
+
                     return msg
                     
                     break;
                 case .en_event_type_pwd:
-                    
-                    
-                    var passBuffer:CString? = CString("123456");
-                    msg?.pointee.xdag_pwd = UnsafeMutablePointer.allocate(capacity: MemoryLayout<Int8>.size);
-                    strncpy(msg?.pointee.xdag_pwd, passBuffer!.buffer,
-                            MemoryLayout.size(ofValue: passBuffer));
-                    passBuffer = nil
+                    let msg = UnsafeMutablePointer<st_xdag_app_msg>.init(OpaquePointer(sender))
                     return msg
                     
                     break
@@ -156,14 +171,14 @@ class HomeViewController: UIViewController {
                     break;
                 case .en_event_update_state:
                     
-                    print("en_event_update_state:")
+//                    print("en_event_update_state:")
                     var bufferAddress =  event!.pointee.address;
                     let address = withUnsafeBytes(of: &bufferAddress) { (rawPtr) -> String in
                         let ptr = rawPtr.baseAddress!.assumingMemoryBound(to: CChar.self)
                         return String(cString: ptr)
                     }
                     
-                    print("address", address)
+//                    print("address", address)
                     
                     //                    self.labelAddress.titleLabel?.text  = address;
                     var bufferBalance =  event!.pointee.balance;
@@ -171,7 +186,7 @@ class HomeViewController: UIViewController {
                         let ptr = rawPtr.baseAddress!.assumingMemoryBound(to: CChar.self)
                         return String(cString: ptr)
                     }
-                    print("balance", balance)
+//                    print("balance", balance)
                     DispatchQueue.global(qos: .background).async {
                         let notificationName = Notification.Name(rawValue: "updateXdagState")
                         NotificationCenter.default.post(name: notificationName, object: nil,userInfo: ["address":address, "balance" : balance])
@@ -223,9 +238,11 @@ class HomeViewController: UIViewController {
                 [unowned self] in
                 self.labelAddress.text = self.address!
                 self.labelBalance.text = self.balance!
-                if(self.address != "Not ready") {
+                if(self.balance != "Not ready") {
                     self.loadTransactions(address: self.address!)
+                    self.clearAllNotice()
                     
+                    Util.saveAddress(address: self.address!, balance: self.balance!)
                 }
                 
             }
@@ -263,7 +280,7 @@ class HomeViewController: UIViewController {
             }
             
             let json = res.result.value
-//            print(json)
+            //            print(json)
             let result = JSON(json!)
             
             if result["state"].stringValue == "Accepted" {

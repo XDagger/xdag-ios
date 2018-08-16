@@ -17,4 +17,24 @@ class Util: NSObject {
         return toViewController
         
     }
+    
+    class func saveAddress(address:String,balance:String) {
+        UserDefaults.standard.set(address, forKey: "xdag-address")
+        UserDefaults.standard.set(balance, forKey: "xdag-balance")
+        UserDefaults.standard.synchronize()
+    }
+    
+    class func getCurrentAddress() -> String {
+        if let addr = UserDefaults.standard.string(forKey: "xdag-address") {
+            return addr
+        }
+        return ""
+    }
+    
+    class func getCurrentBalance() -> String {
+        if let balance = UserDefaults.standard.string(forKey: "xdag-balance") {
+            return balance
+        }
+        return "0.00"
+    }
 }

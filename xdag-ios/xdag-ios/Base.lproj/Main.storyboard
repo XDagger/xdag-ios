@@ -471,6 +471,7 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="availabelBalance" destination="9xW-Pw-JWN" id="Xtm-xu-JnY"/>
                         <outlet property="txtAmount" destination="ca0-7U-XtN" id="EgX-Us-VsE"/>
                         <outlet property="txtToAddress" destination="7PE-6f-YSh" id="tDv-f7-DRY"/>
                     </connections>
@@ -627,12 +628,18 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="26" translatesAutoresizingMaskIntoConstraints="NO" id="w6V-gZ-1mf">
-                                <rect key="frame" x="181.5" y="427.5" width="237.5" height="45.5"/>
+                                <rect key="frame" x="130" y="407.5" width="340.5" height="86"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Enter Password" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="KIZ-ll-7wD">
-                                        <rect key="frame" x="0.0" y="0.0" width="237.5" height="45.5"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Enter XDAG Password" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="KIZ-ll-7wD">
+                                        <rect key="frame" x="0.0" y="0.0" width="340.5" height="45.5"/>
                                         <fontDescription key="fontDescription" type="system" weight="thin" pointSize="38"/>
                                         <color key="textColor" red="0.33333334329999997" green="0.33333334329999997" blue="0.33333334329999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Remember the password!!!" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Q72-f2-OcL">
+                                        <rect key="frame" x="94.5" y="71.5" width="151.5" height="14.5"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                        <color key="textColor" red="0.93411756199259255" green="0.39746278137160496" blue="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                 </subviews>
@@ -651,6 +658,8 @@
                     <size key="freeformSize" width="600" height="900"/>
                     <connections>
                         <outlet property="passwordStack" destination="w6V-gZ-1mf" id="7tN-mN-jLg"/>
+                        <outlet property="passwordSubtitle" destination="Q72-f2-OcL" id="RV4-hI-VPM"/>
+                        <outlet property="passwordTitle" destination="KIZ-ll-7wD" id="cTc-JK-BDd"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="brk-Ni-f2P" userLabel="First Responder" sceneMemberID="firstResponder"/>
