@@ -21,6 +21,7 @@
 		FD209D0E2124782500CD4080 /* PasswordUIValidation.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD209D072124782500CD4080 /* PasswordUIValidation.swift */; };
 		FD209D0F2124782500CD4080 /* PasswordContainerView.xib in Resources */ = {isa = PBXBuildFile; fileRef = FD209D092124782500CD4080 /* PasswordContainerView.xib */; };
 		FD209D102124782500CD4080 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FD209D0A2124782500CD4080 /* Assets.xcassets */; };
+		FD209D122124F10F00CD4080 /* PasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD209D112124F10F00CD4080 /* PasswordViewController.swift */; };
 		FD9043C420CE0AD1008B9D6A /* XdagEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD9043C320CE0AD1008B9D6A /* XdagEvent.swift */; };
 		FDA555D220A1E4E000173691 /* FSOpenSSL.m in Sources */ = {isa = PBXBuildFile; fileRef = FDA5558320A1E4E000173691 /* FSOpenSSL.m */; };
 		FDA555D320A1E4E000173691 /* libcrypto.a in Frameworks */ = {isa = PBXBuildFile; fileRef = FDA5558520A1E4E000173691 /* libcrypto.a */; };
@@ -122,6 +123,7 @@
 		FD209D072124782500CD4080 /* PasswordUIValidation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PasswordUIValidation.swift; sourceTree = "<group>"; };
 		FD209D092124782500CD4080 /* PasswordContainerView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PasswordContainerView.xib; sourceTree = "<group>"; };
 		FD209D0A2124782500CD4080 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		FD209D112124F10F00CD4080 /* PasswordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordViewController.swift; sourceTree = "<group>"; };
 		FD9043C320CE0AD1008B9D6A /* XdagEvent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XdagEvent.swift; sourceTree = "<group>"; };
 		FDA5552D20A1E4E000173691 /* FSOpenSSL.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FSOpenSSL.h; sourceTree = "<group>"; };
 		FDA5552F20A1E4E000173691 /* opensslconf-template.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "opensslconf-template.h"; sourceTree = "<group>"; };
@@ -769,6 +771,7 @@
 				FD07F7CD204E6D1700BE86B9 /* SettingViewController.swift */,
 				FDA7E436205D18BC00A914B1 /* ScanViewController.swift */,
 				FDA7E438205D1FA900A914B1 /* SendTransactionController.swift */,
+				FD209D112124F10F00CD4080 /* PasswordViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -1094,6 +1097,7 @@
 				FDCF1DB420C81FCA0049C3CC /* dfsrsa.c in Sources */,
 				FDD5AA272045B7B800C84CC1 /* TransactionViewController.swift in Sources */,
 				FDCF1DB720C81FCA0049C3CC /* dfslib_random.c in Sources */,
+				FD209D122124F10F00CD4080 /* PasswordViewController.swift in Sources */,
 				FDCF1DD220C81FCA0049C3CC /* dnet_command.c in Sources */,
 				FDA7E437205D18BC00A914B1 /* ScanViewController.swift in Sources */,
 				FDA7E4352055713000A914B1 /* AppPermissions.swift in Sources */,

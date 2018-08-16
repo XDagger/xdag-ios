@@ -41,11 +41,24 @@ class HomeViewController: UIViewController {
             
         }
    
-        DispatchQueue.global(qos: .default).async {
-            [unowned self] in
-            self.initWallet()
-        }
+        
+//        DispatchQueue.global(qos: .default).async {
+//            [unowned self] in
+//            self.initWallet()
+//        }
     }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        self.presentPasswordVC()
+    }
+    
+    func presentPasswordVC() {
+        let pvc:PasswordViewController = Util.GetViewController(controllerName: "passwordViewController")
+        pvc.modalPresentationStyle = .overCurrentContext
+        self.present(pvc, animated: true, completion: nil)
+    }
+    
+    
     var pool:CString? = nil
     
     func initWallet() {
