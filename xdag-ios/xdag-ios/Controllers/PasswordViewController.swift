@@ -55,6 +55,9 @@ class PasswordViewController: UIViewController {
         passwordContainerView.highlightedColor = UIColor.navigationBarColor()
         if(firstSetPassword) {
             passwordContainerView.touchAuthenticationEnabled = false
+        } else {
+            passwordContainerView.touchAuthenticationEnabled = true
+
         }
         // Do any additional setup after loading the view.
     }
