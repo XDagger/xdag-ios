@@ -1355,7 +1355,6 @@
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"$(inherited)",
 					"COCOAPODS=1",
-					__LDuS__,
 					__APPLE__,
 				);
 				"GCC_PREPROCESSOR_DEFINITIONS[arch=*]" = (
