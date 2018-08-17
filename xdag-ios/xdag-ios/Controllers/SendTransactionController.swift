@@ -19,6 +19,7 @@ class SendTransactionController: UIViewController {
         super.viewDidLoad()
 
         self.availabelBalance.text = Util.getCurrentBalance()
+       
         // Do any additional setup after loading the view.
     }
 
@@ -37,6 +38,86 @@ class SendTransactionController: UIViewController {
                 self.present(ac, animated: true, completion: nil)
             }
         }
+    }
+    
+    
+    @IBAction func sendXdagClicked(_ sender: Any) {
+    
+        let sendTo = self.txtToAddress.text
+        let txtAmount = self.txtAmount.text
+        if let to = sendTo, let money = txtAmount  {
+            let amount = Double(money)
+            if amount! <= 0.0 {
+                self.noticeOnlyText("Invalid Amount to Send")
+                return;
+            }
+            
+            if to.count < 10 {
+                self.noticeOnlyText("Invalid Address to Send")
+                return;
+            }
+            self.pleaseWait()
+            let sendTo = CString(sendTo!)
+            let toAmount = CString(txtAmount!)
+            xdag_send_coin(toAmount.buffer, sendTo.buffer)
+        }
+    }
+    
+    func registerNotify() {
+        let notificationName = Notification.Name(rawValue: "updateXdagState")
+        NotificationCenter.default.addObserver(self,
+                                               selector:#selector(updateXdagXferState(notification:)),
+                                               name: notificationName, object: nil)
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        registerNotify();
+        self.availabelBalance.text = Util.getCurrentBalance()
+
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        NotificationCenter.default.removeObserver(self)
+
+    }
+    
+    func alertXferMsg(type:String, msg:String) {
+        if type != "xdag_transfered" {
+            return
+        }
+        
+        DispatchQueue.global(qos: .background).async {
+            
+            DispatchQueue.main.async {
+                [unowned self] in
+                self.clearAllNotice()
+                if msg == "success" {
+                    self.noticeSuccess("xfer success!")
+                    self.txtAmount.text = ""
+                    self.txtToAddress.text = ""
+                } else {
+                    self.noticeOnlyText(msg)
+                }
+                
+            }
+        }
+    }
+    
+    
+    @objc func updateXdagXferState(notification: Notification) {
+        let userInfo = notification.userInfo as! [String: AnyObject]
+        
+        let type = userInfo["type"] as! String
+        
+        if type != "xdag_transfered" {
+            return
+        }
+        
+        let msg = userInfo["msg"] as! String
+
+        self.alertXferMsg(type:type,msg:msg)
+       
+        
     }
     
     override func didReceiveMemoryWarning() {
