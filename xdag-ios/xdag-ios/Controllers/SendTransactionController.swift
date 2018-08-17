@@ -40,6 +40,23 @@ class SendTransactionController: UIViewController {
         }
     }
     
+    func presentPasswordVC() {
+        let pvc:PasswordViewController = Util.GetViewController(controllerName: "passwordViewController")
+        pvc.sendTransactionController = self
+        pvc.modalPresentationStyle = .overCurrentContext
+        self.present(pvc, animated: true, completion: nil)
+    }
+    
+    
+    func xferXdag() {
+        
+        self.pleaseWait()
+        let sendTo = CString(self.txtToAddress.text!)
+        let toAmount = CString(self.txtAmount.text!)
+        xdag_send_coin(toAmount.buffer, sendTo.buffer)
+
+    }
+    
     
     @IBAction func sendXdagClicked(_ sender: Any) {
     
@@ -56,10 +73,10 @@ class SendTransactionController: UIViewController {
                 self.noticeOnlyText("Invalid Address to Send")
                 return;
             }
-            self.pleaseWait()
-            let sendTo = CString(sendTo!)
-            let toAmount = CString(txtAmount!)
-            xdag_send_coin(toAmount.buffer, sendTo.buffer)
+            
+            self.presentPasswordVC()
+            
+            
         }
     }
     
@@ -92,7 +109,8 @@ class SendTransactionController: UIViewController {
                 [unowned self] in
                 self.clearAllNotice()
                 if msg == "success" {
-                    self.noticeSuccess("xfer success!")
+//                    self.noticeSuccess("xfer success!")
+                    self.noticeSuccess("xfer success!", autoClear: true, autoClearTime: 3)
                     self.txtAmount.text = ""
                     self.txtToAddress.text = ""
                 } else {
@@ -120,6 +138,9 @@ class SendTransactionController: UIViewController {
         
     }
     
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        self.view.endEditing(false)
+    }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.

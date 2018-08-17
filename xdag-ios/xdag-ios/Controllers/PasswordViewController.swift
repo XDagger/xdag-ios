@@ -21,6 +21,8 @@ class PasswordViewController: UIViewController {
     
     var homeViewController:HomeViewController?
     
+    var sendTransactionController:SendTransactionController?
+    
     @IBOutlet weak var passwordStack: UIStackView!
     let kPasswordDigit = 6
 
@@ -126,7 +128,13 @@ private extension PasswordViewController {
     
     func validationSuccess() {
 //        print("*️⃣ success!")
-        homeViewController?.loadXDagWallet();
+        if let homeVC = self.homeViewController {
+            homeVC.loadXDagWallet();
+        }
+        
+        if let sendVC = self.sendTransactionController {
+           sendVC.xferXdag()
+        }
         dismiss(animated: true, completion: nil)
     }
     

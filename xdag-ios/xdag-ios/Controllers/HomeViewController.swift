@@ -122,7 +122,7 @@ class HomeViewController: UIViewController {
             if let v = event?.pointee.event_type.rawValue {
                 //                print (String(v, radix:16))
                 let eType = XdagEvent(rawValue: Int32(v))!
-                print("EventType", eType)
+//                print("EventType", eType)
                 switch eType {
                 case .en_event_xdag_log_print:
                     
@@ -260,7 +260,7 @@ class HomeViewController: UIViewController {
         let address = userInfo["address"] as! String
         let balance = userInfo["balance"] as! String
         
-        print("updateXdagState: \(address):\(balance)")
+//        print("updateXdagState: \(address):\(balance)")
         
         //        self.labelAddress.titleLabel?.text = address;
         if(self.address == address && self.balance == balance) {
