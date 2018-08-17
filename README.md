@@ -1,6 +1,9 @@
 # xdag-ios
 XDAG iOS Wallet 
 
+## Status
+[![Throughput Graph](https://graphs.waffle.io/XDagger/xdag-ios/throughput.svg)](https://waffle.io/XDagger/xdag-ios/metrics/throughput)
+
 
 ## Building
 
