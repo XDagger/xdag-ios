@@ -19,6 +19,7 @@ class SendTransactionController: UIViewController {
         super.viewDidLoad()
 
         self.availabelBalance.text = Util.getCurrentBalance()
+       
         // Do any additional setup after loading the view.
     }
 
@@ -39,6 +40,107 @@ class SendTransactionController: UIViewController {
         }
     }
     
+    func presentPasswordVC() {
+        let pvc:PasswordViewController = Util.GetViewController(controllerName: "passwordViewController")
+        pvc.sendTransactionController = self
+        pvc.modalPresentationStyle = .overCurrentContext
+        self.present(pvc, animated: true, completion: nil)
+    }
+    
+    
+    func xferXdag() {
+        
+        self.pleaseWait()
+        let sendTo = CString(self.txtToAddress.text!)
+        let toAmount = CString(self.txtAmount.text!)
+        xdag_send_coin(toAmount.buffer, sendTo.buffer)
+
+    }
+    
+    
+    @IBAction func sendXdagClicked(_ sender: Any) {
+    
+        let sendTo = self.txtToAddress.text
+        let txtAmount = self.txtAmount.text
+        if let to = sendTo, let money = txtAmount  {
+            let amount = Double(money)
+            if amount! <= 0.0 {
+                self.noticeOnlyText("Invalid Amount to Send")
+                return;
+            }
+            
+            if to.count < 10 {
+                self.noticeOnlyText("Invalid Address to Send")
+                return;
+            }
+            
+            self.presentPasswordVC()
+            
+            
+        }
+    }
+    
+    func registerNotify() {
+        let notificationName = Notification.Name(rawValue: "updateXdagState")
+        NotificationCenter.default.addObserver(self,
+                                               selector:#selector(updateXdagXferState(notification:)),
+                                               name: notificationName, object: nil)
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        registerNotify();
+        self.availabelBalance.text = Util.getCurrentBalance()
+
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        NotificationCenter.default.removeObserver(self)
+
+    }
+    
+    func alertXferMsg(type:String, msg:String) {
+        if type != "xdag_transfered" {
+            return
+        }
+        
+        DispatchQueue.global(qos: .background).async {
+            
+            DispatchQueue.main.async {
+                [unowned self] in
+                self.clearAllNotice()
+                if msg == "success" {
+//                    self.noticeSuccess("xfer success!")
+                    self.noticeSuccess("xfer success!", autoClear: true, autoClearTime: 3)
+                    self.txtAmount.text = ""
+                    self.txtToAddress.text = ""
+                } else {
+                    self.noticeOnlyText(msg)
+                }
+                
+            }
+        }
+    }
+    
+    
+    @objc func updateXdagXferState(notification: Notification) {
+        let userInfo = notification.userInfo as! [String: AnyObject]
+        
+        let type = userInfo["type"] as! String
+        
+        if type != "xdag_transfered" {
+            return
+        }
+        
+        let msg = userInfo["msg"] as! String
+
+        self.alertXferMsg(type:type,msg:msg)
+       
+        
+    }
+    
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        self.view.endEditing(false)
+    }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.

@@ -47,7 +47,6 @@ class HomeViewController: UIViewController {
     }
     
     override func viewDidAppear(_ animated: Bool) {
-        
         if !self.isRunning {
             self.presentPasswordVC()
         }
@@ -137,6 +136,36 @@ class HomeViewController: UIViewController {
                     
                     print(logMsg)
                     break
+                case .en_event_xdag_transfered:
+//                    var errorMsg =  event!.pointee.error_msg;
+//                    let error = withUnsafeBytes(of: &errorMsg) { (rawPtr) -> String in
+//                        let ptr = rawPtr.baseAddress!.assumingMemoryBound(to: CChar.self)
+//                        return String(cString: ptr)
+//                    }
+
+                    DispatchQueue.global(qos: .background).async {
+                        let notificationName = Notification.Name(rawValue: "updateXdagState")
+                        NotificationCenter.default.post(name: notificationName, object: nil,userInfo: ["msg":"success","type":"xdag_transfered"])
+                    }
+                    break;
+                case .en_event_balance_too_small:
+                    DispatchQueue.global(qos: .background).async {
+                        let notificationName = Notification.Name(rawValue: "updateXdagState")
+                        NotificationCenter.default.post(name: notificationName, object: nil,userInfo: ["msg":"not enough balance","type":"xdag_transfered"])
+                    }
+                    break;
+                case .en_event_nothing_transfer:
+                    DispatchQueue.global(qos: .background).async {
+                        let notificationName = Notification.Name(rawValue: "updateXdagState")
+                        NotificationCenter.default.post(name: notificationName, object: nil,userInfo: ["msg":"nothing transfered!","type":"xdag_transfered"])
+                    }
+                    break;
+                case .en_event_invalid_recv_address:
+                    DispatchQueue.global(qos: .background).async {
+                        let notificationName = Notification.Name(rawValue: "updateXdagState")
+                        NotificationCenter.default.post(name: notificationName, object: nil,userInfo: ["msg":"invalid receive address!","type":"xdag_transfered"])
+                    }
+                    break;
                 case .en_event_set_pwd:
                     
                     let msg = UnsafeMutablePointer<st_xdag_app_msg>.init(OpaquePointer(sender))
@@ -189,7 +218,7 @@ class HomeViewController: UIViewController {
 //                    print("balance", balance)
                     DispatchQueue.global(qos: .background).async {
                         let notificationName = Notification.Name(rawValue: "updateXdagState")
-                        NotificationCenter.default.post(name: notificationName, object: nil,userInfo: ["address":address, "balance" : balance])
+                        NotificationCenter.default.post(name: notificationName, object: nil,userInfo: ["address":address, "balance" : balance,"type":"update_state"])
                     }
                     //
                     return nil
@@ -221,9 +250,17 @@ class HomeViewController: UIViewController {
     
     @objc func updateXdagState(notification: Notification) {
         let userInfo = notification.userInfo as! [String: AnyObject]
+        
+        let type = userInfo["type"] as! String
+        
+        if type != "update_state" {
+            return
+        }
+        
         let address = userInfo["address"] as! String
         let balance = userInfo["balance"] as! String
-        print("updateXdagState: \(address):\(balance)")
+        
+//        print("updateXdagState: \(address):\(balance)")
         
         //        self.labelAddress.titleLabel?.text = address;
         if(self.address == address && self.balance == balance) {
@@ -257,7 +294,7 @@ class HomeViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         registerNotify();
-        let notificationName = Notification.Name(rawValue: "updateXdagState")
+       
         
     }
     override func viewDidDisappear(_ animated: Bool) {
