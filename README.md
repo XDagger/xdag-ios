@@ -111,4 +111,4 @@ We use `Thank you for your efforts.` in comments on the code review to indicate 
 
 ### Support Developers  
 
-[Solar](https://github.com/feiin) (XDAG )   
+[Solar](https://github.com/feiin) (XDAG 4f1Sp/UD55JX5+kQCevUCpyenaPwqmpC)   
