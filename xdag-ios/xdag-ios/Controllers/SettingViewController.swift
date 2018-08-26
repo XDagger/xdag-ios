@@ -43,6 +43,11 @@ class SettingViewController: UITableViewController {
                 
             })
             self.clearAllNotice()
+            
+            let backupVC:BackupViewController = Util.GetViewController(controllerName: "backupViewController")
+            self.present(backupVC, animated: true, completion: nil)
+
+
         } catch {
             self.noticeError("backup error")
             

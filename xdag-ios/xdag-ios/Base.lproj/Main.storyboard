@@ -82,6 +82,90 @@
             </objects>
             <point key="canvasLocation" x="749.60000000000002" y="-320.68965517241384"/>
         </scene>
+        <!--Backup View Controller-->
+        <scene sceneID="tyW-Ce-TGm">
+            <objects>
+                <viewController storyboardIdentifier="backupViewController" id="kpa-vg-VaU" customClass="BackupViewController" customModule="xdag_ios" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="OiW-tY-J9u">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="79J-aD-jyk">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="200"/>
+                                <subviews>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="map-bg" translatesAutoresizingMaskIntoConstraints="NO" id="1sW-by-ucv">
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="200"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="200" id="aO9-q3-6cd"/>
+                                        </constraints>
+                                    </imageView>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="wifi-white" translatesAutoresizingMaskIntoConstraints="NO" id="GkI-sQ-1Vl">
+                                        <rect key="frame" x="157" y="42" width="60" height="60"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    </imageView>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Your iOS device and the PC need to be connected to the same WiFi network" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wNU-sK-lSs">
+                                        <rect key="frame" x="16" y="131.5" width="343" height="38.5"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                        <color key="textColor" red="0.98753036189999999" green="0.98753036189999999" blue="0.98753036189999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="X9L-wV-gMS">
+                                        <rect key="frame" x="8" y="18" width="32" height="32"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="32" id="UqI-Ue-WHL"/>
+                                            <constraint firstAttribute="height" constant="32" id="drw-dh-0j7"/>
+                                        </constraints>
+                                        <state key="normal" image="close"/>
+                                        <connections>
+                                            <action selector="closeView:" destination="kpa-vg-VaU" eventType="touchUpInside" id="JZk-jp-gJ1"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" red="0.4039215686" green="0.46666666670000001" blue="0.76862745099999996" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="tintColor" red="0.98753036189999999" green="0.98753036189999999" blue="0.98753036189999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstItem="1sW-by-ucv" firstAttribute="top" secondItem="79J-aD-jyk" secondAttribute="top" id="1Ji-bl-J8K"/>
+                                    <constraint firstAttribute="trailing" secondItem="1sW-by-ucv" secondAttribute="trailing" id="3v0-Jw-ZWb"/>
+                                    <constraint firstItem="X9L-wV-gMS" firstAttribute="leading" secondItem="79J-aD-jyk" secondAttribute="leading" constant="8" id="9mR-FA-15u"/>
+                                    <constraint firstAttribute="bottom" secondItem="1sW-by-ucv" secondAttribute="bottom" id="AFi-8W-HLT"/>
+                                    <constraint firstAttribute="bottom" secondItem="wNU-sK-lSs" secondAttribute="bottom" constant="30" id="JXY-D6-MwT"/>
+                                    <constraint firstItem="X9L-wV-gMS" firstAttribute="top" secondItem="79J-aD-jyk" secondAttribute="top" constant="18" id="LHT-3o-k5L"/>
+                                    <constraint firstItem="1sW-by-ucv" firstAttribute="leading" secondItem="79J-aD-jyk" secondAttribute="leading" id="YTi-Gq-GgO"/>
+                                    <constraint firstItem="wNU-sK-lSs" firstAttribute="leading" secondItem="79J-aD-jyk" secondAttribute="leading" constant="16" id="ncA-Hh-CHa"/>
+                                    <constraint firstAttribute="trailing" secondItem="wNU-sK-lSs" secondAttribute="trailing" constant="16" id="sLc-D8-s4h"/>
+                                </constraints>
+                            </view>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Open the URL with your PC  browser" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RKH-ol-e01">
+                                <rect key="frame" x="30" y="278" width="315" height="20"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="OpG-1Z-bNm">
+                                <rect key="frame" x="56" y="326" width="244" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                <state key="normal" title="http://127.0.0.1">
+                                    <color key="titleColor" red="0.1215686275" green="0.23921568630000001" blue="0.33725490200000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                </state>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="RKH-ol-e01" firstAttribute="leading" secondItem="p7z-fm-z2F" secondAttribute="leading" constant="30" id="5GU-Ka-Fgp"/>
+                            <constraint firstItem="p7z-fm-z2F" firstAttribute="trailing" secondItem="RKH-ol-e01" secondAttribute="trailing" constant="30" id="FfH-nk-2Rc"/>
+                            <constraint firstItem="79J-aD-jyk" firstAttribute="leading" secondItem="OiW-tY-J9u" secondAttribute="leading" id="b6A-jp-ffy"/>
+                            <constraint firstItem="79J-aD-jyk" firstAttribute="top" secondItem="OiW-tY-J9u" secondAttribute="top" id="bjg-F9-MQa"/>
+                            <constraint firstAttribute="trailing" secondItem="79J-aD-jyk" secondAttribute="trailing" id="hgg-j2-q4J"/>
+                            <constraint firstItem="RKH-ol-e01" firstAttribute="top" secondItem="p7z-fm-z2F" secondAttribute="top" constant="258" id="nfP-eh-474"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="p7z-fm-z2F"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="kMf-5K-9oU" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1840.8" y="-335.08245877061472"/>
+        </scene>
         <!--Receive XDag-->
         <scene sceneID="wg7-f3-ORb">
             <objects>
@@ -673,6 +757,7 @@
         </scene>
     </scenes>
     <resources>
+        <image name="close" width="40" height="40"/>
         <image name="home" width="25" height="25"/>
         <image name="map-bg" width="960" height="505"/>
         <image name="receive" width="25" height="17"/>
@@ -680,6 +765,7 @@
         <image name="send" width="25" height="17"/>
         <image name="setting" width="25" height="25"/>
         <image name="tx-input" width="25" height="25"/>
+        <image name="wifi-white" width="60" height="60"/>
         <image name="xdag-2" width="27" height="26"/>
     </resources>
 </document>
