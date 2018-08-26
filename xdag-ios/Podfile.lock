@@ -3,12 +3,14 @@ PODS:
   - paper-onboarding (4.0.1)
   - SnapKit (4.0.0)
   - SwiftyJSON (4.1.0)
+  - Zip (1.1.0)
 
 DEPENDENCIES:
   - Alamofire (from `https://github.com/Alamofire/Alamofire.git`)
   - paper-onboarding (from `https://github.com/Ramotion/paper-onboarding.git`)
   - SnapKit (~> 4.0.0)
   - SwiftyJSON (from `https://github.com/SwiftyJSON/SwiftyJSON.git`)
+  - Zip (~> 1.1)
 
 EXTERNAL SOURCES:
   Alamofire:
@@ -34,7 +36,8 @@ SPEC CHECKSUMS:
   paper-onboarding: ecb43c83e4e4f90137f228b8e9d87ca5aee591ee
   SnapKit: a42d492c16e80209130a3379f73596c3454b7694
   SwiftyJSON: c29297daf073d2aa016295d5809cdd68045c39b3
+  Zip: 8877eede3dda76bcac281225c20e71c25270774c
 
-PODFILE CHECKSUM: 998efc4f331e603b991c8bc1c61e38b929c38d70
+PODFILE CHECKSUM: 6bab9dca2800dca81e069fe2650543f1cfcc1f37
 
 COCOAPODS: 1.4.0
