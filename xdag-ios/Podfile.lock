@@ -1,8 +1,13 @@
 PODS:
   - Alamofire (4.7.3)
+  - CocoaAsyncSocket (7.6.2)
+  - HTTPParserC (2.7.3)
   - paper-onboarding (4.0.1)
   - SnapKit (4.0.0)
   - SwiftyJSON (4.1.0)
+  - Telegraph (0.17):
+    - CocoaAsyncSocket (~> 7.5)
+    - HTTPParserC (~> 2.7)
   - Zip (1.1.0)
 
 DEPENDENCIES:
@@ -10,6 +15,7 @@ DEPENDENCIES:
   - paper-onboarding (from `https://github.com/Ramotion/paper-onboarding.git`)
   - SnapKit (~> 4.0.0)
   - SwiftyJSON (from `https://github.com/SwiftyJSON/SwiftyJSON.git`)
+  - Telegraph (from `https://github.com/Building42/Telegraph.git`)
   - Zip (~> 1.1)
 
 EXTERNAL SOURCES:
@@ -19,6 +25,8 @@ EXTERNAL SOURCES:
     :git: https://github.com/Ramotion/paper-onboarding.git
   SwiftyJSON:
     :git: https://github.com/SwiftyJSON/SwiftyJSON.git
+  Telegraph:
+    :git: https://github.com/Building42/Telegraph.git
 
 CHECKOUT OPTIONS:
   Alamofire:
@@ -30,14 +38,20 @@ CHECKOUT OPTIONS:
   SwiftyJSON:
     :commit: b93c5d2bd883959262b4c7aabe333667dadb1ab0
     :git: https://github.com/SwiftyJSON/SwiftyJSON.git
+  Telegraph:
+    :commit: f53cf45f1b54fd8e1c83487e72976d6623a3846a
+    :git: https://github.com/Building42/Telegraph.git
 
 SPEC CHECKSUMS:
   Alamofire: c7287b6e5d7da964a70935e5db17046b7fde6568
+  CocoaAsyncSocket: 3541e024f48c54b251638ef72d51dd42808de932
+  HTTPParserC: 93cbbe5aec9b051138cfb971981e0ef345c54502
   paper-onboarding: ecb43c83e4e4f90137f228b8e9d87ca5aee591ee
   SnapKit: a42d492c16e80209130a3379f73596c3454b7694
   SwiftyJSON: c29297daf073d2aa016295d5809cdd68045c39b3
+  Telegraph: 071636becb6f92babe9738ea22a1f3fefe832e3f
   Zip: 8877eede3dda76bcac281225c20e71c25270774c
 
-PODFILE CHECKSUM: 6bab9dca2800dca81e069fe2650543f1cfcc1f37
+PODFILE CHECKSUM: d4d58f6312ab540a817189bc37a53189d60c1b80
 
 COCOAPODS: 1.4.0

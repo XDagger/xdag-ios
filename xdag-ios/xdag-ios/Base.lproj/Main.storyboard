@@ -141,26 +141,34 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="OpG-1Z-bNm">
-                                <rect key="frame" x="56" y="326" width="244" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="OpG-1Z-bNm">
+                                <rect key="frame" x="40" y="326" width="295" height="30"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                                <state key="normal" title="http://127.0.0.1">
+                                <state key="normal">
                                     <color key="titleColor" red="0.1215686275" green="0.23921568630000001" blue="0.33725490200000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </state>
+                                <connections>
+                                    <action selector="copyUrl:" destination="kpa-vg-VaU" eventType="touchUpInside" id="GVk-DO-98A"/>
+                                </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="RKH-ol-e01" firstAttribute="leading" secondItem="p7z-fm-z2F" secondAttribute="leading" constant="30" id="5GU-Ka-Fgp"/>
                             <constraint firstItem="p7z-fm-z2F" firstAttribute="trailing" secondItem="RKH-ol-e01" secondAttribute="trailing" constant="30" id="FfH-nk-2Rc"/>
+                            <constraint firstItem="p7z-fm-z2F" firstAttribute="trailing" secondItem="OpG-1Z-bNm" secondAttribute="trailing" constant="40" id="Rvw-pv-Sza"/>
+                            <constraint firstItem="OpG-1Z-bNm" firstAttribute="top" secondItem="RKH-ol-e01" secondAttribute="bottom" constant="28" id="XI8-D2-AEC"/>
                             <constraint firstItem="79J-aD-jyk" firstAttribute="leading" secondItem="OiW-tY-J9u" secondAttribute="leading" id="b6A-jp-ffy"/>
                             <constraint firstItem="79J-aD-jyk" firstAttribute="top" secondItem="OiW-tY-J9u" secondAttribute="top" id="bjg-F9-MQa"/>
                             <constraint firstAttribute="trailing" secondItem="79J-aD-jyk" secondAttribute="trailing" id="hgg-j2-q4J"/>
                             <constraint firstItem="RKH-ol-e01" firstAttribute="top" secondItem="p7z-fm-z2F" secondAttribute="top" constant="258" id="nfP-eh-474"/>
+                            <constraint firstItem="OpG-1Z-bNm" firstAttribute="leading" secondItem="p7z-fm-z2F" secondAttribute="leading" constant="40" id="w4C-oC-Qhj"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="p7z-fm-z2F"/>
                     </view>
+                    <connections>
+                        <outlet property="httpUrlLabel" destination="OpG-1Z-bNm" id="gaq-0f-UeU"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="kMf-5K-9oU" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

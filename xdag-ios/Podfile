@@ -11,7 +11,8 @@ target 'xdag-ios' do
   pod 'Alamofire', :git => 'https://github.com/Alamofire/Alamofire.git'
   pod 'SwiftyJSON', :git => 'https://github.com/SwiftyJSON/SwiftyJSON.git'
   pod 'Zip', '~> 1.1'
-
+  pod 'Telegraph', :git => 'https://github.com/Building42/Telegraph.git'
+  
   target 'xdag-iosTests' do
     inherit! :search_paths
     # Pods for testing

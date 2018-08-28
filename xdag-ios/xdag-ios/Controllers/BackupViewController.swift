@@ -7,15 +7,34 @@
 //
 
 import UIKit
+import Telegraph
 
 class BackupViewController: UIViewController {
 
+    var httpServer:Server!
+    
+    @IBOutlet weak var httpUrlLabel: UIButton!
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        initHttpServer()
         // Do any additional setup after loading the view.
     }
 
+    
+    @IBAction func copyUrl(_ sender: Any) {
+        UIPasteboard.general.string = httpUrlLabel.titleLabel?.text
+        self.noticeSuccess("copy success!", autoClear: true,autoClearTime:1)
+    }
+    func initHttpServer() {
+        httpServer = Server()
+        let documentsDirectory = FileManager.default.urls(for:.documentDirectory, in: .userDomainMask)[0]
+        httpServer.serveDirectory(documentsDirectory)
+        try! httpServer.start()
+        
+        httpUrlLabel.setTitle("http://\(Util.GetIPAddresses()!):\(httpServer.port)/wallet.zip", for: UIControlState.normal)
+    }
+    
     @IBAction func closeView(_ sender: Any) {
         
         self.dismiss(animated: true, completion: nil)
@@ -27,7 +46,7 @@ class BackupViewController: UIViewController {
     
     override func viewWillDisappear(_ animated: Bool) {
         UIApplication.shared.statusBarStyle = .default
-
+        httpServer.stop()
     }
     
     override func didReceiveMemoryWarning() {
@@ -39,6 +58,8 @@ class BackupViewController: UIViewController {
         return .lightContent
         
     }
+    
+    
 
     /*
     // MARK: - Navigation

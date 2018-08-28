@@ -12,4 +12,5 @@
 #include "../xdag/wrapper/xdagwrapper.h"
 #include "../xdag/client/xdagmain.h"
 #include "../xdag/utils/utils.h"
+#include <ifaddrs.h>
 #endif /* xdag_Bridging_Header_h */
