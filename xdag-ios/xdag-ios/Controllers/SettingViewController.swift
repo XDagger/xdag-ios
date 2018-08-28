@@ -59,6 +59,8 @@ class SettingViewController: UITableViewController {
          if indexPath.section == 1 && indexPath.row == 0 {
             self.createZipBackupWallet()
             
+         } else {
+            self.noticeInfo("coming soon", autoClear: true, autoClearTime: 3)
         }
     }
     // MARK: - Table view data source

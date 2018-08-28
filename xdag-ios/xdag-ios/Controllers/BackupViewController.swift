@@ -30,7 +30,7 @@ class BackupViewController: UIViewController {
         httpServer = Server()
         let documentsDirectory = FileManager.default.urls(for:.documentDirectory, in: .userDomainMask)[0]
         httpServer.serveDirectory(documentsDirectory)
-        try! httpServer.start()
+        try! httpServer.start(onPort: 8099)
         
         httpUrlLabel.setTitle("http://\(Util.GetIPAddresses()!):\(httpServer.port)/wallet.zip", for: UIControlState.normal)
     }
