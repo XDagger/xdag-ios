@@ -1,5 +1,5 @@
 # Uncomment the next line to define a global platform for your project
-# platform :ios, '10.0'
+platform :ios, '10.0'
 
 target 'xdag-ios' do
   # Comment the next line if you're not using Swift and don't want to use dynamic frameworks
@@ -10,7 +10,9 @@ target 'xdag-ios' do
   pod 'SnapKit', '~> 4.0.0'
   pod 'Alamofire', :git => 'https://github.com/Alamofire/Alamofire.git'
   pod 'SwiftyJSON', :git => 'https://github.com/SwiftyJSON/SwiftyJSON.git'
-
+  pod 'Zip', '~> 1.1'
+  pod 'Telegraph', :git => 'https://github.com/Building42/Telegraph.git'
+  
   target 'xdag-iosTests' do
     inherit! :search_paths
     # Pods for testing

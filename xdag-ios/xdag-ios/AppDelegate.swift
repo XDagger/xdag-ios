@@ -21,6 +21,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         originViewController = self.window?.rootViewController
 
+        UIApplication.shared.statusBarStyle = .lightContent
         if UserDefaults.standard.bool(forKey: "firstLogin") == false {
             UserDefaults.standard.set(true, forKey: "firstLogin")
             UserDefaults.standard.synchronize()

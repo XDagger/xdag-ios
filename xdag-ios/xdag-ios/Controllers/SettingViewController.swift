@@ -7,12 +7,16 @@
 //
 
 import UIKit
+import Zip
 
 class SettingViewController: UITableViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
+       
+       
+        
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
 
@@ -24,7 +28,41 @@ class SettingViewController: UITableViewController {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
+    
+    
+    func createZipBackupWallet() {
+        self.pleaseWait()
+        do {
+            let documentsDirectory = FileManager.default.urls(for:.documentDirectory, in: .userDomainMask)[0]
+            let zipFilePath = documentsDirectory.appendingPathComponent("wallet.zip")
+            let storagePath = documentsDirectory.appendingPathComponent("storage")
+            let walletPath = documentsDirectory.appendingPathComponent("wallet.dat")
+            let dnetPath = documentsDirectory.appendingPathComponent("dnet_key.dat")
 
+            try Zip.zipFiles(paths: [walletPath,storagePath,dnetPath], zipFilePath: zipFilePath, password:nil, progress: { (progress) -> () in
+                
+            })
+            self.clearAllNotice()
+            
+            let backupVC:BackupViewController = Util.GetViewController(controllerName: "backupViewController")
+            self.present(backupVC, animated: true, completion: nil)
+
+
+        } catch {
+            self.noticeError("backup error")
+            
+        }
+    }
+
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        print(indexPath)
+         if indexPath.section == 1 && indexPath.row == 0 {
+            self.createZipBackupWallet()
+            
+         } else {
+            self.noticeInfo("coming soon", autoClear: true, autoClearTime: 3)
+        }
+    }
     // MARK: - Table view data source
 
 //    override func numberOfSections(in tableView: UITableView) -> Int {
