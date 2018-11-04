@@ -17,7 +17,10 @@ class BackupViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        initHttpServer()
+        let reachability = Reachability()!
+        if (reachability.connection == .wifi) {
+            initHttpServer()
+        }
         // Do any additional setup after loading the view.
     }
 
@@ -46,7 +49,9 @@ class BackupViewController: UIViewController {
     
     override func viewWillDisappear(_ animated: Bool) {
         UIApplication.shared.statusBarStyle = .default
-        httpServer.stop()
+        if (httpServer != nil) {
+            httpServer.stop()
+        }
     }
     
     override func didReceiveMemoryWarning() {
