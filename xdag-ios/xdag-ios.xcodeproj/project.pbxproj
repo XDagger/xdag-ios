@@ -23,6 +23,7 @@
 		FD209D102124782500CD4080 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FD209D0A2124782500CD4080 /* Assets.xcassets */; };
 		FD209D122124F10F00CD4080 /* PasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD209D112124F10F00CD4080 /* PasswordViewController.swift */; };
 		FD209D172125C2D600CD4080 /* Keychain.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD209D162125C2D600CD4080 /* Keychain.swift */; };
+		FD89CE3C218E890F00A1EDF8 /* Reachability.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD89CE3B218E890F00A1EDF8 /* Reachability.swift */; };
 		FD8ACE4E2132BEAC00ED84AE /* BackupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD8ACE4D2132BEAC00ED84AE /* BackupViewController.swift */; };
 		FD9043C420CE0AD1008B9D6A /* XdagEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD9043C320CE0AD1008B9D6A /* XdagEvent.swift */; };
 		FDA555D220A1E4E000173691 /* FSOpenSSL.m in Sources */ = {isa = PBXBuildFile; fileRef = FDA5558320A1E4E000173691 /* FSOpenSSL.m */; };
@@ -127,6 +128,7 @@
 		FD209D0A2124782500CD4080 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		FD209D112124F10F00CD4080 /* PasswordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordViewController.swift; sourceTree = "<group>"; };
 		FD209D162125C2D600CD4080 /* Keychain.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Keychain.swift; sourceTree = "<group>"; };
+		FD89CE3B218E890F00A1EDF8 /* Reachability.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Reachability.swift; sourceTree = "<group>"; };
 		FD8ACE4D2132BEAC00ED84AE /* BackupViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackupViewController.swift; sourceTree = "<group>"; };
 		FD9043C320CE0AD1008B9D6A /* XdagEvent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XdagEvent.swift; sourceTree = "<group>"; };
 		FDA5552D20A1E4E000173691 /* FSOpenSSL.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FSOpenSSL.h; sourceTree = "<group>"; };
@@ -686,6 +688,7 @@
 				FDA555F620A1F2BF00173691 /* CString.swift */,
 				FD9043C320CE0AD1008B9D6A /* XdagEvent.swift */,
 				FD209D162125C2D600CD4080 /* Keychain.swift */,
+				FD89CE3B218E890F00A1EDF8 /* Reachability.swift */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -1126,6 +1129,7 @@
 				FDA7E439205D1FA900A914B1 /* SendTransactionController.swift in Sources */,
 				FDA7E43320556A0400A914B1 /* AVCaptureSessionManager.swift in Sources */,
 				FDCF1DCC20C81FCA0049C3CC /* dnet_threads.c in Sources */,
+				FD89CE3C218E890F00A1EDF8 /* Reachability.swift in Sources */,
 				FDD5AA2C2046882100C84CC1 /* UIColorExtension.swift in Sources */,
 				FDCF1DD420C81FCA0049C3CC /* dnet_connection.c in Sources */,
 				FDCF1DC620C81FCA0049C3CC /* pool.c in Sources */,
