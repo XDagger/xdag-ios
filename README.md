@@ -3,10 +3,6 @@
 This project is based on XDAG C implementation, and developed for iOS platform.  
 XDAG iOS Wallet is maintained by xdagger community developers, the official XDAG iOS Wallet.
 
-## Status
-[![Throughput Graph](https://graphs.waffle.io/XDagger/xdag-ios/throughput.svg)](https://waffle.io/XDagger/xdag-ios/metrics/throughput)
-
-
 ## Building
 
 1. git clone sources
