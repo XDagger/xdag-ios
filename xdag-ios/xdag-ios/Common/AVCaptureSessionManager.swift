@@ -9,6 +9,7 @@
 import Foundation
 import AVFoundation
 import Photos
+import UIKit
 
 typealias SuccessCallback = (String?) -> Void
 

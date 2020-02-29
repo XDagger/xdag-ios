@@ -133,7 +133,7 @@ class HomeViewController: UIViewController {
                         //                        ptr.deallocate()
                         return ret;
                     }
-                    
+
                     print(logMsg)
                     break
                 case .en_event_xdag_transfered:
