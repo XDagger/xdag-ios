@@ -13,7 +13,7 @@ extern "C" {
 #define MAX_XDAG_BANLANCE_LEN 32
 #define MAX_XDAG_STATE_LEN 1024
 #define MAX_XDAG_ERR_MSG_LEN 1024
-#define MAX_XDAG_LOG_BUF_SIZE 4096
+#define MAX_XDAG_LOG_BUF_SIZE 2048
 
 typedef enum {
     en_procedure_init_wallet    = 0,
@@ -126,11 +126,13 @@ typedef struct {
     en_xdag_program_state   xdag_program_state;
     en_address_load_state   xdag_address_state;
     en_balance_load_state   xdag_balance_state;
+
     char state[MAX_XDAG_STATE_LEN + 1];
     char address[MAX_XDAG_ADDRESS_LEN + 1];
     char balance[MAX_XDAG_BANLANCE_LEN + 1];
     char error_msg[MAX_XDAG_ERR_MSG_LEN + 1];
     char app_log_msg[MAX_XDAG_LOG_BUF_SIZE + 1];
+
 } st_xdag_event;
 
 typedef struct {

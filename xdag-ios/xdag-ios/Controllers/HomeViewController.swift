@@ -125,7 +125,8 @@ class HomeViewController: UIViewController {
 //                print("EventType", eType)
                 switch eType {
                 case .en_event_xdag_log_print:
-                    
+//                    event!.pointee.
+//                    event!.pointee.xdag_address_state
                     var buffer =  event!.pointee.app_log_msg;
                     let logMsg = withUnsafeBytes(of: &buffer) { (rawPtr) -> String in
                         let ptr = rawPtr.baseAddress!.assumingMemoryBound(to: CChar.self)
@@ -133,7 +134,7 @@ class HomeViewController: UIViewController {
                         //                        ptr.deallocate()
                         return ret;
                     }
-                    
+
                     print(logMsg)
                     break
                 case .en_event_xdag_transfered:
