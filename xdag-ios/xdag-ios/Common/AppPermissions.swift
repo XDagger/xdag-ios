@@ -27,6 +27,10 @@ class AppPermissions: NSObject {
                     completion(status == PHAuthorizationStatus.authorized ? true:false)
                 }
             })
+        case .limited:
+            completion(false)
+            break
+            
         }
     }
     
